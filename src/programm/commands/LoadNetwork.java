@@ -1,6 +1,7 @@
 package programm.commands;
 
-import graph.holder.implementation.SubGraph;
+
+import holder.implementation.SubGraph;
 
 import java.io.IOException;
 import java.nio.file.Files;
