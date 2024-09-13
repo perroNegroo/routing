@@ -1,7 +1,7 @@
 package holder.node;
 
 public class Computer extends Node{
-    public Computer(String ipV4) {
-        super(ipV4);
+    public Computer(String ipV4, String name) {
+        super(ipV4, name);
     }
 }
