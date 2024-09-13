@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class FileToList {
     public static List<String> fileToList() {
@@ -19,5 +20,14 @@ public class FileToList {
         } catch (IOException e) {
             return new ArrayList<>();
         }
+    }
+    String subgraphPattern = "(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+)/(\\d+)";
+    String routerPattern = "(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]";
+    String pcPattern = "(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]";
+    String edgePattern = "(\\w+) <-->|(\\d+)| (\\w+)";
+    String routerEdgePattern = "(\\w+_Router) <--> (\\w+_Router)";
+    String endPattern = "end";
+    public static void recognizer(List<String> lines) {
+
     }
 }
