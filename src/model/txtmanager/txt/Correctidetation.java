@@ -1,7 +1,6 @@
-package txtmanager.txt;
+package model.txtmanager.txt;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Correctidetation implements Test_Txt {

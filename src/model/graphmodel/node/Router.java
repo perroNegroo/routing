@@ -1,9 +1,8 @@
-package holder.node;
+package model.graphmodel.node;
 
 
 
-import holder.edge.NotWeightedEdge;
-import holder.edge.WeightedEdge;
+import model.graphmodel.edge.NotWeightedEdge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,8 @@ public class Router extends Node {
         this.interEdges.add(newEdge);
     }
 
-    public void removeNotWeightedEdge(NotWeightedEdge edge) {
-        this.interEdges.remove(edge);
+    public void removeInterEdge(String ipV4To) {
+        interEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(this.ipV4) && edge.getTo().getIpV4().equals(ipV4To));
     }
 
     @Override

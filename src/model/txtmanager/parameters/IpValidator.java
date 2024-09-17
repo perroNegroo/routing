@@ -1,6 +1,6 @@
-package txtmanager.parameters;
+package model.txtmanager.parameters;
 
-import txtmanager.txt.Test_Txt;
+import model.txtmanager.txt.Test_Txt;
 
 import java.util.List;
 

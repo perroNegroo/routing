@@ -1,4 +1,4 @@
-package txtmanager.txt;
+package model.txtmanager.txt;
 
 import java.util.List;
 import java.util.regex.Matcher;

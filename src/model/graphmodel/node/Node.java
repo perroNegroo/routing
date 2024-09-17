@@ -1,21 +1,29 @@
-package holder.node;
+package model.graphmodel.node;
 
 
 
-import holder.edge.WeightedEdge;
+import model.graphmodel.edge.WeightedEdge;
 
 import java.util.*;
 
 public abstract class Node {
-    private final String name;
-    private final String ipV4;
-    private final List<WeightedEdge> intraEdges = new ArrayList<>();
-    private final Map<String, WeightedEdge> intraEdgesSimp = new HashMap<>();
+    protected final String name;
+    protected final String ipV4;
+    protected final List<WeightedEdge> intraEdges = new ArrayList<>();
+    protected final Map<String, List<String>> shortestWays = new HashMap<>();
+
 
     public Node(String ipV4, String name) {
         this.ipV4 = ipV4;
         this.name = name;
     }
+    public void removeAllConnections(String ipV4To) {
+        intraEdges.removeIf(edge -> edge.getTo().getIpV4().equals(ipV4To));
+    }
+    public void removeIntraEdge(String ipV4To) {
+        intraEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(ipV4) && edge.getTo().getIpV4().equals(ipV4To));
+    }
+
     public String getIpV4() {
         return ipV4;
     }
@@ -27,9 +35,6 @@ public abstract class Node {
         this.intraEdges.add(newEdge);
     }
 
-    public void removeEdge(WeightedEdge edge) {
-        this.intraEdges.remove(edge);
-    }
     public String getName() {
         return name;
     }

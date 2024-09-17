@@ -1,9 +1,9 @@
-package txtmanager.parameters;
+package model.txtmanager.parameters;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static txtmanager.parameters.IpValidator.ipValidator;
+import static model.txtmanager.parameters.IpValidator.ipValidator;
 
 public class SubGraphValidation {
     public static String[] subGraphValidator(String input) {

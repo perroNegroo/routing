@@ -2,17 +2,22 @@ package programm.commands;
 
 import model.graphmodel.SubGraph;
 
-import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import java.io.IOException;
+import java.util.Map;
 
-public class ListSystems implements Command{
+import static model.graphmodel.GraphManager.getGraphHolder;
+
+public class ListSubnets implements Command {
+
     @Override
     public void execute(String[] arguments) {
-        String subnet = arguments[0];
-        SubGraph subGraph = getNodeFromGraphHolder(subnet);
-        for (String sistem: subGraph.getKeys()) {
-            System.out.print(sistem + " ");
+
+        //organiazrlos ascendente
+        for (Map.Entry<String, SubGraph> entry: getGraphHolder().entrySet()) {
+            System.out.print(entry.getKey() + " ");
         }
         System.out.println();
+
     }
 
     @Override

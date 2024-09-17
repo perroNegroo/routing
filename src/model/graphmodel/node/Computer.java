@@ -1,4 +1,4 @@
-package holder.node;
+package model.graphmodel.node;
 
 public class Computer extends Node{
     public Computer(String ipV4, String name) {

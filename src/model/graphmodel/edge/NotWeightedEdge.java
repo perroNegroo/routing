@@ -1,7 +1,7 @@
-package holder.edge;
+package model.graphmodel.edge;
 
 
-import holder.node.Node;
+import model.graphmodel.node.Node;
 
 public class NotWeightedEdge extends Edge {
     public NotWeightedEdge(Node from, Node to) {

@@ -1,4 +1,4 @@
-package txtmanager;
+package model.txtmanager;
 
 public class TxtManager {
 
