@@ -1,11 +1,14 @@
-package holder.edge;
+package model.graphmodel.edge;
 
 
-import holder.node.Node;
+import model.graphmodel.node.Node;
+
+import java.util.PriorityQueue;
 
 public abstract class Edge {
-    private final Node from;
-    private final Node to;
+    protected final Node from;
+    protected final Node to;
+    PriorityQueue<Node> pq = new PriorityQueue<>();
 
     public Edge(Node from, Node to) {
         this.from = from;
