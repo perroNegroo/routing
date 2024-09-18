@@ -3,9 +3,12 @@ package programm.commands;
 import model.graphmodel.SubGraph;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import static model.graphmodel.GraphManager.getGraphHolder;
+import static model.graphmodel.GraphManager.getKeySet;
+import static programm.utils.IpSorter.ipSorter;
 
 public class ListSubnets implements Command {
 
@@ -13,10 +16,14 @@ public class ListSubnets implements Command {
     public void execute(String[] arguments) {
 
         //organiazrlos ascendente
+        System.out.println(String.join(" ", getKeySet()));
+        /*
         for (Map.Entry<String, SubGraph> entry: getGraphHolder().entrySet()) {
             System.out.print(entry.getKey() + " ");
         }
         System.out.println();
+
+         */
 
     }
 
