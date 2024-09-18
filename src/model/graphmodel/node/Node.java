@@ -10,9 +10,17 @@ public abstract class Node {
     protected final String name;
     protected final String ipV4;
     protected final List<WeightedEdge> intraEdges = new ArrayList<>();
-    protected final Map<String, List<String>> shortestWays = new HashMap<>();
+    protected Map<String, List<String>> shortestWays = new HashMap<>();
 
+    public abstract boolean isRouter();
+    public List<String> getShortestWays(String destinationIp) {
+        //System.out.println(shortestWays.get(destinationIp));
+        return new ArrayList<>(shortestWays.get(destinationIp));
+    }
 
+    public void setShortestWays(Map<String, List<String>> shortestWays) {
+        this.shortestWays = shortestWays;
+    }
     public Node(String ipV4, String name) {
         this.ipV4 = ipV4;
         this.name = name;

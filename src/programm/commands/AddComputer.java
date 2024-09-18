@@ -18,11 +18,11 @@ public class AddComputer implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean availability() {
-        return false;
+        return true;
     }
 }

@@ -4,12 +4,14 @@ import model.graphmodel.edge.WeightedEdge;
 import model.graphmodel.node.Node;
 import model.txtmanager.dataextraction.LaunchGraph;
 import programm.CommandHandler;
+import programm.commands.*;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import static model.graphmodel.GraphManager.getGraphToBeTested;
+import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static model.txtmanager.FileToList.fileToList;
 import static model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
@@ -18,48 +20,30 @@ public class Main {
     final static String FilePath = "C:\\Users\\merch\\Downloads\\example_network.txt";
     public static void main(String[] args) {
         new CommandHandler().start();
-        new LaunchGraph().launchSubGraphs(FilePath);
-        System.out.println("___________________________________");
-        System.out.println("___________________________________");
+        System.out.println("Load network");
+        new LoadNetwork().execute(new String[] {"C:\\Users\\merch\\Downloads\\example_network.txt"});
+        System.out.println("list subnets");
+        new ListSubnets().execute(new String[] {});
+        System.out.println("list range");
+        new ListRange().execute(new String[] {"10.0.0.0/16"});
+        System.out.println("Send packet");
+        new SendPackage().execute(new String[] {"172.16.0.4", "172.16.0.1"});
+        System.out.println("Send packet");
+        new SendPackage().execute(new String[] {"192.168.100.2", "192.168.1.5"});
+        System.out.println("add computer");
+        new AddComputer().execute(new String[] {"192.168.100.0/24", "192.168.100.10"});
+        System.out.println("add connection");
+        new AddConnection().execute(new String[] {"192.168.100.10", "192.168.100.5", "1"});
+        System.out.println("list Systems");
+        new ListSystems().execute(new String[] {"192.168.100.0/24"});
+        System.out.println("Send packet");
+        new SendPackage().execute(new String[] {"192.168.100.10", "192.168.100.2"});
+        System.out.println("remove connection");
+        new RemoveConnection().execute(new String[] {"192.168.100.1", "10.0.0.1"});
+        System.out.println("Send packet");
+        new SendPackage().execute(new String[] {"192.168.100.10", "10.0.0.3"});
 
-        Map<String, SubGraph> graphMap = getGraphToBeTested();
 
-        for (String subGraphKey: graphMap.keySet()) {
-            SubGraph subGraph = graphMap.get(subGraphKey);
-            System.out.println("Subgraph name : " + subGraph.getNetWorkName());
-            System.out.println("Subgraph router : " + subGraph.getRouter().getName());
-            for (NotWeightedEdge edge: subGraph.getRouter().getInterEdges()) {
-                System.out.println("InterEdge from: " + edge.getFrom().getName() + " to: " + edge.getTo().getName());
-            }
-            System.out.println("___________________________________");
-            System.out.println("___________________________________");
-            for (String nodeName: subGraph.getKeys()) {
-                System.out.println("Node name : " + nodeName);
-                for (WeightedEdge edge: subGraph.getNode(nodeName).getIntraEdges()) {
-                    System.out.println("From: " + edge.getFrom().getName());
-                    System.out.println("To: " + edge.getTo().getName());
-                    System.out.println("Weight: " + edge.getWeight());
-                }
-            }
-
-
-        }
-
-        /*
-        List<List<String>> subGraphs = extractSubGraphs(FilePath);
-
-        System.out.println("___________________________________");
-        for (List<String> subGraph: subGraphs) {
-            subGraph.forEach(System.out::println);
-            System.out.println("___________________________________");
-        }
-
-         */
-
-        //LoadNetwork loadNetwork = new LoadNetwork();
-        //loadNetwork.execute(null);
-        String cidr = "10.0.0.0/16";
-        calculateCIDRRange(cidr);
     }
 
 

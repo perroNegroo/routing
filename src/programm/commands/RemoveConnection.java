@@ -4,6 +4,7 @@ import model.graphmodel.SubGraph;
 import model.graphmodel.node.Node;
 import model.graphmodel.node.Router;
 
+import static model.graphmodel.GraphManager.dijkstraExecutor;
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static programm.utils.NetworkIdentifier.findNetworkForIP;
 import static programm.utils.NetworkIdentifier.isIpInNetwork;
@@ -23,12 +24,12 @@ public class RemoveConnection implements Command {
             secondNode.removeIntraEdge(firstIp);
 
             //aca hay que actualiyar el Dijstra para calcular send package
-
+            firstNetwork.dijkstraInSubgraph();
             return;
         }
         //diferent networks
         String secondNetworkAdresse = findNetworkForIP(secondIp);
-        SubGraph secondNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
+        SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
         Router firstRouter = firstNetwork.getRouter();
         Router secondRouter = secondNetwork.getRouter();
 
@@ -36,6 +37,7 @@ public class RemoveConnection implements Command {
         secondRouter.removeInterEdge(firstIp);
 
         //aca hay que actualiyar el BFS para calcular send package
+        dijkstraExecutor();
 
     }
 

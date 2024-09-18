@@ -46,6 +46,7 @@ public class CommandHandler {
             case "add computer" -> executeCommandWithArguments(new AddComputer(), arguments);
             case "add connection" -> executeCommandWithArguments(new AddConnection(), arguments);
             case "remove connection" -> executeCommandWithArguments(new RemoveConnection(), arguments);
+            case "remove computer" -> executeCommandWithArguments(new RemoveComputer(), arguments);
             default -> System.out.println("ERROR_UNKNOWN_COMMAND : " + command);
         }
     }

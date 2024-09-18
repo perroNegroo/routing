@@ -21,6 +21,7 @@ public class RemoveComputer implements Command {
         }
 
         //correr el Dijstra
+        network.dijkstraInSubgraph();
     }
 
     @Override

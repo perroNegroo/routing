@@ -45,6 +45,11 @@ public class GraphManager {
             GRAPH_HOLDER.put(key, graphToBeTested.get(key));
         }
     }
+    public static void dijkstraExecutor() {
+        for (String subGraphKey: GRAPH_HOLDER.keySet()) {
+            GRAPH_HOLDER.get(subGraphKey).dijkstraInSubgraph();
+        }
+    }
 
 
 

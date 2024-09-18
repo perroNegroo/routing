@@ -115,11 +115,6 @@ public class LaunchGraph {
             //aca poner el pattern de router edge para validar
         }
         Router router = subGraph.getRouter();
-        for (WeightedEdge edge: router.getIntraEdges()) {
-            System.out.println("from: " + edge.getFrom().getName());
-            System.out.println("to: " + edge.getTo().getName());
-            System.out.println("weight: " + edge.getWeight());
-        }
         return subGraph;
     }
     private int parseInteger(String number) {

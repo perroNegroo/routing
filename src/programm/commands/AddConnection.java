@@ -8,8 +8,7 @@ import model.graphmodel.node.Router;
 
 import java.util.TreeSet;
 
-import static model.graphmodel.GraphManager.getKeySet;
-import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import static model.graphmodel.GraphManager.*;
 import static model.txtmanager.loadvalidation.CalculateRange.ipToInt;
 import static programm.utils.NetworkIdentifier.findNetworkForIP;
 
@@ -26,6 +25,7 @@ public class AddConnection implements Command{
             Node secondNode = network.getNode(secondIp);
             firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
             secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+            network.dijkstraInSubgraph();
             return;
         }
 
@@ -39,6 +39,7 @@ public class AddConnection implements Command{
         Router secondRouter = secondNetwork.getRouter();
         firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
         secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
+        dijkstraExecutor();
     }
 
 
@@ -49,12 +50,12 @@ public class AddConnection implements Command{
             // si estan en la misma red, mirar que ambos dispositivos esten contenidos
         // si estan en diferente network, no debe tener peso y deben ser ambos routers
             //si estan en diferentes subgraphos, mirar que si sean los routers
-        return false;
+        return true;
     }
 
     @Override
     public boolean availability() {
-        return false;
+        return true;
     }
 
     private int parseInteger(String number) {

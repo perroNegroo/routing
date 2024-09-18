@@ -10,6 +10,8 @@ import java.util.*;
 
 import static model.txtmanager.loadvalidation.CalculateRange.calculateRange;
 import static model.txtmanager.loadvalidation.CalculateRange.intToIp;
+import static programm.utils.BFS.bfs;
+import static programm.utils.Dijkstra.dijkstra;
 
 public class SubGraph {
     private final String netWorkName;
@@ -74,6 +76,13 @@ public class SubGraph {
             }
         }
         return new Computer("", "");
+    }
+
+    public void dijkstraInSubgraph() {
+        for (String nodeKey: graphHolder.keySet()) {
+            dijkstra(graphHolder.get(nodeKey));
+        }
+        bfs(router);
     }
 
 
