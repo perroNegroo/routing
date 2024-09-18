@@ -19,9 +19,9 @@ import static model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
 public class Main {
     final static String FilePath = "C:\\Users\\merch\\Downloads\\example_network.txt";
     public static void main(String[] args) {
-        //new CommandHandler().start();
+        new CommandHandler().start();
 
-
+        /*
         System.out.println("Load network");
         new LoadNetwork().execute(new String[] {"C:\\Users\\merch\\Downloads\\example_network.txt"});
         System.out.println("list subnets");
@@ -44,6 +44,8 @@ public class Main {
         new RemoveConnection().execute(new String[] {"192.168.100.1", "10.0.0.1"});
         System.out.println("Send packet");
         new SendPackage().execute(new String[] {"192.168.100.10", "10.0.0.3"});
+
+         */
 
 
 
