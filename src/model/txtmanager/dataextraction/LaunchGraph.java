@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static model.graphmodel.GraphManager.*;
+import static model.txtmanager.FileToList.fileToList;
 import static model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
 
@@ -26,6 +27,7 @@ public class LaunchGraph {
     Pattern endPattern = Pattern.compile("end");
 
     public void launchSubGraphs(String filePath) {
+        List<String> txtInformation = fileToList(filePath);
         List<String> routerEdges = extractRouterEdges(filePath);
         List<List<String>> subGraphs = extractSubGraphs(filePath);
 
@@ -41,6 +43,7 @@ public class LaunchGraph {
         }
         // esto debe ir en otra calse despues de probar que los subGraphos estan bien
         graphIsAlreadyTestedToBeUploaded();
+        txtInformation.forEach(System.out::println);
 
     }
 
@@ -114,7 +117,6 @@ public class LaunchGraph {
 
             //aca poner el pattern de router edge para validar
         }
-        Router router = subGraph.getRouter();
         return subGraph;
     }
     private int parseInteger(String number) {

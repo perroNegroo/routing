@@ -9,6 +9,7 @@ public class LoadNetwork implements Command {
     @Override
     public void execute(String[] arguments) {
         new LaunchGraph().launchSubGraphs(arguments[0]);
+
         dijkstraExecutor();
     }
     @Override
