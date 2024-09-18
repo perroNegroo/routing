@@ -43,7 +43,9 @@ public class LaunchGraph {
         }
         // esto debe ir en otra calse despues de probar que los subGraphos estan bien
         graphIsAlreadyTestedToBeUploaded();
-        txtInformation.forEach(System.out::println);
+        for (String line: txtInformation) {
+            System.out.println(line);
+        }
 
     }
 
