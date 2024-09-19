@@ -8,6 +8,7 @@ import routing.model.graphmodel.node.Router;
 
 import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import static routing.model.txtmanager.parameters.IpValidator.ipValidator;
 import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
@@ -54,6 +55,9 @@ public class AddConnection implements Command {
         }
         String firstIp = arguments[0];
         String secondIp = arguments[1];
+        if (!ipValidator(firstIp) || !ipValidator(secondIp)) {
+            return false;
+        }
         String firstNetworkAdresse = findNetworkForIP(firstIp);
         SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
         String secondNetworkAdresse = findNetworkForIP(secondIp);
