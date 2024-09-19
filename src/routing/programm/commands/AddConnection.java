@@ -63,6 +63,9 @@ public class AddConnection implements Command {
         }
         Node firstNode = firstNetwork.getNode(firstIp);
         Node secondNode = secondNetwork.getNode(secondIp);
+        if (firstNode == null || secondNode == null) {
+            return false;
+        }
         if (isIpInNetwork(firstIp, firstNetworkAdresse)
                 && isIpInNetwork(secondIp, firstNetworkAdresse)
                 && !firstNode.existsConnection(secondIp)
