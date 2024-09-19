@@ -42,6 +42,9 @@ public class SendPackage implements Command {
         }
         String firstIp = arguments[0];
         String secondIp = arguments[1];
+        if (firstIp.equals(secondIp)) {
+            return false;
+        }
 
         String firstNetworkAdresse = findNetworkForIP(firstIp);
         String secondNetworkAdresse = findNetworkForIP(secondIp);
