@@ -1,5 +1,6 @@
 package routing.programm.commands;
 
+import static routing.model.graphmodel.GraphManager.getGraphHolder;
 import static routing.model.graphmodel.GraphManager.getKeySet;
 import static routing.programm.utils.NetworkSorter.sortSubnets;
 
@@ -20,11 +21,11 @@ public class ListSubnets implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        return true;
+        return arguments.length == 0;
     }
 
     @Override
     public boolean availability() {
-        return true;
+        return !getGraphHolder().isEmpty();
     }
 }
