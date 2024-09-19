@@ -2,6 +2,7 @@ package routing.programm.commands;
 
 import routing.model.graphmodel.SubGraph;
 
+import static routing.model.graphmodel.GraphManager.getKeySet;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.programm.utils.IpSorter.ipSorter;
 
@@ -21,6 +22,12 @@ public class ListSystems implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
+        if (arguments.length != 1) {
+            return false;
+        }
+        if (!getKeySet().contains(arguments[0])) {
+            return false;
+        }
         return true;
     }
 
