@@ -48,6 +48,33 @@ public class RemoveConnection implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
+        if (arguments.length != 2) {
+            return false;
+        }
+        String firstIp = arguments[0];
+        String secondIp = arguments[1];
+        String firstNetworkAdresse = findNetworkForIP(firstIp);
+        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
+        String secondNetworkAdresse = findNetworkForIP(secondIp);
+        SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
+        // si alguna de las dos ip no existen
+        if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
+            return false;
+        }
+        // same network
+        if (isIpInNetwork(firstIp, firstNetworkAdresse)
+                && isIpInNetwork(secondIp, firstNetworkAdresse)) {
+            return true;
+
+        }
+        Node firstNode = firstNetwork.getNode(firstIp);
+        Node secondNode = secondNetwork.getNode(secondIp);
+        if (!firstNode.isRouter() && !secondNode.isRouter()) {
+            return false;
+        }
+        // si estan en la misma red , deben tener coneccion
+
+        // si estan en diferentes subredes , deben ser router
         return true;
     }
 
