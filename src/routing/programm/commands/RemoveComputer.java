@@ -4,6 +4,7 @@ import routing.model.graphmodel.SubGraph;
 //import routing.model.graphmodel.node.Computer;
 //import routing.model.graphmodel.node.Node;
 
+import static routing.model.graphmodel.GraphManager.getKeySet;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
 /**
@@ -30,7 +31,22 @@ public class RemoveComputer implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        // mirar que exista y que no sea router
+        if (arguments.length != 2) {
+            return false;
+        }
+        if (!getKeySet().contains(arguments[0])) {
+            return false;
+        }
+
+        String subnetAdresse = arguments[0];
+        SubGraph network = getNodeFromGraphHolder(subnetAdresse);
+        if (!network.getKeys().contains(arguments[1])) {
+            return false;
+        }
+        if (network.getNode(arguments[1]).isRouter()) {
+            return false;
+        }
+
         return true;
     }
 
