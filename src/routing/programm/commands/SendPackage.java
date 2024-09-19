@@ -37,6 +37,18 @@ public class SendPackage implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
+        if (arguments.length != 2) {
+            return false;
+        }
+        String firstIp = arguments[0];
+        String secondIp = arguments[1];
+
+        String firstNetworkAdresse = findNetworkForIP(firstIp);
+        String secondNetworkAdresse = findNetworkForIP(secondIp);
+
+        if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
+            return false;
+        }
         return true;
     }
 
