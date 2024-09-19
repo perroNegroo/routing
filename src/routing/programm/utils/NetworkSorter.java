@@ -29,7 +29,13 @@ public final class NetworkSorter {
     }
 
     private static long ipToLong(String ip) {
-        String[] parts = ip.split("\\.")[0].split("/")[0].split("\\.");
+        // Extract the IP part before the '/'
+        String ipAddress = ip.split("/")[0];
+
+        // Split the IP address into its octets
+        String[] parts = ipAddress.split("\\.");
+
+        // Convert each octet to a long and combine them
         return (Long.parseLong(parts[0]) << 24)
                 | (Long.parseLong(parts[1]) << 16)
                 | (Long.parseLong(parts[2]) << 8)
