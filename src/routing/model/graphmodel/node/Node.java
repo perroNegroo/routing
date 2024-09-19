@@ -71,6 +71,20 @@ public abstract class Node {
         intraEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(ipV4) && edge.getTo().getIpV4().equals(ipV4To));
     }
     /**
+     * Validates if exist a connection between the given nodes.
+     *
+     * @param ipV4 the IPv4 address of the target node
+     * @return true if the connection exists.
+     */
+    public boolean existsConnection(String ipV4) {
+        for (WeightedEdge edge: intraEdges) {
+            if (edge.getTo().getIpV4().equals(ipV4)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * Returns the IPv4 address of this node.
      *
      * @return the IPv4 address

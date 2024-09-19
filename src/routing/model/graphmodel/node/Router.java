@@ -75,6 +75,20 @@ public class Router extends Node {
     public void removeInterEdge(String ipV4To) {
         interEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(this.ipV4) && edge.getTo().getIpV4().equals(ipV4To));
     }
+    /**
+     * Validates if exist a connection between the given routers.
+     *
+     * @param secondRouter the IPv4 address of the target router.
+     * @return true if the connection exists.
+     */
+    public boolean existsConnectionBetweenRouters(String secondRouter) {
+        for (NotWeightedEdge edge: interEdges) {
+            if (edge.getTo().getIpV4().equals(secondRouter)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void connectionsPriter() {

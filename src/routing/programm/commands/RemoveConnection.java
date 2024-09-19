@@ -61,21 +61,23 @@ public class RemoveConnection implements Command {
         if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
             return false;
         }
+        Node firstNode = firstNetwork.getNode(firstIp);
+        Node secondNode = secondNetwork.getNode(secondIp);
         // same network
         if (isIpInNetwork(firstIp, firstNetworkAdresse)
                 && isIpInNetwork(secondIp, firstNetworkAdresse)) {
-            return true;
+
+            return firstNode.existsConnection(secondIp);
 
         }
-        Node firstNode = firstNetwork.getNode(firstIp);
-        Node secondNode = secondNetwork.getNode(secondIp);
-        if (!firstNode.isRouter() && !secondNode.isRouter()) {
-            return false;
+
+        if (firstNode.isRouter() && secondNode.isRouter()) {
+            return firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp);
         }
         // si estan en la misma red , deben tener coneccion
 
         // si estan en diferentes subredes , deben ser router
-        return true;
+        return false;
     }
 
     @Override
