@@ -75,11 +75,11 @@ public class CommandHandler {
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
         if (!commandExecutor.availability()) {
-            System.out.printf("Error, COMMAND_AVAILABILITY %s.", commandExecutor.getClass().getSimpleName());
+            System.out.printf("Error, COMMAND_AVAILABILITY %s.%n", commandExecutor.getClass().getSimpleName());
             return false;
         }
         if (!commandExecutor.validArguments(arguments)) {
-            System.out.printf("Error, COMMAND_ARGUMENTS %s.", commandExecutor.getClass().getSimpleName());
+            System.out.printf("Error, COMMAND_ARGUMENTS %s.%n", commandExecutor.getClass().getSimpleName());
             return false;
         }
         return true;
