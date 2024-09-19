@@ -31,7 +31,7 @@ public class AddComputer implements Command {
 
         String subnetAdresse = arguments[0];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        if (!network.getKeys().contains(arguments[1])) {
+        if (network.getKeys().contains(arguments[1])) {
             return false;
         }
 
