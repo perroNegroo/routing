@@ -2,8 +2,7 @@ package routing.programm.commands;
 
 import routing.model.graphmodel.SubGraph;
 
-import static routing.model.graphmodel.GraphManager.getKeySet;
-import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import static routing.model.graphmodel.GraphManager.*;
 import static routing.programm.utils.IpSorter.ipSorter;
 
 
@@ -33,6 +32,6 @@ public class ListSystems implements Command {
 
     @Override
     public boolean availability() {
-        return true;
+        return !getGraphHolder().isEmpty();
     }
 }

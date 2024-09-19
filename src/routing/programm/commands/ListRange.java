@@ -2,8 +2,7 @@ package routing.programm.commands;
 
 import routing.model.graphmodel.SubGraph;
 
-import static routing.model.graphmodel.GraphManager.getKeySet;
-import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import static routing.model.graphmodel.GraphManager.*;
 
 /**
  * Command to list the IP address range of a specified subnet.
@@ -29,6 +28,6 @@ public class ListRange implements Command {
 
     @Override
     public boolean availability() {
-        return true;
+        return !getGraphHolder().isEmpty();
     }
 }
