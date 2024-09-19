@@ -9,7 +9,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ExtractSubGraphs {
+/**
+ * Extracts subgraph sections from a file.
+ * @author uktup
+ */
+public final class ExtractSubGraphs {
+    private ExtractSubGraphs() { }
+    /**
+     * Extracts and divides subgraph sections from the specified file.
+     *
+     * @param filePath the path to the file containing subgraphs
+     * @return a list of subgraphs, each represented as a list of strings
+     */
     public static List<List<String>> extractSubGraphs(String filePath) {
         String content = fileToCotent(filePath);
         List<String> subGraphs = extractSubgraph(content);

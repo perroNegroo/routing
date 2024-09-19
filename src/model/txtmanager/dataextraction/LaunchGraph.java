@@ -12,20 +12,33 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static model.graphmodel.GraphManager.*;
+import static model.graphmodel.GraphManager.clearGraphHolder;
+import static model.graphmodel.GraphManager.addSubgraphInTheGraphHolder;
+import static model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUploaded;
+
+
 import static model.txtmanager.FileToList.fileToList;
 import static model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
 
+/**
+ * Manages the loading and processing of subgraphs and router connections from a file.
+ * @author uktup
+ */
 public class LaunchGraph {
     private final List<SubGraph> subGraphs = new ArrayList<>();
-    Pattern subgraphPattern = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
-    Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
-    Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
-    Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
-    Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
-    Pattern endPattern = Pattern.compile("end");
+    private final Pattern subgraphPattern = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
+    private final Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
+    private final Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
+    private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
+    private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
+    private final Pattern endPattern = Pattern.compile("end");
 
+    /**
+     * Launches subgraphs and router connections by reading from the specified file.
+     *
+     * @param filePath the path to the file containing subgraphs and router connections
+     */
     public void launchSubGraphs(String filePath) {
         List<String> txtInformation = fileToList(filePath);
         List<String> routerEdges = extractRouterEdges(filePath);
@@ -35,8 +48,6 @@ public class LaunchGraph {
         routerEdges(routerEdges);
 
         clearGraphHolder();
-
-
 
         for (SubGraph subGraph: this.subGraphs) {
             addSubgraphInTheGraphHolder(subGraph);
@@ -52,7 +63,7 @@ public class LaunchGraph {
     private void subGraphInitializer(List<List<String>> subGraphs) {
         for (List<String> subGraphInformation: subGraphs) {
             Matcher subGraphMatcher = subgraphPattern.matcher(subGraphInformation.get(0));
-            if(subGraphMatcher.find()) {
+            if (subGraphMatcher.find()) {
                 SubGraph subGraph = setSubGraph(new SubGraph(subGraphMatcher.group(2)), subGraphInformation);
                 this.subGraphs.add(subGraph);
             } else {
@@ -128,7 +139,5 @@ public class LaunchGraph {
             return Integer.MIN_VALUE;
         }
     }
-
-
 
 }

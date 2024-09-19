@@ -4,12 +4,22 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NumberOfSubGraphs implements Test_Txt {
+/**
+ * Validates the structure and content of graph data, focusing on subgraph and router connections.
+ * @author uktup
+ */
+public class NumberOfSubGraphs implements TestTxt {
     @Override
     public boolean valid(List<String> data)  {
         return validateSubgraphs(data) && validateRouterConnections(data);
     }
 
+    /**
+     * Checks if subgraphs in the data are properly defined and closed.
+     *
+     * @param lines the lines of data to validate
+     * @return true if all subgraphs are correctly started and ended, false otherwise
+     */
     public static boolean validateSubgraphs(List<String> lines) {
         boolean inSubgraph = false;
         for (String line : lines) {
@@ -33,7 +43,12 @@ public class NumberOfSubGraphs implements Test_Txt {
         }
         return true;
     }
-
+    /**
+     * Validates the format of router connections after the last 'end' keyword.
+     *
+     * @param lines the lines of data to validate
+     * @return true if router connections are valid, false otherwise
+     */
     public static boolean validateRouterConnections(List<String> lines) {
         // Regular expression for the connection pattern between routers
         Pattern routerConnectionPattern = Pattern.compile("(\\w+_Router) <--> (\\w+_Router)");
@@ -69,7 +84,5 @@ public class NumberOfSubGraphs implements Test_Txt {
         }
         return true;
     }
-
-
 
 }

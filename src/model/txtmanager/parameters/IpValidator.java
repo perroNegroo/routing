@@ -1,14 +1,24 @@
 package model.txtmanager.parameters;
 
-import model.txtmanager.txt.Test_Txt;
+import model.txtmanager.txt.TestTxt;
 
 import java.util.List;
 
-public class IpValidator implements Test_Txt {
+/**
+ * Validates IP addresses.
+ * @author uktup
+ */
+public class IpValidator implements TestTxt {
     @Override
     public boolean valid(List<String> data) {
         return false;
     }
+    /**
+     * Validates an IPv4 address.
+     *
+     * @param ip the IP address to validate (e.g., "192.168.1.1")
+     * @return true if the IP address is valid, false otherwise
+     */
     public static boolean ipValidator(String ip) {
         // Split the IP address by the dots
         String[] octets = ip.split("\\.");
@@ -38,6 +48,5 @@ public class IpValidator implements Test_Txt {
         }
         return true;
     }
-
 
 }

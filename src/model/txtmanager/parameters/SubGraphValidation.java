@@ -5,7 +5,18 @@ import java.util.regex.Pattern;
 
 import static model.txtmanager.parameters.IpValidator.ipValidator;
 
-public class SubGraphValidation {
+/**
+ * Validates and extracts components from a subgraph description.
+ * @author uktup
+ */
+public final class SubGraphValidation {
+    private SubGraphValidation() { }
+    /**
+     * Validates and extracts IP address and subnet mask from a subgraph description.
+     *
+     * @param input the subgraph description (e.g., "subgraph 192.168.1.0/24")
+     * @return an array containing the IP address and subnet mask if valid, or an empty array if invalid
+     */
     public static String[] subGraphValidator(String input) {
         // Define the regex pattern
         String regex = "(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+)/(\\d+)";
