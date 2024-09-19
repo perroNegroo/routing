@@ -1,8 +1,8 @@
 package programm.commands;
 
 import model.graphmodel.SubGraph;
-import model.graphmodel.node.Computer;
-import model.graphmodel.node.Node;
+//import model.graphmodel.node.Computer;
+//import model.graphmodel.node.Node;
 
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
@@ -17,7 +17,7 @@ public class RemoveComputer implements Command {
         String ipToDelete = arguments[1];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
         // borrar todos las conecctiones
-        Node computer = network.getNode(ipToDelete);
+        // Node computer = network.getNode(ipToDelete);
         network.removeNode(ipToDelete);
         //aca borra las conectiones de cualquier nodo con ese nodo
         for (String key: network.getKeys()) {
