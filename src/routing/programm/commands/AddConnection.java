@@ -59,8 +59,9 @@ public class AddConnection implements Command {
             return false;
         }
         String firstNetworkAdresse = findNetworkForIP(firstIp);
-        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
         String secondNetworkAdresse = findNetworkForIP(secondIp);
+
+        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
         SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
         if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
             return false;
