@@ -13,6 +13,7 @@ import java.util.TreeSet;
  * @author uktup
  */
 public final class GraphManager {
+    //antes era Treemap, tener cuidado
     private static final Map<String, SubGraph> GRAPH_HOLDER = new HashMap<>();
     private static final Map<String, SubGraph> GRAPH_TO_BE_TESTED = new HashMap<>();
     private GraphManager() { }

@@ -55,7 +55,7 @@ public class AddConnection implements Command {
         }
         String firstIp = arguments[0];
         String secondIp = arguments[1];
-        if (!ipValidator(firstIp) || !ipValidator(secondIp)) {
+        if (!ipValidator(firstIp) || !ipValidator(secondIp) || firstIp.equals(secondIp)) {
             return false;
         }
         String firstNetworkAdresse = findNetworkForIP(firstIp);
@@ -63,7 +63,8 @@ public class AddConnection implements Command {
 
         SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
         SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
-        if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
+        if (firstNetworkAdresse == null  || secondNetworkAdresse == null
+                || firstNetwork == null || secondNetwork == null) {
             return false;
         }
         Node firstNode = firstNetwork.getNode(firstIp);
