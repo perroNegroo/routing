@@ -5,6 +5,7 @@ import routing.model.graphmodel.node.Computer;
 
 import static routing.model.graphmodel.GraphManager.getKeySet;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
+import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
  * Command to add a new computer to a specified subnet.
@@ -32,6 +33,9 @@ public class AddComputer implements Command {
         String subnetAdresse = arguments[0];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
         if (network.getKeys().contains(arguments[1])) {
+            return false;
+        }
+        if (!isIpInNetwork(arguments[1], arguments[0])) {
             return false;
         }
 

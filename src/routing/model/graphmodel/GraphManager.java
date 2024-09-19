@@ -42,8 +42,6 @@ public final class GraphManager {
     public static Map<String, SubGraph> getGraphHolder() {
         return new TreeMap<>(GRAPH_HOLDER);
     }
-
-
     //es el possible grapho a manejar, debe ser testeado para ver si si es posible subirlo
     // poner una badera en el graphluancer si hay edeges con o sin peso donde no deben ir
 
