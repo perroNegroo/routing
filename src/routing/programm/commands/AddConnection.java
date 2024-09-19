@@ -9,6 +9,7 @@ import routing.model.graphmodel.node.Router;
 import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
+import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
  * Command to add a new connection between two nodes.
@@ -48,11 +49,41 @@ public class AddConnection implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
+        if (arguments.length < 2 || arguments.length > 3) {
+            return false;
+        }
+        String firstIp = arguments[0];
+        String secondIp = arguments[1];
+        String firstNetworkAdresse = findNetworkForIP(firstIp);
+        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
+        String secondNetworkAdresse = findNetworkForIP(secondIp);
+        SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
+        if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
+            return false;
+        }
+        Node firstNode = firstNetwork.getNode(firstIp);
+        Node secondNode = secondNetwork.getNode(secondIp);
+        if (isIpInNetwork(firstIp, firstNetworkAdresse)
+                && isIpInNetwork(secondIp, firstNetworkAdresse)
+                && !firstNode.existsConnection(secondIp)
+                && arguments.length == 3) {
+
+            return parseInteger(arguments[2]) > 0;
+
+        }
+
+        if (firstNode.isRouter() && secondNode.isRouter()
+                && !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp)
+                && arguments.length == 2) {
+            return true;
+
+        }
+
         // Si estan en la misma network, debe haber un peso
             // si estan en la misma red, mirar que ambos dispositivos esten contenidos
         // si estan en diferente network, no debe tener peso y deben ser ambos routers
             //si estan en diferentes subgraphos, mirar que si sean los routers
-        return true;
+        return false;
     }
 
     @Override

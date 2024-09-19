@@ -63,10 +63,8 @@ public class RemoveConnection implements Command {
         }
         Node firstNode = firstNetwork.getNode(firstIp);
         Node secondNode = secondNetwork.getNode(secondIp);
-        // same network
         if (isIpInNetwork(firstIp, firstNetworkAdresse)
                 && isIpInNetwork(secondIp, firstNetworkAdresse)) {
-
             return firstNode.existsConnection(secondIp);
 
         }
@@ -74,9 +72,6 @@ public class RemoveConnection implements Command {
         if (firstNode.isRouter() && secondNode.isRouter()) {
             return firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp);
         }
-        // si estan en la misma red , deben tener coneccion
-
-        // si estan en diferentes subredes , deben ser router
         return false;
     }
 
