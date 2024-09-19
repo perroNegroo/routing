@@ -1,11 +1,27 @@
 package programm;
 
-import programm.commands.*;
+import programm.commands.LoadNetwork;
+import programm.commands.ListSubnets;
+import programm.commands.ListRange;
+import programm.commands.ListSystems;
+import programm.commands.SendPackage;
+import programm.commands.AddComputer;
+import programm.commands.AddConnection;
+import programm.commands.RemoveConnection;
+import programm.commands.RemoveComputer;
+import programm.commands.Command;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Handles user commands for interacting with the network management system.
+ * @author uktup
+ */
 public class CommandHandler {
+    /**
+     * Starts the command input loop, processing user commands until "quit" is entered.
+     */
     public void start() {
         Scanner scanner = new Scanner(System.in);
         String commandInput;

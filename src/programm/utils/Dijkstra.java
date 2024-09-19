@@ -1,6 +1,5 @@
 package programm.utils;
 
-import model.graphmodel.SubGraph;
 import model.graphmodel.edge.WeightedEdge;
 import model.graphmodel.node.Node;
 
@@ -12,12 +11,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import static model.graphmodel.GraphManager.getKeySet;
 
+/**
+ * Utility class for performing Dijkstra's algorithm on a graph of nodes.
+ *
+ * @author uktup
+ */
+public final class Dijkstra {
 
-public class Dijkstra {
-
-
+    private Dijkstra() { }
+    /**
+     * Computes the shortest paths from the specified start node to all other nodes in the graph.
+     *
+     * @param startNode the node from which to start the Dijkstra's algorithm
+     */
     public static void dijkstra(Node startNode) {
         // Priority queue with a comparator that compares by distance first, and by IPv4 address if distances are equal
         PriorityQueue<NodeDistance> pq = new PriorityQueue<>(

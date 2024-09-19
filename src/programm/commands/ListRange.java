@@ -4,6 +4,10 @@ import model.graphmodel.SubGraph;
 
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
+/**
+ * Command to list the IP address range of a specified subnet.
+ * @author uktup
+ */
 public class ListRange implements Command {
     @Override
     public void execute(String[] arguments) {
@@ -11,7 +15,6 @@ public class ListRange implements Command {
         SubGraph subGraph = getNodeFromGraphHolder(subnet);
         System.out.println(subGraph.getLowerBound() + " " + subGraph.getHigherBound());
     }
-
     @Override
     public boolean validArguments(String[] arguments) {
         return true;

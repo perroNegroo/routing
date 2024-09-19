@@ -6,6 +6,10 @@ import model.graphmodel.node.Node;
 
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
+/**
+ * Command to remove a compùter from a given network.
+ * @author uktup
+ */
 public class RemoveComputer implements Command {
     @Override
     public void execute(String[] arguments) {

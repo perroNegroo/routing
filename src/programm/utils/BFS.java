@@ -3,10 +3,28 @@ package programm.utils;
 import model.graphmodel.edge.NotWeightedEdge;
 import model.graphmodel.node.Router;
 
-import java.util.*;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class BFS {
+/**
+ * Utility class for performing Breadth-First Search (BFS) on a network of routers.
+ *
+ * @author uktup
+ */
+public final class BFS {
+    private BFS() { }
 
+    /**
+     * Performs BFS from the specified start router to compute shortest paths to all other routers.
+     * Updates the start router's shortest path information based on the BFS traversal.
+     *
+     * @param startRouter the router from which to start the BFS
+     */
     public static void bfs(Router startRouter) {
         // Queue for BFS, using a comparator for tie-breaking by IPv4 address
         Queue<Router> queue = new LinkedList<>();

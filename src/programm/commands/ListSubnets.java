@@ -1,17 +1,12 @@
 package programm.commands;
 
-import model.graphmodel.SubGraph;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-
-import static model.graphmodel.GraphManager.getGraphHolder;
 import static model.graphmodel.GraphManager.getKeySet;
-import static programm.utils.IpSorter.ipSorter;
 
+/**
+ * Command to list all subnets in ascending order.
+ * @author uktup
+ */
 public class ListSubnets implements Command {
-
     @Override
     public void execute(String[] arguments) {
 

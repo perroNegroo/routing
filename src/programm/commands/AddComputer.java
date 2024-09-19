@@ -5,6 +5,10 @@ import model.graphmodel.node.Computer;
 
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
+/**
+ * Command to add a new computer to a specified subnet.
+ * @author uktup
+ */
 public class AddComputer implements Command {
     @Override
     public void execute(String[] arguments) {
@@ -12,10 +16,9 @@ public class AddComputer implements Command {
         String newIp = arguments[1];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
 
-        network.addNode(newIp ,new Computer(newIp, ""));
+        network.addNode(newIp, new Computer(newIp, ""));
 
     }
-
     @Override
     public boolean validArguments(String[] arguments) {
         return true;

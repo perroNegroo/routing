@@ -1,7 +1,6 @@
 package programm.commands;
 
 import model.graphmodel.SubGraph;
-import model.graphmodel.node.Node;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -9,10 +8,12 @@ import java.util.List;
 import java.util.Objects;
 
 import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static programm.utils.IpSorter.ipSorter;
 import static programm.utils.NetworkIdentifier.findNetworkForIP;
-import static programm.utils.NetworkIdentifier.isIpInNetwork;
 
+/**
+ * Command to print the shortest path between two systems.
+ * @author uktup
+ */
 public class SendPackage implements Command {
     @Override
     public void execute(String[] arguments) {
@@ -31,9 +32,6 @@ public class SendPackage implements Command {
         path.addAll(secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp));
         System.out.println(String.join(" ", new LinkedHashSet<>(path)));
         //System.out.println(new LinkedHashSet<>(path));
-
-
-
 
     }
 

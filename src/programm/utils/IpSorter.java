@@ -1,33 +1,39 @@
 package programm.utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.Comparator;
 
 
-public class IpSorter {
+/**
+ * Utility class for sorting IPv4 addresses.
+ *
+ * @author uktup
+ */
+public final class IpSorter {
+    private IpSorter() { }
+    /**
+     * Sorts a set of IPv4 addresses in ascending numerical order.
+     *
+     * @param ips a set of IPv4 addresses to be sorted
+     * @return a list of IPv4 addresses sorted in ascending order
+     */
     public static List<String> ipSorter(Set<String> ips) {
         List<String> ipList = new ArrayList<>(ips);
-
-        // Sort the List using a custom Comparator for IPv4 addresses
-        ipList.sort((ip1, ip2) -> {
-            String[] parts1 = ip1.split("\\.");
-            String[] parts2 = ip2.split("\\.");
-
-            for (int i = 0; i < 4; i++) {
-                int num1 = Integer.parseInt(parts1[i]);
-                int num2 = Integer.parseInt(parts2[i]);
-
-                if (num1 != num2) {
-                    return Integer.compare(num1, num2); // Compare numerically
-                }
-            }
-            return 0; // If all parts are equal, the IPs are equal
-        });
-
-        // Print the sorted List
+        ipList.sort(IpSorter::compareIpAddresses);
         return ipList;
     }
+
+    private static int compareIpAddresses(String ip1, String ip2) {
+        String[] parts1 = ip1.split("\\.");
+        String[] parts2 = ip2.split("\\.");
+        for (int i = 0; i < 4; i++) {
+            int cmp = Integer.compare(Integer.parseInt(parts1[i]), Integer.parseInt(parts2[i]));
+            if (cmp != 0) {
+                return cmp;
+            }
+        }
+        return 0;
+    }
+
 }

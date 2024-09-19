@@ -6,13 +6,15 @@ import model.graphmodel.edge.WeightedEdge;
 import model.graphmodel.node.Node;
 import model.graphmodel.node.Router;
 
-import java.util.TreeSet;
-
-import static model.graphmodel.GraphManager.*;
-import static model.txtmanager.loadvalidation.CalculateRange.ipToInt;
+import static model.graphmodel.GraphManager.dijkstraExecutor;
+import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static programm.utils.NetworkIdentifier.findNetworkForIP;
 
-public class AddConnection implements Command{
+/**
+ * Command to add a new connection between two nodes.
+ * @author uktup
+ */
+public class AddConnection implements Command {
     @Override
     public void execute(String[] arguments) {
         String firstIp = arguments[0];

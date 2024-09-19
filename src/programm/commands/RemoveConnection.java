@@ -9,6 +9,11 @@ import static model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static programm.utils.NetworkIdentifier.findNetworkForIP;
 import static programm.utils.NetworkIdentifier.isIpInNetwork;
 
+/**
+ * Command to remove a connection between two systems.
+ * @author uktup
+ */
+
 public class RemoveConnection implements Command {
     @Override
     public void execute(String[] arguments) {
