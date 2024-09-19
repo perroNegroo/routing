@@ -1,6 +1,7 @@
 package routing.programm.commands;
 
 import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.programm.utils.NetworkSorter.sortSubnets;
 
 /**
  * Command to list all subnets in ascending order.
@@ -11,14 +12,9 @@ public class ListSubnets implements Command {
     public void execute(String[] arguments) {
 
         //organiazrlos ascendente
-        System.out.println(String.join(" ", getKeySet()));
-        /*
-        for (Map.Entry<String, SubGraph> entry: getGraphHolder().entrySet()) {
-            System.out.print(entry.getKey() + " ");
-        }
-        System.out.println();
+        //System.out.println(String.join(" ", getKeySet()));
 
-         */
+        System.out.println(String.join(" ", sortSubnets(getKeySet())));
 
     }
 
