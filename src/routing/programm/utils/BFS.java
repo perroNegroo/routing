@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Utility class for performing Breadth-First Search (BFS) on a network of routers.
@@ -37,7 +38,11 @@ public final class BFS {
         while (!queue.isEmpty()) {
             Router currentRouter = queue.poll();
 
-            for (NotWeightedEdge edge : currentRouter.getInterEdges()) {
+            // Sort neighbors by their IPv4 address lexicographically before processing them
+            List<NotWeightedEdge> sortedEdges = new ArrayList<>(currentRouter.getInterEdges());
+            sortedEdges.sort(Comparator.comparing(edge -> ((Router) edge.getTo()).getIpV4()));
+
+            for (NotWeightedEdge edge : sortedEdges) {
                 Router neighbor = (Router) edge.getTo();
                 String neighborIp = neighbor.getIpV4();
                 int newDist = distances.get(currentRouter.getIpV4()) + 1; // Unweighted graph (distance is always 1)
@@ -82,3 +87,4 @@ public final class BFS {
         return 0;
     }
 }
+
