@@ -78,11 +78,6 @@ public final class GraphManager {
     public static void graphIsAlreadyTestedToBeUploaded() {
         GRAPH_HOLDER.clear();
         GRAPH_HOLDER.putAll(GRAPH_TO_BE_TESTED);
-        /*
-        for (String key: GRAPH_TO_BE_TESTED.keySet()) {
-            GRAPH_HOLDER.put(key, GRAPH_TO_BE_TESTED.get(key));
-        }
-         */
     }
     /**
      * Executes Dijkstra's algorithm on each subgraph in the main graph.

@@ -33,6 +33,7 @@ public class LaunchGraph {
     private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
     private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
     private final Pattern endPattern = Pattern.compile("end");
+    private final boolean isGraphCorrect = true;
 
     /**
      * Launches subgraphs and router connections by reading from the specified file.

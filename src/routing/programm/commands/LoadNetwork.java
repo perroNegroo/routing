@@ -2,6 +2,8 @@ package routing.programm.commands;
 
 import routing.model.txtmanager.dataextraction.LaunchGraph;
 
+import java.io.File;
+
 import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
 
 /**
@@ -16,12 +18,23 @@ public class LoadNetwork implements Command {
     }
     @Override
     public boolean validArguments(String[] arguments) {
+        if (arguments.length != 1) {
+            return false;
+        }
+        if (!validPath(arguments[0])){
+            return false;
+        }
+
         return true;
     }
 
     @Override
     public boolean availability() {
         return true;
+    }
+    private boolean validPath(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.isFile();
     }
 
 
