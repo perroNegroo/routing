@@ -57,8 +57,9 @@ public final class BFS {
 
                     queue.add(neighbor);
                 } else if (newDist == distances.get(neighborIp)) {
-                    // Tie breaking: if the distances are equal, choose the one with the smaller IPv4 address
-                    if (compareIpV4(neighborIp, shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1)) < 0) {
+                    // Tie breaking: Compare the current neighbor's IP with the neighbor already in the shortest path
+                    List<String> currentShortestPath = shortestPaths.get(neighborIp);
+                    if (compareIpV4(neighborIp, currentShortestPath.get(currentShortestPath.size() - 1)) < 0) {
                         List<String> path = new ArrayList<>(shortestPaths.get(currentRouter.getIpV4()));
                         path.add(neighborIp);
                         shortestPaths.put(neighborIp, path);
@@ -67,6 +68,7 @@ public final class BFS {
                     }
                 }
             }
+
         }
 
         // Store the shortest paths back to the router
