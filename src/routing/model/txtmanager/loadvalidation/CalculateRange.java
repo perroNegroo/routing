@@ -17,7 +17,9 @@ public final class CalculateRange {
         String ipAddress = parts[0];
         int prefixLength = parseInteger(parts[1]);
         int address = ipToInt(ipAddress);
-        int mask = -(1 << (32 - prefixLength));
+        int mask = (prefixLength == 0) ? 0 : -(1 << (32 - prefixLength));
+        //int mask = -(1 << (32 - prefixLength));
+
         int firstUsableIp = address & mask;
         int lastUsableIp = firstUsableIp | ~mask;
         return new int[]{firstUsableIp, lastUsableIp};
