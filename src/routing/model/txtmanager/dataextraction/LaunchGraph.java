@@ -117,12 +117,12 @@ public class LaunchGraph {
             Matcher edgeMatcher = edgePattern.matcher(line);
             Matcher incorrectEdgePattern = this.incorrectEdgePattern.matcher(line);
             if (routerMatcher.find()) {
-                if (subGraph.isRouterAssign()) {
+                String name = routerMatcher.group(1);
+                String ip = routerMatcher.group(2);
+                if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(ip)) {
                     isGraphCorrect = false;
                     break;
                 }
-                String name = routerMatcher.group(1);
-                String ip = routerMatcher.group(2);
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
