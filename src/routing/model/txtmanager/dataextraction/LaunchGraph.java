@@ -125,12 +125,6 @@ public class LaunchGraph {
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
                 edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
-                /*
-                if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
-                    //isGraphCorrect = false;
-                    break;
-                }
-                 */
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
             } else {
