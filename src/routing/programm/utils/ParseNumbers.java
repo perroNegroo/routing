@@ -6,7 +6,7 @@ package routing.programm.utils;
  *
  * @author uktup
  */
-public class ParseNumbers {
+public final class ParseNumbers {
     private ParseNumbers() { }
     /**
      * Parses the specified string as an integer.
