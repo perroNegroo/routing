@@ -139,6 +139,11 @@ public class LaunchGraph {
 
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+            } else {
+                if (!subGraphMatcher.find() && !endMatcher.find()) {
+                    isGraphCorrect = false;
+                    break;
+                }
             }
             /*
             else if (incorrectEdgePattern.find()) {
@@ -147,12 +152,7 @@ public class LaunchGraph {
             }
              */
 
-            else {
-                if (!subGraphMatcher.find() && !endMatcher.find()) {
-                    isGraphCorrect = false;
-                    break;
-                }
-            }
+
             areNetworksDisjoinct(subGraph);
         }
         return subGraph;
