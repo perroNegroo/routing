@@ -109,9 +109,13 @@ public class LaunchGraph {
     }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
-
+        int index = 0;
         //aca hacer un metodo para probra que son disjuntos
         for (String line: content) {
+
+            //System.out.println("lina: "+ line);
+            Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
+            Matcher endMatcher = endPattern.matcher(line.trim());
             Matcher routerMatcher = routerPattern.matcher(line);
             Matcher pcMatcher = pcPattern.matcher(line);
             Matcher edgeMatcher = edgePattern.matcher(line);
@@ -131,31 +135,36 @@ public class LaunchGraph {
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
+                //System.out.println("subgrap name: " + name);
+                //System.out.println("computer ip: " + ip);
                 if (!pcValidator(subGraph, ip)) {
                     isGraphCorrect = false;
                     break;
-                } else {
-                    subGraph.addNode(ip, new Computer(ip, name));
                 }
+                subGraph.addNode(ip, new Computer(ip, name));
+
             } else if (edgeMatcher.find()) {
                 String nameFirstDevice = edgeMatcher.group(1);
                 String nameSecondDevice = edgeMatcher.group(3);
                 int weight = parseInteger(edgeMatcher.group(2));
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
-                /*
+
                 if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
                     isGraphCorrect = false;
                     break;
                 }
-
-                 */
 
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
             } else if (incorrectEdgePattern.find()) {
                 isGraphCorrect = false;
                 break;
+            } else {
+                if (!subGraphMatcher.find() && !endMatcher.find()) {
+                    isGraphCorrect = false;
+                    break;
+                }
             }
 
             //aca poner el pattern de router edge para validar
@@ -167,6 +176,7 @@ public class LaunchGraph {
             return false;
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
+            System.out.println("El pc no pertece a la red");
             return false;
         }
         return true;
