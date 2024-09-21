@@ -2,7 +2,6 @@ package routing.model.graphmodel;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.TreeMap;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -10,8 +9,8 @@ import java.util.HashSet;
 
 
 /**
- * Manages the storage and testing of subgraphs in a network.
- * This is a utility class with static methods to handle the main graph and subgraphs.
+ * Manages the storage of subgraphs in a network.
+ *
  * @author uktup
  */
 public final class GraphManager {
@@ -41,7 +40,7 @@ public final class GraphManager {
      * @return a map of subgraph names to subgraphs
      */
     public static Map<String, SubGraph> getGraphHolder() {
-        return new TreeMap<>(GRAPH_HOLDER);
+        return new HashMap<>(GRAPH_HOLDER);
     }
 
     /**
