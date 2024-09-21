@@ -122,7 +122,7 @@ public class LaunchGraph {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
                 if (!isRouterValid(ip, subGraph)) {
-                    break;
+                    //break;
                 }
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
