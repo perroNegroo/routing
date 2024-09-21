@@ -43,7 +43,7 @@ public final class NetworkIdentifier {
         int networkIp = ipToInt(networkAddress);
 
         // Calculate the subnet mask in binary form
-        int subnetMask = (int) (0xFFFFFFFF << (32 - subnetMaskLength));
+        int subnetMask = (0xFFFFFFFF << (32 - subnetMaskLength));
 
         // Check if the IP address belongs to the network
         return (ip & subnetMask) == (networkIp & subnetMask);
