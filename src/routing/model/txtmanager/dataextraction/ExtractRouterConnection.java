@@ -34,6 +34,7 @@ public final class ExtractRouterConnection {
             if (routerEdgeMatcher.find()) {
                 routerEdges.add(line.trim());
             }
+            routerEdges.add(line.trim());
         }
         Collections.reverse(lines);
         return routerEdges;
