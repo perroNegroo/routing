@@ -85,8 +85,6 @@ public class LaunchGraph {
             if (subGraphMatcher.find()) {
                 SubGraph subGraph = setSubGraph(new SubGraph(subGraphMatcher.group(2)), subGraphInformation);
                 this.subGraphs.add(subGraph);
-            } else {
-                break;
             }
         }
     }
