@@ -17,7 +17,7 @@ import java.util.List;
 public final class GraphManager {
     //antes era Treemap, tener cuidado
     private static final Map<String, SubGraph> GRAPH_HOLDER = new HashMap<>();
-    private static final Map<String, SubGraph> GRAPH_TO_BE_TESTED = new HashMap<>();
+    //private static final Map<String, SubGraph> GRAPH_TO_BE_TESTED = new HashMap<>();
     private GraphManager() { }
 
     /**
@@ -56,37 +56,6 @@ public final class GraphManager {
         for (SubGraph subGraph: subgraphs) {
             GRAPH_HOLDER.put(subGraph.getNetWorkName(), subGraph);
         }
-    }
-
-    /**
-     * Adds a subgraph to the list of graphs to be tested.
-     *
-     * @param subGraph the subgraph to add
-     */
-    public static void addSubgraphInTheGraphHolder(SubGraph subGraph) {
-        GRAPH_TO_BE_TESTED.put(subGraph.getNetWorkName(), subGraph);
-    }
-    /**
-     * Clears the list of subgraphs to be tested.
-     */
-    public static void clearGraphHolder() {
-        GRAPH_TO_BE_TESTED.clear();
-    }
-
-    /**
-     * Returns the subgraphs that are pending testing.
-     *
-     * @return a map of subgraph names to subgraphs to be tested
-     */
-    public static Map<String, SubGraph> getGraphToBeTested() {
-        return GRAPH_TO_BE_TESTED;
-    }
-    /**
-     * Moves all subgraphs from the test list to the main graph after successful testing.
-     */
-    public static void graphIsAlreadyTestedToBeUploaded() {
-        GRAPH_HOLDER.clear();
-        GRAPH_HOLDER.putAll(GRAPH_TO_BE_TESTED);
     }
     /**
      * Executes Dijkstra's algorithm on each subgraph in the main graph.
