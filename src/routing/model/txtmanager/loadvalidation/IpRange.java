@@ -24,6 +24,6 @@ public final class IpRange {
         int start2 = range2[0];
         int end2 = range2[1];
 
-        return (end1 < start2 - 1 || end2 < start1 - 1);
+        return (end1 < start2 || end2 < start1);
     }
 }
