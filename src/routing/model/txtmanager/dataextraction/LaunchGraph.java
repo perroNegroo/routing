@@ -121,7 +121,7 @@ public class LaunchGraph {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
                 if (!pcValidator(subGraph, ip)) {
-                    isGraphCorrect = false;
+                    //isGraphCorrect = false;
                     break;
                 }
                 subGraph.addNode(ip, new Computer(ip, name));
@@ -176,9 +176,11 @@ public class LaunchGraph {
     }
     private boolean pcValidator(SubGraph subGraph, String ip) {
         if (subGraph.getKeys().contains(ip)) {
+            isGraphCorrect = false;
             return false;
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
+            isGraphCorrect = false;
             return false;
         }
         return true;
