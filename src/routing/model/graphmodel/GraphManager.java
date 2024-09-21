@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.TreeSet;
 import java.util.TreeMap;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
+
 
 
 /**
@@ -15,9 +18,7 @@ import java.util.List;
  * @author uktup
  */
 public final class GraphManager {
-    //antes era Treemap, tener cuidado
     private static final Map<String, SubGraph> GRAPH_HOLDER = new HashMap<>();
-    //private static final Map<String, SubGraph> GRAPH_TO_BE_TESTED = new HashMap<>();
     private GraphManager() { }
 
     /**
@@ -34,8 +35,8 @@ public final class GraphManager {
      *
      * @return a sorted set of subgraph names
      */
-    public static TreeSet<String> getKeySet() {
-        return new TreeSet<>(GRAPH_HOLDER.keySet());
+    public static Set<String> getKeySet() {
+        return new HashSet<>(GRAPH_HOLDER.keySet());
     }
     /**
      * Returns a copy of the main graph.
