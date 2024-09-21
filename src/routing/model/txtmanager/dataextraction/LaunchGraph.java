@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import static routing.model.graphmodel.GraphManager.clearGraphHolder;
-//import static routing.model.graphmodel.GraphManager.addSubgraphInTheGraphHolder;
-//import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUploaded;
 import static routing.model.graphmodel.GraphManager.assignGraphHolder;
 
 
@@ -64,23 +61,12 @@ public class LaunchGraph {
         subGraphInitializer(extractSubGraphs(filePath));
         routerEdges(extractRouterEdges(filePath));
 
-        if (!isGraphCorrect) {
-            return;
+        if (isGraphCorrect) {
+            assignGraphHolder(this.subGraphs);
+            for (String line: txtInformation) {
+                System.out.println(line);
+            }
         }
-
-        /*
-        clearGraphHolder();
-        for (SubGraph subGraph: this.subGraphs) {
-            addSubgraphInTheGraphHolder(subGraph);
-        }
-        graphIsAlreadyTestedToBeUploaded();
-         */
-
-        assignGraphHolder(this.subGraphs);
-        for (String line: txtInformation) {
-            System.out.println(line);
-        }
-
     }
     private void errorHandler(String errorMessage) {
         if (isErrorMessageUnique) {
