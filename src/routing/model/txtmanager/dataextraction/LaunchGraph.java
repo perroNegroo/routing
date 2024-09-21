@@ -85,6 +85,8 @@ public class LaunchGraph {
             if (subGraphMatcher.find()) {
                 SubGraph subGraph = setSubGraph(new SubGraph(subGraphMatcher.group(2)), subGraphInformation);
                 this.subGraphs.add(subGraph);
+            } else {
+                break;
             }
         }
     }
@@ -124,6 +126,7 @@ public class LaunchGraph {
                 edgeHandler(subGraph, nameFirstDevice, nameSecondDevice, weight);
             } else if (!subGraphMatcher.find() && !endMatcher.find()) {
                 errorHandler(ERROR_PATTER_NOT_RECOGNIZE);
+                break;
             }
             areNetworksDisjoint(subGraph);
         }
