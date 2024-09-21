@@ -27,13 +27,16 @@ public final class ExtractRouterConnection {
         List<String> routerEdges = new ArrayList<>();
         Collections.reverse(lines);
         for (String line: lines) {
-            Matcher routerEdgeMatcher = ROUTER_EDGE_PATTERN.matcher(line);
+            //Matcher routerEdgeMatcher = ROUTER_EDGE_PATTERN.matcher(line);
             if (line.trim().equals("end")) {
                 break;
             }
+            /*
             if (routerEdgeMatcher.find()) {
                 routerEdges.add(line.trim());
             }
+
+             */
             routerEdges.add(line.trim());
         }
         Collections.reverse(lines);
