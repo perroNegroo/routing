@@ -170,6 +170,7 @@ public class LaunchGraph {
     }
     private void areNetworksDisjoinct(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
+            //System.out.println(areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName()));
             if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
                 isGraphCorrect = false;
                 break;
