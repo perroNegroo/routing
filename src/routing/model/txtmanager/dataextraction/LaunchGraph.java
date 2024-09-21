@@ -97,7 +97,6 @@ public class LaunchGraph {
                 firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
                 secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
             } else {
-                //isGraphCorrect = false;
                 errorHandler(ERROR_NOT_VALID_INTER_EDGE);
                 break;
             }
@@ -126,7 +125,6 @@ public class LaunchGraph {
             } else {
                 if (!subGraphMatcher.find() && !endMatcher.find()) {
                     errorHandler(ERROR_PATTER_NOT_RECOGNIZE);
-                    //isGraphCorrect = false;
                     break;
                 }
             }
@@ -161,18 +159,15 @@ public class LaunchGraph {
         int expectedRouter = ipToInt(subGraph.getLowerBound()) + 1;
         if (integerValueRouterIp != expectedRouter) {
             errorHandler(ERROR_ROUTER_IP);
-            //isGraphCorrect = false;
         }
         if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(routerIp)) {
             errorHandler(ERROR_ROUTER_IS_ASSIGNED);
-            //isGraphCorrect = false;
         }
     }
     private void areNetworksDisjoint(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
             if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
                 errorHandler(ERROR_NOT_DISJOINT_NETWORKS);
-                //isGraphCorrect = false;
                 break;
             }
         }
@@ -180,21 +175,17 @@ public class LaunchGraph {
     private void pcValidator(SubGraph subGraph, String ip) {
         if (subGraph.getKeys().contains(ip)) {
             errorHandler(ERROR_NOT_UNIQUE_IP);
-            //isGraphCorrect = false;
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
             errorHandler(ERROR_PC_NOT_IN_THE_NETWORK);
-            //isGraphCorrect = false;
         }
     }
     private void edgeValidator(SubGraph subGraph, String firstIp, String secondIp, int weight) {
         if (!isIpInNetwork(firstIp, subGraph.getNetWorkName()) || !isIpInNetwork(secondIp, subGraph.getNetWorkName())) {
             errorHandler(ERROR_EDGE);
-            //isGraphCorrect = false;
         }
         if (weight < 0) {
             errorHandler(ERROR_INVALID_WEIGHT);
-            //isGraphCorrect = false;
         }
     }
     private Router getRouterByName(String routerName) {
