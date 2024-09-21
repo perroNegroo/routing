@@ -26,20 +26,16 @@ public class AddComputer implements Command {
         if (arguments.length != 2) {
             return false;
         }
-        if (!getNetworksNames().contains(arguments[0])) {
-            return false;
-        }
-
         String subnetAdresse = arguments[0];
+        String newComputerIp = arguments[1];
+        if (!getNetworksNames().contains(subnetAdresse)) {
+            return false;
+        }
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        if (network.getKeys().contains(arguments[1])) {
+        if (network.getKeys().contains(newComputerIp)) {
             return false;
         }
-        if (!isIpInNetwork(arguments[1], arguments[0])) {
-            return false;
-        }
-
-        return true;
+        return isIpInNetwork(newComputerIp, subnetAdresse);
     }
 
     @Override
