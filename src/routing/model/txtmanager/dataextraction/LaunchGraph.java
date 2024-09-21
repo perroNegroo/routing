@@ -20,6 +20,7 @@ import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUplo
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
+import static routing.model.txtmanager.loadvalidation.IpRange.areDisjoint;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
@@ -109,6 +110,13 @@ public class LaunchGraph {
     }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
+        for (SubGraph tempSubGraph :this.subGraphs) {
+            if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
+                isGraphCorrect = false;
+                break;
+            }
+        }
+
         for (String line: content) {
             Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
             Matcher endMatcher = endPattern.matcher(line.trim());
