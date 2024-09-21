@@ -22,24 +22,16 @@ public final class ExtractRouterConnection {
      * @return a list of router-to-router connection strings
      */
     public static List<String> extractRouterEdges(String filePath) {
-        //fileToList debe ir con un parametro que es filetopath
         List<String> lines = fileToList(filePath);
         List<String> routerEdges = new ArrayList<>();
         Collections.reverse(lines);
         for (String line: lines) {
-            //Matcher routerEdgeMatcher = ROUTER_EDGE_PATTERN.matcher(line);
             if (line.trim().equals("end")) {
                 break;
             }
-            /*
-            if (routerEdgeMatcher.find()) {
-                routerEdges.add(line.trim());
-            }
-
-             */
             routerEdges.add(line.trim());
         }
-        Collections.reverse(lines);
+        //Collections.reverse(lines);
         return routerEdges;
     }
 }
