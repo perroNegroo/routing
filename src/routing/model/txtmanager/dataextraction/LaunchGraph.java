@@ -31,13 +31,15 @@ import static routing.programm.utils.ParseNumbers.parseInteger;
  * @author uktup
  */
 public class LaunchGraph {
+    private static final String ERROR_PATTERN = "Error, %s%n";
+    private static final Pattern SUBGRAPH_PATTERN = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
+    private static final Pattern ROUTER_PATTERN = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
+    private static final Pattern PC_PATTERN = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
+    private static final Pattern EDGE_PATTERN = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
+    private static final Pattern ROUTER_EDGE_PATTERN = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
+    private static final Pattern END_PATTERN = Pattern.compile("end");
     private final List<SubGraph> subGraphs = new ArrayList<>();
-    private final Pattern subgraphPattern = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
-    private final Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
-    private final Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
-    private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
-    private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
-    private final Pattern endPattern = Pattern.compile("end");
+    private List<String> txtInformation = new ArrayList<>();
     private boolean isGraphCorrect = true;
 
     /**
@@ -46,7 +48,8 @@ public class LaunchGraph {
      * @param filePath the path to the file containing subgraphs and router connections
      */
     public void launchSubGraphs(String filePath) {
-        List<String> txtInformation = fileToList(filePath);
+        txtInformation = fileToList(filePath);
+        //List<String> txtInformation = fileToList(filePath);
         List<String> routerEdges = extractRouterEdges(filePath);
         List<List<String>> subGraphs = extractSubGraphs(filePath);
 
@@ -72,10 +75,17 @@ public class LaunchGraph {
         }
 
     }
+    private void errorHandler(String errorMessage) {
+        for (String line: txtInformation) {
+            System.out.println(line);
+        }
+        System.out.printf(ERROR_PATTERN, errorMessage);
+        //System.out.println("Error, the network is not valid.");
+    }
 
     private void subGraphInitializer(List<List<String>> subGraphs) {
         for (List<String> subGraphInformation: subGraphs) {
-            Matcher subGraphMatcher = subgraphPattern.matcher(subGraphInformation.get(0));
+            Matcher subGraphMatcher = SUBGRAPH_PATTERN.matcher(subGraphInformation.get(0));
             if (subGraphMatcher.find()) {
                 SubGraph subGraph = setSubGraph(new SubGraph(subGraphMatcher.group(2)), subGraphInformation);
                 this.subGraphs.add(subGraph);
@@ -86,7 +96,7 @@ public class LaunchGraph {
     }
     private void routerEdges(List<String> routerEdges) {
         for (String edge: routerEdges) {
-            Matcher routerEdge = routerEdgePattern.matcher(edge);
+            Matcher routerEdge = ROUTER_EDGE_PATTERN.matcher(edge);
             if (routerEdge.find()) {
                 Router firstRouter = getRouterByName(routerEdge.group(1));
                 Router secondRouter = getRouterByName(routerEdge.group(2));
@@ -98,60 +108,26 @@ public class LaunchGraph {
             }
         }
     }
-    private void routerHandler(SubGraph currentSubgraph, String name, String ip) {
-        isRouterValid(ip, currentSubgraph);
-        Router router = new Router(ip, name);
-        currentSubgraph.addNode(ip, router);
-        currentSubgraph.setRouter(router);
-    }
-    private void pcHandler(SubGraph currentSubgraph, String name, String ip) {
-        pcValidator(currentSubgraph, ip);
-        currentSubgraph.addNode(ip, new Computer(ip, name));
-    }
-    private void edgeHandler(SubGraph currentSubgraph, String nameFirstDevice, String nameSecondDevice, int weight) {
-        Node firstNode = currentSubgraph.getNodeByName(nameFirstDevice);
-        Node secondNode = currentSubgraph.getNodeByName(nameSecondDevice);
-        edgeValidator(currentSubgraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
-        firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
-        secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
-    }
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
         for (String line: content) {
-            Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
-            Matcher endMatcher = endPattern.matcher(line.trim());
-            Matcher routerMatcher = routerPattern.matcher(line);
-            Matcher pcMatcher = pcPattern.matcher(line);
-            Matcher edgeMatcher = edgePattern.matcher(line);
+            Matcher subGraphMatcher = SUBGRAPH_PATTERN.matcher(line.trim());
+            Matcher endMatcher = END_PATTERN.matcher(line.trim());
+            Matcher routerMatcher = ROUTER_PATTERN.matcher(line);
+            Matcher pcMatcher = PC_PATTERN.matcher(line);
+            Matcher edgeMatcher = EDGE_PATTERN.matcher(line);
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
                 routerHandler(subGraph, name, ip);
-                /*
-                isRouterValid(ip, subGraph);
-                Router router = new Router(ip, name);
-                subGraph.addNode(ip, router);
-                subGraph.setRouter(router);
-                 */
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
                 pcHandler(subGraph, name, ip);
-                /*
-                pcValidator(subGraph, ip);
-                subGraph.addNode(ip, new Computer(ip, name));
-                 */
             } else if (edgeMatcher.find()) {
                 String nameFirstDevice = edgeMatcher.group(1);
                 String nameSecondDevice = edgeMatcher.group(3);
                 int weight = parseInteger(edgeMatcher.group(2));
                 edgeHandler(subGraph, nameFirstDevice, nameSecondDevice, weight);
-                /*
-                Node firstNode = subGraph.getNodeByName(nameFirstDevice);
-                Node secondNode = subGraph.getNodeByName(nameSecondDevice);
-                edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
-                firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
-                secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
-                 */
             } else {
                 if (!subGraphMatcher.find() && !endMatcher.find()) {
                     isGraphCorrect = false;
@@ -161,6 +137,27 @@ public class LaunchGraph {
             areNetworksDisjoinct(subGraph);
         }
         return subGraph;
+    }
+    private void routerHandler(SubGraph currentSubgraph, String name, String ip) {
+        isRouterValid(ip, currentSubgraph);
+
+        Router router = new Router(ip, name);
+        currentSubgraph.addNode(ip, router);
+        currentSubgraph.setRouter(router);
+    }
+    private void pcHandler(SubGraph currentSubgraph, String name, String ip) {
+        pcValidator(currentSubgraph, ip);
+
+        currentSubgraph.addNode(ip, new Computer(ip, name));
+    }
+    private void edgeHandler(SubGraph currentSubgraph, String nameFirstDevice, String nameSecondDevice, int weight) {
+        Node firstNode = currentSubgraph.getNodeByName(nameFirstDevice);
+        Node secondNode = currentSubgraph.getNodeByName(nameSecondDevice);
+
+        edgeValidator(currentSubgraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
+
+        firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
+        secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
     }
     private void isRouterValid(String routerIp, SubGraph subGraph) {
         int integerValueRouterIp = ipToInt(routerIp);
