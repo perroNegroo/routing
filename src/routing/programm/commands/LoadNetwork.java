@@ -21,14 +21,14 @@ public class LoadNetwork implements Command {
         if (arguments.length != 1) {
             return false;
         }
-        return validPath(arguments[0]);
+        return validFilePath(arguments[0]);
     }
 
     @Override
     public boolean availability() {
         return true;
     }
-    private boolean validPath(String filePath) {
+    private boolean validFilePath(String filePath) {
         File file = new File(filePath);
         return file.exists() && file.isFile();
     }
