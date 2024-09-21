@@ -46,7 +46,7 @@ public final class GraphManager {
     /**
      * this method clears and assigns the Graph Holder of the programm.
      *
-     * @param subgraphs the map of the already tested subgraphs
+     * @param subgraphs List of tested Subgraphs.
      */
     public static void assignGraphHolder(List<SubGraph> subgraphs) {
         GRAPH_HOLDER.clear();

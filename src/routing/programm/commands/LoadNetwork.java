@@ -21,11 +21,7 @@ public class LoadNetwork implements Command {
         if (arguments.length != 1) {
             return false;
         }
-        if (!validPath(arguments[0])) {
-            return false;
-        }
-
-        return true;
+        return validPath(arguments[0]);
     }
 
     @Override
