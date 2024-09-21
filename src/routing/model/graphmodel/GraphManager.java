@@ -2,10 +2,12 @@ package routing.model.graphmodel;
 
 //import routing.model.graphmodel.node.Router;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.TreeSet;
+import java.util.TreeMap;
+import java.util.List;
+
 
 /**
  * Manages the storage and testing of subgraphs in a network.
@@ -43,11 +45,18 @@ public final class GraphManager {
     public static Map<String, SubGraph> getGraphHolder() {
         return new TreeMap<>(GRAPH_HOLDER);
     }
-    //es el possible grapho a manejar, debe ser testeado para ver si si es posible subirlo
-    // poner una badera en el graphluancer si hay edeges con o sin peso donde no deben ir
 
-    // maneja el grafo grande donde
-    //private static final Map<String, Router> adjacentListRouters = new HashMap<>();
+    /**
+     * this method clears and assigns the Graph Holder of the programm.
+     *
+     * @param subgraphs the map of the already tested subgraphs
+     */
+    public static void assignGraphHolder(List<SubGraph> subgraphs) {
+        GRAPH_HOLDER.clear();
+        for (SubGraph subGraph: subgraphs) {
+            GRAPH_HOLDER.put(subGraph.getNetWorkName(), subGraph);
+        }
+    }
 
     /**
      * Adds a subgraph to the list of graphs to be tested.

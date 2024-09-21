@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static routing.model.graphmodel.GraphManager.clearGraphHolder;
-import static routing.model.graphmodel.GraphManager.addSubgraphInTheGraphHolder;
-import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUploaded;
+//import static routing.model.graphmodel.GraphManager.clearGraphHolder;
+//import static routing.model.graphmodel.GraphManager.addSubgraphInTheGraphHolder;
+//import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUploaded;
+import static routing.model.graphmodel.GraphManager.assignGraphHolder;
+
 
 
 import static routing.model.txtmanager.FileToList.fileToList;
@@ -65,11 +67,16 @@ public class LaunchGraph {
         if (!isGraphCorrect) {
             return;
         }
+
+        /*
         clearGraphHolder();
         for (SubGraph subGraph: this.subGraphs) {
             addSubgraphInTheGraphHolder(subGraph);
         }
         graphIsAlreadyTestedToBeUploaded();
+         */
+
+        assignGraphHolder(this.subGraphs);
         for (String line: txtInformation) {
             System.out.println(line);
         }
