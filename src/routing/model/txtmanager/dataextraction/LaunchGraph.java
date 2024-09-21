@@ -143,10 +143,13 @@ public class LaunchGraph {
                 int weight = parseInteger(edgeMatcher.group(2));
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
+                /*
                 if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
                     isGraphCorrect = false;
                     break;
                 }
+
+                 */
 
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
