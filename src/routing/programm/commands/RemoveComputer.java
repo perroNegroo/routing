@@ -35,7 +35,7 @@ public class RemoveComputer implements Command {
             return false;
         }
         String subnetAdresse = arguments[0];
-        String ipToRemove =arguments[1];
+        String ipToRemove = arguments[1];
         if (!getNetworksNames().contains(subnetAdresse)) {
             return false;
         }
