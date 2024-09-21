@@ -36,7 +36,6 @@ public class LaunchGraph {
     private final Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
-    //private final Pattern incorrectEdgePattern = Pattern.compile("(\\w+)\\s<-->\\s(\\w+)");
     private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
     private final Pattern endPattern = Pattern.compile("end");
     private boolean isGraphCorrect = true;
@@ -125,10 +124,13 @@ public class LaunchGraph {
                 int weight = parseInteger(edgeMatcher.group(2));
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
+                edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
+                /*
                 if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
-                    isGraphCorrect = false;
+                    //isGraphCorrect = false;
                     break;
                 }
+                 */
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
             } else {
@@ -168,14 +170,13 @@ public class LaunchGraph {
         }
     }
 
-    private boolean edgeValidator(SubGraph subGraph, String firstIp, String secondIp, int weight) {
+    private void edgeValidator(SubGraph subGraph, String firstIp, String secondIp, int weight) {
         if (!isIpInNetwork(firstIp, subGraph.getNetWorkName()) || !isIpInNetwork(secondIp, subGraph.getNetWorkName())) {
-            return false;
+            isGraphCorrect = false;
         }
         if (weight < 0) {
-            return false;
+            isGraphCorrect = false;
         }
-        return true;
     }
 
     private Router getRouterByName(String routerName) {
