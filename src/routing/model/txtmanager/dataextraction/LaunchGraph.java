@@ -123,7 +123,7 @@ public class LaunchGraph {
                 int weight = parseInteger(edgeMatcher.group(2));
                 edgeHandler(subGraph, nameFirstDevice, nameSecondDevice, weight);
             } else if (!subGraphMatcher.find() && !endMatcher.find()) {
-                    errorHandler(ERROR_PATTER_NOT_RECOGNIZE);
+                errorHandler(ERROR_PATTER_NOT_RECOGNIZE);
             }
             areNetworksDisjoint(subGraph);
         }
