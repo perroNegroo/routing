@@ -26,14 +26,16 @@ public final class GraphManager {
     public static SubGraph getNodeFromGraphHolder(String key) {
         return GRAPH_HOLDER.get(key);
     }
+
     /**
-     * Returns the set of keys (subgraph names) in the main graph.
+     * Returns the set of keys (subgraph names) from the main graph.
      *
      * @return a sorted set of subgraph names
      */
     public static Set<String> getNetworksNames() {
         return new HashSet<>(GRAPH_HOLDER.keySet());
     }
+
     /**
      * Returns a copy of the main graph.
      *
@@ -54,6 +56,7 @@ public final class GraphManager {
             GRAPH_HOLDER.put(subGraph.getNetWorkName(), subGraph);
         }
     }
+
     /**
      * Executes Dijkstra's algorithm on each subgraph in the main graph.
      */
