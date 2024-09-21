@@ -4,7 +4,7 @@ import routing.model.graphmodel.SubGraph;
 //import routing.model.graphmodel.node.Computer;
 //import routing.model.graphmodel.node.Node;
 
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
 /**
@@ -34,7 +34,7 @@ public class RemoveComputer implements Command {
         if (arguments.length != 2) {
             return false;
         }
-        if (!getKeySet().contains(arguments[0])) {
+        if (!getNetworksNames().contains(arguments[0])) {
             return false;
         }
 

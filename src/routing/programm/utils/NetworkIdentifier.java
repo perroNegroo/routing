@@ -3,7 +3,7 @@ package routing.programm.utils;
 import java.util.Set;
 
 
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.txtmanager.loadvalidation.CalculateRange.ipToInt;
 
 /**
@@ -19,7 +19,7 @@ public final class NetworkIdentifier {
      * @return the network that contains the IP address, or {@code null} if no match is found
      */
     public static String findNetworkForIP(String ipAddress) {
-        Set<String> networks = getKeySet();
+        Set<String> networks = getNetworksNames();
         for (String network : networks) {
             if (isIpInNetwork(ipAddress, network)) {
                 return network;  // Return the network if the IP belongs to it

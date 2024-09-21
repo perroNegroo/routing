@@ -3,7 +3,7 @@ package routing.programm.commands;
 import routing.model.graphmodel.SubGraph;
 import routing.model.graphmodel.node.Computer;
 
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
@@ -26,7 +26,7 @@ public class AddComputer implements Command {
         if (arguments.length != 2) {
             return false;
         }
-        if (!getKeySet().contains(arguments[0])) {
+        if (!getNetworksNames().contains(arguments[0])) {
             return false;
         }
 

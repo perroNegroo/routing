@@ -1,7 +1,7 @@
 package routing.programm.commands;
 
 import static routing.model.graphmodel.GraphManager.getGraphHolder;
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.programm.utils.NetworkSorter.sortSubnets;
 
 /**
@@ -15,7 +15,7 @@ public class ListSubnets implements Command {
         //organiazrlos ascendente
         //System.out.println(String.join(" ", getKeySet()));
 
-        System.out.println(String.join(" ", sortSubnets(getKeySet())));
+        System.out.println(String.join(" ", sortSubnets(getNetworksNames())));
 
     }
 

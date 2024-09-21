@@ -4,7 +4,7 @@ import routing.model.graphmodel.SubGraph;
 
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.model.graphmodel.GraphManager.getGraphHolder;
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 
 
 import static routing.programm.utils.IpSorter.ipSorter;
@@ -28,7 +28,7 @@ public class ListSystems implements Command {
         if (arguments.length != 1) {
             return false;
         }
-        if (!getKeySet().contains(arguments[0])) {
+        if (!getNetworksNames().contains(arguments[0])) {
             return false;
         }
         return true;

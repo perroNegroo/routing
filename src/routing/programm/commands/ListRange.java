@@ -4,7 +4,7 @@ import routing.model.graphmodel.SubGraph;
 
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.model.graphmodel.GraphManager.getGraphHolder;
-import static routing.model.graphmodel.GraphManager.getKeySet;
+import static routing.model.graphmodel.GraphManager.getNetworksNames;
 
 /**
  * Command to list the IP address range of a specified subnet.
@@ -22,7 +22,7 @@ public class ListRange implements Command {
         if (arguments.length != 1) {
             return false;
         }
-        if (!getKeySet().contains(arguments[0])) {
+        if (!getNetworksNames().contains(arguments[0])) {
             return false;
         }
         return true;

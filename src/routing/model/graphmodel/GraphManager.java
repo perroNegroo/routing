@@ -31,7 +31,7 @@ public final class GraphManager {
      *
      * @return a sorted set of subgraph names
      */
-    public static Set<String> getKeySet() {
+    public static Set<String> getNetworksNames() {
         return new HashSet<>(GRAPH_HOLDER.keySet());
     }
     /**
