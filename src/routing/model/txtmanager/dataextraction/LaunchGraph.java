@@ -104,7 +104,17 @@ public class LaunchGraph {
         currentSubgraph.addNode(ip, router);
         currentSubgraph.setRouter(router);
     }
-
+    private void pcHandler(SubGraph currentSubgraph, String name, String ip) {
+        pcValidator(currentSubgraph, ip);
+        currentSubgraph.addNode(ip, new Computer(ip, name));
+    }
+    private void edgeHandler(SubGraph currentSubgraph, String nameFirstDevice, String nameSecondDevice, int weight) {
+        Node firstNode = currentSubgraph.getNodeByName(nameFirstDevice);
+        Node secondNode = currentSubgraph.getNodeByName(nameSecondDevice);
+        edgeValidator(currentSubgraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
+        firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
+        secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+    }
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
         for (String line: content) {
             Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
@@ -125,17 +135,23 @@ public class LaunchGraph {
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
+                pcHandler(subGraph, name, ip);
+                /*
                 pcValidator(subGraph, ip);
                 subGraph.addNode(ip, new Computer(ip, name));
+                 */
             } else if (edgeMatcher.find()) {
                 String nameFirstDevice = edgeMatcher.group(1);
                 String nameSecondDevice = edgeMatcher.group(3);
                 int weight = parseInteger(edgeMatcher.group(2));
+                edgeHandler(subGraph, nameFirstDevice, nameSecondDevice, weight);
+                /*
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
                 edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight);
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+                 */
             } else {
                 if (!subGraphMatcher.find() && !endMatcher.find()) {
                     isGraphCorrect = false;
