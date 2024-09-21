@@ -50,6 +50,7 @@ public class LaunchGraph {
     private final List<SubGraph> subGraphs = new ArrayList<>();
     private List<String> txtInformation = new ArrayList<>();
     private boolean isGraphCorrect = true;
+    private boolean isErrorMessageUnique = true;
 
     /**
      * Launches subgraphs and router connections by reading from the specified file.
@@ -85,11 +86,13 @@ public class LaunchGraph {
 
     }
     private void errorHandler(String errorMessage) {
-        for (String line: txtInformation) {
-            System.out.println(line);
+        if (isErrorMessageUnique) {
+            for (String line: txtInformation) {
+                System.out.println(line);
+            }
+            System.out.printf(ERROR_PATTERN, errorMessage);
+            isErrorMessageUnique = false;
         }
-        System.out.printf(ERROR_PATTERN, errorMessage);
-        //System.out.println("Error, the network is not valid.");
     }
 
     private void subGraphInitializer(List<List<String>> subGraphs) {
