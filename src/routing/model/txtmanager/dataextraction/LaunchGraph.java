@@ -111,9 +111,12 @@ public class LaunchGraph {
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
+                isRouterValid(ip, subGraph);
+                /*
                 if (!isRouterValid(ip, subGraph)) {
                     //break;
                 }
+                 */
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
@@ -122,7 +125,6 @@ public class LaunchGraph {
                 String ip = pcMatcher.group(2);
                 pcValidator(subGraph, ip);
                 subGraph.addNode(ip, new Computer(ip, name));
-
             } else if (edgeMatcher.find()) {
                 String nameFirstDevice = edgeMatcher.group(1);
                 String nameSecondDevice = edgeMatcher.group(3);
@@ -150,18 +152,15 @@ public class LaunchGraph {
         }
         return subGraph;
     }
-    private boolean isRouterValid(String routerIp, SubGraph subGraph) {
+    private void isRouterValid(String routerIp, SubGraph subGraph) {
         int integerValueRouterIp = ipToInt(routerIp);
         int expectedRouter = ipToInt(subGraph.getLowerBound()) + 1;
         if (integerValueRouterIp != expectedRouter) {
             isGraphCorrect = false;
-            return false;
         }
         if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(routerIp)) {
             isGraphCorrect = false;
-            return false;
         }
-        return true;
     }
     private void areNetworksDisjoinct(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
@@ -171,16 +170,13 @@ public class LaunchGraph {
             }
         }
     }
-    private boolean pcValidator(SubGraph subGraph, String ip) {
+    private void pcValidator(SubGraph subGraph, String ip) {
         if (subGraph.getKeys().contains(ip)) {
             isGraphCorrect = false;
-            return false;
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
             isGraphCorrect = false;
-            return false;
         }
-        return true;
     }
 
     private boolean edgeValidator(SubGraph subGraph, String firstIp, String secondIp, int weight) {
