@@ -87,11 +87,6 @@ public class AddConnection implements Command {
             return true;
 
         }
-
-        // Si estan en la misma network, debe haber un peso
-            // si estan en la misma red, mirar que ambos dispositivos esten contenidos
-        // si estan en diferente network, no debe tener peso y deben ser ambos routers
-            //si estan en diferentes subgraphos, mirar que si sean los routers
         return false;
     }
 

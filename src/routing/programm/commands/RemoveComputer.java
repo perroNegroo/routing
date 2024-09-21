@@ -34,20 +34,16 @@ public class RemoveComputer implements Command {
         if (arguments.length != 2) {
             return false;
         }
-        if (!getNetworksNames().contains(arguments[0])) {
-            return false;
-        }
-
         String subnetAdresse = arguments[0];
+        String ipToRemove =arguments[1];
+        if (!getNetworksNames().contains(subnetAdresse)) {
+            return false;
+        }
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        if (!network.getKeys().contains(arguments[1])) {
+        if (!network.getKeys().contains(ipToRemove)) {
             return false;
         }
-        if (network.getNode(arguments[1]).isRouter()) {
-            return false;
-        }
-
-        return true;
+        return !network.getNode(ipToRemove).isRouter();
     }
 
     @Override
