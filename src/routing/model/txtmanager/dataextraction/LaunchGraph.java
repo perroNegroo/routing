@@ -120,10 +120,13 @@ public class LaunchGraph {
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
+                pcValidator(subGraph, ip);
+                /*
                 if (!pcValidator(subGraph, ip)) {
                     //isGraphCorrect = false;
                     break;
                 }
+                 */
                 subGraph.addNode(ip, new Computer(ip, name));
 
             } else if (edgeMatcher.find()) {
