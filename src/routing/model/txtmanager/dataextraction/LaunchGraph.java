@@ -36,7 +36,7 @@ public class LaunchGraph {
     private final Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
-    private final Pattern incorrectEdgePattern = Pattern.compile("(\\w+)\\s<-->\\s(\\w+)");
+    //private final Pattern incorrectEdgePattern = Pattern.compile("(\\w+)\\s<-->\\s(\\w+)");
     private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
     private final Pattern endPattern = Pattern.compile("end");
     private boolean isGraphCorrect = true;
@@ -107,16 +107,10 @@ public class LaunchGraph {
             Matcher routerMatcher = routerPattern.matcher(line);
             Matcher pcMatcher = pcPattern.matcher(line);
             Matcher edgeMatcher = edgePattern.matcher(line);
-            //Matcher incorrectEdgePattern = this.incorrectEdgePattern.matcher(line);
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
                 isRouterValid(ip, subGraph);
-                /*
-                if (!isRouterValid(ip, subGraph)) {
-                    //break;
-                }
-                 */
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
@@ -131,12 +125,10 @@ public class LaunchGraph {
                 int weight = parseInteger(edgeMatcher.group(2));
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
-
                 if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
                     isGraphCorrect = false;
                     break;
                 }
-
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
             } else {
@@ -145,14 +137,6 @@ public class LaunchGraph {
                     break;
                 }
             }
-            /*
-            else if (incorrectEdgePattern.find()) {
-                isGraphCorrect = false;
-                break;
-            }
-             */
-
-
             areNetworksDisjoinct(subGraph);
         }
         return subGraph;
