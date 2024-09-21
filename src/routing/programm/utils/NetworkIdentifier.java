@@ -22,10 +22,10 @@ public final class NetworkIdentifier {
         Set<String> networks = getNetworksNames();
         for (String network : networks) {
             if (isIpInNetwork(ipAddress, network)) {
-                return network;  // Return the network if the IP belongs to it
+                return network;
             }
         }
-        return null;  // If the IP doesn't match any network, return null
+        return null;
     }
     /**
      * Checks if the specified IP address is within the given network.
