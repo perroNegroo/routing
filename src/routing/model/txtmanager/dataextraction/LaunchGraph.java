@@ -23,6 +23,7 @@ import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSu
 import static routing.model.txtmanager.loadvalidation.CalculateRange.ipToInt;
 import static routing.model.txtmanager.loadvalidation.IpRange.areDisjoint;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
+import static routing.programm.utils.ParseNumbers.parseInteger;
 
 /**
  * Manages the loading and processing of subgraphs and router connections from a file.
@@ -208,11 +209,9 @@ public class LaunchGraph {
         if (weight < 0) {
             return false;
         }
-
-
         return true;
     }
-
+    /*
     private int parseInteger(String number) {
         try {
             return Integer.parseInt(number);
@@ -220,5 +219,7 @@ public class LaunchGraph {
             return Integer.MIN_VALUE;
         }
     }
+
+     */
 
 }
