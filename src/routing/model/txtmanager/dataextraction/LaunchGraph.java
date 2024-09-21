@@ -40,6 +40,7 @@ public class LaunchGraph {
     private static final String ERROR_EDGE = "the systems in the edge are not in the in the network.";
     private static final String ERROR_INVALID_WEIGHT = "the weight of the edge is not valid.";
     private static final String ERROR_PATTER_NOT_RECOGNIZE = "the pattern in the file is not valid.";
+    private static final String ERROR_NOT_DISJOINT_NETWORKS = "this network is not disjoint.";
     private static final Pattern SUBGRAPH_PATTERN = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
     private static final Pattern ROUTER_PATTERN = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private static final Pattern PC_PATTERN = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
@@ -182,7 +183,6 @@ public class LaunchGraph {
             isGraphCorrect = false;
         }
     }
-    private static final String ERROR_NOT_DISJOINT_NETWORKS = "this network is not disjoint.";
     private void areNetworksDisjoint(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
             if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
