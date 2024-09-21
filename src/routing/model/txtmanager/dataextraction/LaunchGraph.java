@@ -20,6 +20,7 @@ import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUplo
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
+import static routing.model.txtmanager.loadvalidation.CalculateRange.ipToInt;
 import static routing.model.txtmanager.loadvalidation.IpRange.areDisjoint;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
@@ -120,8 +121,7 @@ public class LaunchGraph {
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
-                if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(ip)) {
-                    isGraphCorrect = false;
+                if (!isRouterValid(ip, subGraph)) {
                     break;
                 }
                 Router router = new Router(ip, name);
@@ -167,6 +167,19 @@ public class LaunchGraph {
             //aca poner el pattern de router edge para validar
         }
         return subGraph;
+    }
+    private boolean isRouterValid(String routerIp, SubGraph subGraph) {
+        int integerValueRouterIp = ipToInt(routerIp);
+        int expectedRouter = ipToInt(subGraph.getLowerBound()) + 1;
+        if (integerValueRouterIp != expectedRouter) {
+            isGraphCorrect = false;
+            return false;
+        }
+        if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(routerIp)) {
+            isGraphCorrect = false;
+            return false;
+        }
+        return true;
     }
     private void areNetworksDisjoinct(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
