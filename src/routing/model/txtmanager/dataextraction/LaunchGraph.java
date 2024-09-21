@@ -98,6 +98,12 @@ public class LaunchGraph {
             }
         }
     }
+    private void routerHandler(SubGraph currentSubgraph, String name, String ip) {
+        isRouterValid(ip, currentSubgraph);
+        Router router = new Router(ip, name);
+        currentSubgraph.addNode(ip, router);
+        currentSubgraph.setRouter(router);
+    }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
         for (String line: content) {
@@ -109,10 +115,13 @@ public class LaunchGraph {
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
+                routerHandler(subGraph, name, ip);
+                /*
                 isRouterValid(ip, subGraph);
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
+                 */
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
