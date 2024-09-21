@@ -20,9 +20,11 @@ import static routing.model.graphmodel.GraphManager.graphIsAlreadyTestedToBeUplo
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
+import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
  * Manages the loading and processing of subgraphs and router connections from a file.
+ *
  * @author uktup
  */
 public class LaunchGraph {
@@ -31,9 +33,10 @@ public class LaunchGraph {
     private final Pattern routerPattern = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern pcPattern = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private final Pattern edgePattern = Pattern.compile("(\\w+)\\s<-->\\|(\\d+)\\|\\s(\\w+)");
+    private final Pattern incorrectEdgePattern = Pattern.compile("(\\w+)\\s<-->\\s(\\w+)");
     private final Pattern routerEdgePattern = Pattern.compile("(\\w+_Router)\\s<-->\\s(\\w+_Router)");
     private final Pattern endPattern = Pattern.compile("end");
-    private final boolean isGraphCorrect = true;
+    private boolean isGraphCorrect = true;
 
     /**
      * Launches subgraphs and router connections by reading from the specified file.
@@ -48,6 +51,13 @@ public class LaunchGraph {
         subGraphInitializer(subGraphs);
         routerEdges(routerEdges);
 
+        if (!isGraphCorrect) {
+            for (String line: txtInformation) {
+                System.out.println(line);
+            }
+            System.out.println("Error, the network is not valid.");
+            return;
+        }
         clearGraphHolder();
 
         for (SubGraph subGraph: this.subGraphs) {
@@ -82,6 +92,9 @@ public class LaunchGraph {
 
                 firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
                 secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
+            } else {
+                isGraphCorrect = false;
+                break;
             }
         }
 
@@ -97,24 +110,30 @@ public class LaunchGraph {
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
 
+        //aca hacer un metodo para probra que son disjuntos
         for (String line: content) {
             Matcher routerMatcher = routerPattern.matcher(line);
             Matcher pcMatcher = pcPattern.matcher(line);
             Matcher edgeMatcher = edgePattern.matcher(line);
+            Matcher incorrectEdgePattern = this.incorrectEdgePattern.matcher(line);
             if (routerMatcher.find()) {
+                if (subGraph.isRouterAssign()) {
+                    isGraphCorrect = false;
+                    break;
+                }
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
                 //subGraph.addNode(subGraph.getRouter().getName(), subGraph.getRouter());
-
                 // No aparece bien el router en los nodos
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
-                if (subGraph.getKeys().contains(ip)) {
-                    //poner algina condicion para romper y no ejecutar
+                if (!pcValidator(subGraph, ip)) {
+                    isGraphCorrect = false;
+                    break;
                 } else {
                     subGraph.addNode(ip, new Computer(ip, name));
                 }
@@ -124,15 +143,44 @@ public class LaunchGraph {
                 int weight = parseInteger(edgeMatcher.group(2));
                 Node firstNode = subGraph.getNodeByName(nameFirstDevice);
                 Node secondNode = subGraph.getNodeByName(nameSecondDevice);
+                if (!edgeValidator(subGraph, firstNode.getIpV4(), secondNode.getIpV4(), weight)) {
+                    isGraphCorrect = false;
+                    break;
+                }
 
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+            } else if (incorrectEdgePattern.find()) {
+                isGraphCorrect = false;
+                break;
             }
 
             //aca poner el pattern de router edge para validar
         }
         return subGraph;
     }
+    private boolean pcValidator(SubGraph subGraph, String ip) {
+        if (subGraph.getKeys().contains(ip)) {
+            return false;
+        }
+        if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean edgeValidator(SubGraph subGraph, String firstIp, String secondIp, int weight) {
+        if (!isIpInNetwork(firstIp, subGraph.getNetWorkName()) || !isIpInNetwork(secondIp, subGraph.getNetWorkName())) {
+            return false;
+        }
+        if (weight < 0) {
+            return false;
+        }
+
+
+        return true;
+    }
+
     private int parseInteger(String number) {
         try {
             return Integer.parseInt(number);
