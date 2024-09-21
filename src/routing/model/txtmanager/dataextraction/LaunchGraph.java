@@ -59,23 +59,16 @@ public class LaunchGraph {
      */
     public void launchSubGraphs(String filePath) {
         txtInformation = fileToList(filePath);
-        List<String> routerEdges = extractRouterEdges(filePath);
-        List<List<String>> subGraphs = extractSubGraphs(filePath);
+        //List<String> routerEdges = extractRouterEdges(filePath);
+        //List<List<String>> subGraphs = extractSubGraphs(filePath);
 
-        subGraphInitializer(subGraphs);
-        routerEdges(routerEdges);
+        subGraphInitializer(extractSubGraphs(filePath));
+        routerEdges(extractRouterEdges(filePath));
 
         if (!isGraphCorrect) {
-            /*
-            for (String line: txtInformation) {
-                System.out.println(line);
-            }
-            System.out.println("Error, the network is not valid.");
-             */
             return;
         }
         clearGraphHolder();
-
         for (SubGraph subGraph: this.subGraphs) {
             addSubgraphInTheGraphHolder(subGraph);
         }
@@ -180,7 +173,6 @@ public class LaunchGraph {
         if (integerValueRouterIp != expectedRouter) {
             errorHandler(ERROR_ROUTER_IP);
             isGraphCorrect = false;
-            return;
         }
         if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(routerIp)) {
             errorHandler(ERROR_ROUTER_IS_ASSIGNED);
