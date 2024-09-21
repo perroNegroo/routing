@@ -81,7 +81,6 @@ public class LaunchGraph {
                 SubGraph subGraph = setSubGraph(new SubGraph(subGraphMatcher.group(2)), subGraphInformation);
                 this.subGraphs.add(subGraph);
             } else {
-                System.out.println("la primera linea no es subgraph");
                 break;
             }
         }
@@ -92,7 +91,6 @@ public class LaunchGraph {
             if (routerEdge.find()) {
                 Router firstRouter = getRouterByName(routerEdge.group(1));
                 Router secondRouter = getRouterByName(routerEdge.group(2));
-
                 firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
                 secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
             } else {
@@ -100,15 +98,6 @@ public class LaunchGraph {
                 break;
             }
         }
-
-    }
-    private Router getRouterByName(String routerName) {
-        for (SubGraph subGraph: this.subGraphs) {
-            if (subGraph.getRouter().getName().equals(routerName)) {
-                return subGraph.getRouter();
-            }
-        }
-        return new Router("", "");
     }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
@@ -128,13 +117,9 @@ public class LaunchGraph {
                 Router router = new Router(ip, name);
                 subGraph.addNode(ip, router);
                 subGraph.setRouter(router);
-                //subGraph.addNode(subGraph.getRouter().getName(), subGraph.getRouter());
-                // No aparece bien el router en los nodos
             } else if (pcMatcher.find()) {
                 String name = pcMatcher.group(1);
                 String ip = pcMatcher.group(2);
-                //System.out.println("subgrap name: " + name);
-                //System.out.println("computer ip: " + ip);
                 if (!pcValidator(subGraph, ip)) {
                     isGraphCorrect = false;
                     break;
@@ -165,7 +150,6 @@ public class LaunchGraph {
                 }
             }
             areNetworksDisjoinct(subGraph);
-            //aca poner el pattern de router edge para validar
         }
         return subGraph;
     }
@@ -184,7 +168,6 @@ public class LaunchGraph {
     }
     private void areNetworksDisjoinct(SubGraph subGraph) {
         for (SubGraph tempSubGraph :this.subGraphs) {
-            //System.out.println(areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName()));
             if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
                 isGraphCorrect = false;
                 break;
@@ -196,7 +179,6 @@ public class LaunchGraph {
             return false;
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {
-            System.out.println("El pc no pertece a la red");
             return false;
         }
         return true;
@@ -211,15 +193,14 @@ public class LaunchGraph {
         }
         return true;
     }
-    /*
-    private int parseInteger(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            return Integer.MIN_VALUE;
-        }
-    }
 
-     */
+    private Router getRouterByName(String routerName) {
+        for (SubGraph subGraph: this.subGraphs) {
+            if (subGraph.getRouter().getName().equals(routerName)) {
+                return subGraph.getRouter();
+            }
+        }
+        return new Router("", "");
+    }
 
 }
