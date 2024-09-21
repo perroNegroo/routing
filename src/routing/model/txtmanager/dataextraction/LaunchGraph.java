@@ -110,13 +110,6 @@ public class LaunchGraph {
     }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
-        for (SubGraph tempSubGraph :this.subGraphs) {
-            if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
-                isGraphCorrect = false;
-                break;
-            }
-        }
-
         for (String line: content) {
             Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
             Matcher endMatcher = endPattern.matcher(line.trim());
@@ -170,10 +163,18 @@ public class LaunchGraph {
                     break;
                 }
             }
-
+            areNetworksDisjoinct(subGraph);
             //aca poner el pattern de router edge para validar
         }
         return subGraph;
+    }
+    private void areNetworksDisjoinct(SubGraph subGraph) {
+        for (SubGraph tempSubGraph :this.subGraphs) {
+            if (!areDisjoint(tempSubGraph.getNetWorkName(), subGraph.getNetWorkName())) {
+                isGraphCorrect = false;
+                break;
+            }
+        }
     }
     private boolean pcValidator(SubGraph subGraph, String ip) {
         if (subGraph.getKeys().contains(ip)) {
