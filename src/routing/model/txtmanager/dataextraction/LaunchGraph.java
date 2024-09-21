@@ -107,7 +107,7 @@ public class LaunchGraph {
             Matcher routerMatcher = routerPattern.matcher(line);
             Matcher pcMatcher = pcPattern.matcher(line);
             Matcher edgeMatcher = edgePattern.matcher(line);
-            Matcher incorrectEdgePattern = this.incorrectEdgePattern.matcher(line);
+            //Matcher incorrectEdgePattern = this.incorrectEdgePattern.matcher(line);
             if (routerMatcher.find()) {
                 String name = routerMatcher.group(1);
                 String ip = routerMatcher.group(2);
@@ -139,10 +139,15 @@ public class LaunchGraph {
 
                 firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
                 secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
-            } else if (incorrectEdgePattern.find()) {
+            }
+            /*
+            else if (incorrectEdgePattern.find()) {
                 isGraphCorrect = false;
                 break;
-            } else {
+            }
+             */
+
+            else {
                 if (!subGraphMatcher.find() && !endMatcher.find()) {
                     isGraphCorrect = false;
                     break;
