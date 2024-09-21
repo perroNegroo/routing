@@ -177,6 +177,7 @@ public class LaunchGraph {
         if (integerValueRouterIp != expectedRouter) {
             errorHandler(ERROR_ROUTER_IP);
             isGraphCorrect = false;
+            return;
         }
         if (subGraph.isRouterAssign() || subGraph.getIpV4().equals(routerIp)) {
             errorHandler(ERROR_ROUTER_IS_ASSIGNED);
