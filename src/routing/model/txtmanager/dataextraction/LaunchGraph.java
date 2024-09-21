@@ -59,9 +59,6 @@ public class LaunchGraph {
      */
     public void launchSubGraphs(String filePath) {
         txtInformation = fileToList(filePath);
-        //List<String> routerEdges = extractRouterEdges(filePath);
-        //List<List<String>> subGraphs = extractSubGraphs(filePath);
-
         subGraphInitializer(extractSubGraphs(filePath));
         routerEdges(extractRouterEdges(filePath));
 
