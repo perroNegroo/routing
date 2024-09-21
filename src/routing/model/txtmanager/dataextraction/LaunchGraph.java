@@ -109,11 +109,7 @@ public class LaunchGraph {
     }
 
     private SubGraph setSubGraph(SubGraph subGraph, List<String> content) {
-        int index = 0;
-        //aca hacer un metodo para probra que son disjuntos
         for (String line: content) {
-
-            //System.out.println("lina: "+ line);
             Matcher subGraphMatcher = subgraphPattern.matcher(line.trim());
             Matcher endMatcher = endPattern.matcher(line.trim());
             Matcher routerMatcher = routerPattern.matcher(line);
