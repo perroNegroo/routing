@@ -11,6 +11,10 @@ import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
  * @author uktup
  */
 public final class NetworkIdentifier {
+    private static final String CIDR_SEPARATOR = "/";
+    private static final int IPV4_BITS = 32;
+    private static final int FULL_MASK = 0xFFFFFFFF;
+
     private NetworkIdentifier() { }
     /**
      * Finds the network to which the specified IP address belongs.
@@ -35,17 +39,15 @@ public final class NetworkIdentifier {
      * @return {@code true} if the IP address is in the network, {@code false} otherwise
      */
     public static boolean isIpInNetwork(String ipAddress, String network) {
-        String[] parts = network.split("/");
+        String[] parts = network.split(CIDR_SEPARATOR);
         String networkAddress = parts[0];
         int subnetMaskLength = Integer.parseInt(parts[1]);
-        // Convert both IP addresses to binary representation
+
         int ip = ipToInt(ipAddress);
         int networkIp = ipToInt(networkAddress);
 
-        // Calculate the subnet mask in binary form
-        int subnetMask = (0xFFFFFFFF << (32 - subnetMaskLength));
+        int subnetMask = (FULL_MASK << (IPV4_BITS - subnetMaskLength));
 
-        // Check if the IP address belongs to the network
         return (ip & subnetMask) == (networkIp & subnetMask);
     }
 }
