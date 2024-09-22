@@ -20,6 +20,7 @@ import java.util.Scanner;
  * @author uktup
  */
 public class CommandHandler {
+    private static final String QUIT_COMMAND = "quit";
     private static final String COMMAND_AVAILABILITY_ERROR = "Error, command is not available %s.%n";
     private static final String COMMAND_ARGUMENTS_ERROR = "Error, command arguments are invalid %s.%n";
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
@@ -39,7 +40,7 @@ public class CommandHandler {
 
         while (true) {
             commandInput = scanner.nextLine().trim();
-            if (CommandNames.QUIT.getCommand().equals(commandInput)) {
+            if (QUIT_COMMAND.equals(commandInput)) {
                 break;
             }
             executeCommand(commandInput);
@@ -50,7 +51,7 @@ public class CommandHandler {
 
     private void executeCommand(String commandInput) {
         String[] parts = commandInput.split(COMMAND_DELIMITER);
-        String command = "";
+        String command;
         String[] arguments = {};
 
         if (parts.length < 2) {
