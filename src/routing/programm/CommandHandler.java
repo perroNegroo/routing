@@ -1,15 +1,16 @@
 package routing.programm;
 
 import routing.programm.commands.LoadNetwork;
-import routing.programm.commands.ListSubnets;
-import routing.programm.commands.ListRange;
 import routing.programm.commands.ListSystems;
 import routing.programm.commands.SendPackage;
-import routing.programm.commands.AddComputer;
+import routing.programm.commands.ListRange;
+import routing.programm.commands.ListSubnets;
 import routing.programm.commands.AddConnection;
+import routing.programm.commands.AddComputer;
 import routing.programm.commands.RemoveConnection;
 import routing.programm.commands.RemoveComputer;
 import routing.programm.commands.Command;
+
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,6 +20,14 @@ import java.util.Scanner;
  * @author uktup
  */
 public class CommandHandler {
+    private static final String COMMAND_AVAILABILITY_ERROR = "Error, command is not available %s.%n";
+    private static final String COMMAND_ARGUMENTS_ERROR = "Error, command arguments are invalid %s.%n";
+    private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
+    private static final String COMMAND_DELIMITER = " ";
+
+
+
+
     /**
      * Starts the command input loop, processing user commands until "quit" is entered.
      */
@@ -28,7 +37,7 @@ public class CommandHandler {
 
         while (true) {
             commandInput = scanner.nextLine().trim();
-            if ("quit".equals(commandInput)) {
+            if (CommandNames.QUIT.getCommand().equals(commandInput)) {
                 break;
             }
             executeCommand(commandInput);
@@ -38,14 +47,14 @@ public class CommandHandler {
     }
 
     private void executeCommand(String commandInput) {
-        String[] parts = commandInput.split(" ");
+        String[] parts = commandInput.split(COMMAND_DELIMITER);
         String command = "";
         String[] arguments = {};
 
         if (parts.length < 2) {
             command = parts[0];
         }  else  {
-            command = parts[0] + " " + parts[1];
+            command = parts[0] + COMMAND_DELIMITER + parts[1];
             arguments = Arrays.copyOfRange(parts, 2, parts.length);
         }
 
@@ -53,19 +62,20 @@ public class CommandHandler {
     }
 
     private void executeBasedOnCommand(String command, String[] arguments) {
-        switch (command) {
-            case "load network" -> executeCommandWithArguments(new LoadNetwork(), arguments);
-            case "list subnets" -> executeCommandWithArguments(new ListSubnets(), arguments);
-            case "list range" -> executeCommandWithArguments(new ListRange(), arguments);
-            case "list systems" -> executeCommandWithArguments(new ListSystems(), arguments);
-            case "send packet" -> executeCommandWithArguments(new SendPackage(), arguments);
-            case "add computer" -> executeCommandWithArguments(new AddComputer(), arguments);
-            case "add connection" -> executeCommandWithArguments(new AddConnection(), arguments);
-            case "remove connection" -> executeCommandWithArguments(new RemoveConnection(), arguments);
-            case "remove computer" -> executeCommandWithArguments(new RemoveComputer(), arguments);
-            default -> System.out.println("Error, UNKNOWN_COMMAND : " + command);
+        switch (CommandNames.valueOf(command.toUpperCase().replace(" ", "_"))) {
+            case LOAD_NETWORK -> executeCommandWithArguments(new LoadNetwork(), arguments);
+            case LIST_SUBNETS -> executeCommandWithArguments(new ListSubnets(), arguments);
+            case LIST_RANGE -> executeCommandWithArguments(new ListRange(), arguments);
+            case LIST_SYSTEMS -> executeCommandWithArguments(new ListSystems(), arguments);
+            case SEND_PACKET -> executeCommandWithArguments(new SendPackage(), arguments);
+            case ADD_COMPUTER -> executeCommandWithArguments(new AddComputer(), arguments);
+            case ADD_CONNECTION -> executeCommandWithArguments(new AddConnection(), arguments);
+            case REMOVE_CONNECTION -> executeCommandWithArguments(new RemoveConnection(), arguments);
+            case REMOVE_COMPUTER -> executeCommandWithArguments(new RemoveComputer(), arguments);
+            default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
         }
     }
+
 
     private void executeCommandWithArguments(Command commandExecutor, String[] arguments) {
         if (!errorHandler(commandExecutor, arguments)) {
@@ -75,11 +85,11 @@ public class CommandHandler {
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
         if (!commandExecutor.availability()) {
-            System.out.printf("Error, COMMAND_AVAILABILITY %s.%n", commandExecutor.getClass().getSimpleName());
+            System.out.printf(COMMAND_AVAILABILITY_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
         }
         if (!commandExecutor.validArguments(arguments)) {
-            System.out.printf("Error, COMMAND_ARGUMENTS %s.%n", commandExecutor.getClass().getSimpleName());
+            System.out.printf(COMMAND_ARGUMENTS_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
         }
         return true;
