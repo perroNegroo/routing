@@ -24,6 +24,8 @@ public class CommandHandler {
     private static final String COMMAND_ARGUMENTS_ERROR = "Error, command arguments are invalid %s.%n";
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
     private static final String COMMAND_DELIMITER = " ";
+    private static final String COMMAND_NAME_DELIMITER = "_";
+
 
 
 
@@ -62,7 +64,7 @@ public class CommandHandler {
     }
 
     private void executeBasedOnCommand(String command, String[] arguments) {
-        switch (CommandNames.valueOf(command.toUpperCase().replace(" ", "_"))) {
+        switch (CommandNames.valueOf(command.toUpperCase().replace(COMMAND_DELIMITER, COMMAND_NAME_DELIMITER))) {
             case LOAD_NETWORK -> executeCommandWithArguments(new LoadNetwork(), arguments);
             case LIST_SUBNETS -> executeCommandWithArguments(new ListSubnets(), arguments);
             case LIST_RANGE -> executeCommandWithArguments(new ListRange(), arguments);
