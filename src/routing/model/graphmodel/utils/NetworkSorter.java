@@ -27,15 +27,7 @@ public final class NetworkSorter {
 
         List<String> sortedList = new ArrayList<>(subnets);
 
-        sortedList.sort((firstNetworkName, secondNetworkName) -> {
-            int ipComparison = Long.compare(ipToLong(firstNetworkName), ipToLong(secondNetworkName));
-            if (ipComparison != 0) {
-                return ipComparison;
-            }
-            int mask1 = parseInteger(firstNetworkName.split(CIDR_SEPARATOR)[1]);
-            int mask2 = parseInteger(secondNetworkName.split(CIDR_SEPARATOR)[1]);
-            return Integer.compare(mask1, mask2);
-        });
+        sortedList.sort((o1, o2) -> Long.compare(ipToLong(o1), ipToLong(o2)));
 
         return sortedList;
     }
