@@ -33,7 +33,6 @@ public class Router extends Node {
      * @return a list of nodes representing the shortest path
      */
     public List<String> getShortestInterWays(String destinationRouterIp) {
-        //System.out.println(shortestInterWays.get(destinationRouterIp));
         return new ArrayList<>(shortestInterWays.get(destinationRouterIp));
     }
     /**
@@ -56,7 +55,8 @@ public class Router extends Node {
      * @return the list of inter-router edges
      */
     public List<NotWeightedEdge> getInterEdges() {
-        return interEdges;
+        return new ArrayList<>(interEdges);
+        //return interEdges;
     }
 
     /**
