@@ -1,5 +1,7 @@
 package routing.model.graphmodel;
 
+import routing.model.graphmodel.graph.SubGraph;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;

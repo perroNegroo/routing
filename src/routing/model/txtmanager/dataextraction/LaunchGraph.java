@@ -1,11 +1,11 @@
 package routing.model.txtmanager.dataextraction;
 
-import routing.model.graphmodel.SubGraph;
-import routing.model.graphmodel.edge.NotWeightedEdge;
-import routing.model.graphmodel.edge.WeightedEdge;
-import routing.model.graphmodel.node.Computer;
-import routing.model.graphmodel.node.Node;
-import routing.model.graphmodel.node.Router;
+import routing.model.graphmodel.graph.SubGraph;
+import routing.model.graphmodel.graph.edge.NotWeightedEdge;
+import routing.model.graphmodel.graph.edge.WeightedEdge;
+import routing.model.graphmodel.graph.node.Computer;
+import routing.model.graphmodel.graph.node.Node;
+import routing.model.graphmodel.graph.node.Router;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import static routing.model.graphmodel.GraphManager.assignGraphHolder;
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
-import static routing.model.txtmanager.loadvalidation.CalculateRange.ipToInt;
-import static routing.model.txtmanager.loadvalidation.IpRange.areDisjoint;
+import static routing.model.graphmodel.utils.range.CalculateRange.ipToInt;
+import static routing.model.graphmodel.utils.range.IpRange.areDisjoint;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
 import static routing.programm.utils.ParseNumbers.parseInteger;
 

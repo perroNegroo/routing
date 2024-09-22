@@ -1,8 +1,8 @@
 package routing.programm.commands;
 
-import routing.model.graphmodel.SubGraph;
-import routing.model.graphmodel.node.Node;
-import routing.model.graphmodel.node.Router;
+import routing.model.graphmodel.graph.SubGraph;
+import routing.model.graphmodel.graph.node.Node;
+import routing.model.graphmodel.graph.node.Router;
 
 import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;

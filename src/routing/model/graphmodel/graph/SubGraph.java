@@ -1,17 +1,17 @@
-package routing.model.graphmodel;
+package routing.model.graphmodel.graph;
 
 
-import routing.model.graphmodel.node.Computer;
-import routing.model.graphmodel.node.Node;
-import routing.model.graphmodel.node.Router;
+import routing.model.graphmodel.graph.node.Computer;
+import routing.model.graphmodel.graph.node.Node;
+import routing.model.graphmodel.graph.node.Router;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.TreeMap;
 
-import static routing.model.txtmanager.loadvalidation.CalculateRange.calculateRange;
-import static routing.model.txtmanager.loadvalidation.CalculateRange.intToIp;
+import static routing.model.graphmodel.utils.range.CalculateRange.calculateRange;
+import static routing.model.graphmodel.utils.range.CalculateRange.intToIp;
 import static routing.programm.utils.BFS.bfs;
 import static routing.programm.utils.Dijkstra.dijkstra;
 

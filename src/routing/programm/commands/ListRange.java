@@ -1,6 +1,6 @@
 package routing.programm.commands;
 
-import routing.model.graphmodel.SubGraph;
+import routing.model.graphmodel.graph.SubGraph;
 
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.model.graphmodel.GraphManager.getGraphHolder;

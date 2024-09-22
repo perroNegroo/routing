@@ -1,7 +1,7 @@
 package routing.programm.utils;
 
-import routing.model.graphmodel.edge.NotWeightedEdge;
-import routing.model.graphmodel.node.Router;
+import routing.model.graphmodel.graph.edge.NotWeightedEdge;
+import routing.model.graphmodel.graph.node.Router;
 
 import java.util.Queue;
 import java.util.LinkedList;

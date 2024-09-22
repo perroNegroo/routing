@@ -1,6 +1,6 @@
-package routing.model.graphmodel.node;
+package routing.model.graphmodel.graph.node;
 
-import routing.model.graphmodel.edge.NotWeightedEdge;
+import routing.model.graphmodel.graph.edge.NotWeightedEdge;
 
 import java.util.ArrayList;
 import java.util.HashMap;

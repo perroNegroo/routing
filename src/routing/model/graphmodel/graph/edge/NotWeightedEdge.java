@@ -1,7 +1,7 @@
-package routing.model.graphmodel.edge;
+package routing.model.graphmodel.graph.edge;
 
 
-import routing.model.graphmodel.node.Node;
+import routing.model.graphmodel.graph.node.Node;
 /**
  * Represents an unweighted edge between two nodes.
  * @author uktup

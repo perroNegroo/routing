@@ -1,8 +1,8 @@
-package routing.model.graphmodel.node;
+package routing.model.graphmodel.graph.node;
 
 
 
-import routing.model.graphmodel.edge.WeightedEdge;
+import routing.model.graphmodel.graph.edge.WeightedEdge;
 
 import java.util.List;
 import java.util.ArrayList;

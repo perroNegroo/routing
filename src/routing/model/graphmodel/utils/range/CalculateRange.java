@@ -1,4 +1,4 @@
-package routing.model.txtmanager.loadvalidation;
+package routing.model.graphmodel.utils.range;
 
 /**
  * Provides utility methods for calculating IP address ranges and converting between IP address and integer.

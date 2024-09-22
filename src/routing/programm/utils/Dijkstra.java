@@ -1,7 +1,7 @@
 package routing.programm.utils;
 
-import routing.model.graphmodel.edge.WeightedEdge;
-import routing.model.graphmodel.node.Node;
+import routing.model.graphmodel.graph.edge.WeightedEdge;
+import routing.model.graphmodel.graph.node.Node;
 
 import java.util.PriorityQueue;
 import java.util.ArrayList;

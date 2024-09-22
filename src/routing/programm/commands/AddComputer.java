@@ -1,7 +1,7 @@
 package routing.programm.commands;
 
-import routing.model.graphmodel.SubGraph;
-import routing.model.graphmodel.node.Computer;
+import routing.model.graphmodel.graph.SubGraph;
+import routing.model.graphmodel.graph.node.Computer;
 
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;

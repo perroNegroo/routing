@@ -1,6 +1,6 @@
-package routing.model.txtmanager.loadvalidation;
+package routing.model.graphmodel.utils.range;
 
-import static routing.model.txtmanager.loadvalidation.CalculateRange.calculateRange;
+import static routing.model.graphmodel.utils.range.CalculateRange.calculateRange;
 
 /**
  * Utility class for IP range operations.

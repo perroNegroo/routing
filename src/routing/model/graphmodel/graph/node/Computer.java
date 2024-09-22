@@ -1,4 +1,4 @@
-package routing.model.graphmodel.node;
+package routing.model.graphmodel.graph.node;
 
 /**
  * Represents a computer node in the network.
