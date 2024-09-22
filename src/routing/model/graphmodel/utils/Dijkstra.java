@@ -29,55 +29,68 @@ public final class Dijkstra {
      * @param startNode the node from which to start the Dijkstra's algorithm
      */
     public static void dijkstra(Node startNode) {
-        // Priority queue with a comparator that compares by distance first, and by IPv4 address if distances are equal
-        PriorityQueue<NodeDistance> pq = new PriorityQueue<>(
-                Comparator.comparingInt((NodeDistance nd) -> nd.getDistance())
-                        .thenComparing(nd -> nd.getNode().getIpV4()));
-
-        // Map to store the shortest distance to each node (keyed by the node's IPv4 address)
+        PriorityQueue<NodeDistance> priorityQueue = createPriorityQueue();
         Map<String, Integer> distances = new HashMap<>();
-        Map<String, List<String>> shortestPaths = new HashMap<>();
-        shortestPaths.put(startNode.getIpV4(), new ArrayList<>(Collections.singletonList(startNode.getIpV4())));
-        distances.put(startNode.getIpV4(), 0);
+        Map<String, List<String>> shortestPaths = initializeDataStructures(startNode, distances, priorityQueue);
 
-        // Add the starting node to the priority queue
-        pq.add(new NodeDistance(startNode, 0));
-
-        while (!pq.isEmpty()) {
-            NodeDistance current = pq.poll();
+        while (!priorityQueue.isEmpty()) {
+            NodeDistance current = priorityQueue.poll();
             Node currentNode = current.getNode();
 
-            // Explore each edge (neighboring node)
-            for (WeightedEdge edge : currentNode.getIntraEdges()) {
-                Node neighbor = edge.getTo();
-                String neighborIp = neighbor.getIpV4();
-                int newDist = current.getDistance() + edge.getWeight();
-
-                // If a shorter path to the neighbor is found
-                if (newDist < distances.getOrDefault(neighborIp, Integer.MAX_VALUE)) {
-                    distances.put(neighborIp, newDist);
-
-                    // Update shortest path list
-                    List<String> path = new ArrayList<>(shortestPaths.get(currentNode.getIpV4()));
-                    path.add(neighborIp);
-                    shortestPaths.put(neighborIp, path);
-
-                    pq.add(new NodeDistance(neighbor, newDist));
-                } else if (newDist == distances.get(neighborIp)) {
-                    // Tie breaking: if the distances are equal, choose the one with the smaller IPv4 address
-                    if (compareIpV4(neighborIp, shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1)) < 0) {
-                        List<String> path = new ArrayList<>(shortestPaths.get(currentNode.getIpV4()));
-                        path.add(neighborIp);
-                        shortestPaths.put(neighborIp, path);
-
-                        pq.add(new NodeDistance(neighbor, newDist));
-                    }
-                }
-            }
+            processEdges(current, currentNode, distances, shortestPaths, priorityQueue);
         }
 
-        // Store the shortest paths back to the node
         startNode.setShortestWays(shortestPaths);
+    }
+
+    private static PriorityQueue<NodeDistance> createPriorityQueue() {
+        return new PriorityQueue<>(
+                Comparator.comparingInt(NodeDistance::getDistance)
+                        .thenComparing(nd -> nd.getNode().getIpV4())
+        );
+    }
+
+    private static Map<String, List<String>> initializeDataStructures(Node startNode, Map<String, Integer> distances, PriorityQueue<NodeDistance> priorityQueue) {
+        String startIp = startNode.getIpV4();
+        List<String> startPath = new ArrayList<>(Collections.singletonList(startIp));
+        distances.put(startIp, 0);
+        priorityQueue.add(new NodeDistance(startNode, 0));
+
+        Map<String, List<String>> shortestPaths = new HashMap<>();
+        shortestPaths.put(startIp, startPath);
+
+        return shortestPaths;
+    }
+
+    private static void processEdges(NodeDistance current, Node currentNode, Map<String, Integer> distances, Map<String, List<String>> shortestPaths, PriorityQueue<NodeDistance> priorityQueue) {
+        for (WeightedEdge edge : currentNode.getIntraEdges()) {
+            Node neighbor = edge.getTo();
+            String neighborIp = neighbor.getIpV4();
+            int newDist = current.getDistance() + edge.getWeight();
+
+            if (newDist < distances.getOrDefault(neighborIp, Integer.MAX_VALUE)) {
+                updateShortestPath(distances, shortestPaths, currentNode.getIpV4(), neighborIp, newDist);
+                priorityQueue.add(new NodeDistance(neighbor, newDist));
+            } else if (newDist == distances.get(neighborIp)) {
+                checkAndUpdatePathIfShorter(distances, neighborIp, neighbor, currentNode.getIpV4(), newDist, shortestPaths, priorityQueue);
+            }
+        }
+    }
+
+    private static void updateShortestPath(Map<String, Integer> distances, Map<String, List<String>> shortestPaths, String currentIp, String neighborIp, int newDist) {
+        distances.put(neighborIp, newDist);
+        List<String> path = new ArrayList<>(shortestPaths.get(currentIp));
+        path.add(neighborIp);
+        shortestPaths.put(neighborIp, path);
+    }
+
+    private static void checkAndUpdatePathIfShorter(Map<String, Integer> distances, String neighborIp, Node neighbor, String currentIp,
+                                                    int newDist, Map<String, List<String>> shortestPaths, PriorityQueue<NodeDistance> priorityQueue) {
+        String currentShortestIp = shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1);
+        if (compareIpV4(neighborIp, currentShortestIp) < 0) {
+            updateShortestPath(distances, shortestPaths, currentIp, neighborIp, newDist);
+            priorityQueue.add(new NodeDistance(neighbor, newDist));
+        }
     }
 }
 
