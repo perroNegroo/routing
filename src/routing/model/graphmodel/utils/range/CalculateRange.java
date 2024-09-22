@@ -1,5 +1,7 @@
 package routing.model.graphmodel.utils.range;
 
+import static routing.programm.utils.ParseNumbers.parseInteger;
+
 /**
  * Provides utility methods for calculating IP address ranges and converting between IP address and integer.
  * @author uktup
@@ -48,6 +50,7 @@ public final class CalculateRange {
                 + ((ip >> 8) & 0xFF) + "."
                 + (ip & 0xFF);
     }
+    /*
     private static int parseInteger(String number) {
         try {
             return Integer.parseInt(number);
@@ -55,4 +58,6 @@ public final class CalculateRange {
             return Integer.MIN_VALUE;
         }
     }
+
+     */
 }
