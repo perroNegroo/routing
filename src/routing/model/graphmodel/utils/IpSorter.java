@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static routing.programm.utils.ParseNumbers.parseInteger;
+
 
 /**
  * Utility class for sorting IPv4 addresses.
@@ -11,7 +13,10 @@ import java.util.Set;
  * @author uktup
  */
 public final class IpSorter {
+    private static final String OCTET_DELIMITER = "\\.";
+    private static final int OCTET_COUNT = 4;
     private IpSorter() { }
+
     /**
      * Sorts a set of IPv4 addresses in ascending numerical order.
      *
@@ -25,10 +30,10 @@ public final class IpSorter {
     }
 
     private static int compareIpAddresses(String ip1, String ip2) {
-        String[] parts1 = ip1.split("\\.");
-        String[] parts2 = ip2.split("\\.");
-        for (int i = 0; i < 4; i++) {
-            int cmp = Integer.compare(Integer.parseInt(parts1[i]), Integer.parseInt(parts2[i]));
+        String[] parts1 = ip1.split(OCTET_DELIMITER);
+        String[] parts2 = ip2.split(OCTET_DELIMITER);
+        for (int i = 0; i < OCTET_COUNT; i++) {
+            int cmp = Integer.compare(parseInteger(parts1[i]), parseInteger(parts2[i]));
             if (cmp != 0) {
                 return cmp;
             }
