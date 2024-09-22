@@ -8,7 +8,7 @@ package routing.model.graphmodel.graph.node;
 public class NodeDistance {
 
     private Node node;
-    private int distance;
+    private final int distance;
 
     /**
      * Constructs a NodeDistance object with a specified node and distance.
