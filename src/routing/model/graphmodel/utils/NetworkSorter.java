@@ -15,6 +15,8 @@ import static routing.programm.utils.ParseNumbers.parseInteger;
  */
 public final class NetworkSorter {
     private static final String CIDR_SEPARATOR = "/";
+    private static final String OCTET_SEPARATOR = "\\.";
+    private static final int OCTET_SHIFT = 8;
     private NetworkSorter() { }
     /**
      * Sorts a set of subnet addresses in ascending order.
@@ -27,15 +29,27 @@ public final class NetworkSorter {
         List<String> sortedList = new ArrayList<>(subnets);
 
         sortedList.sort((firstNetworkName, secondNetworkName) -> {
-            int ipComparison = Integer.compare(ipToInt(firstNetworkName), ipToInt(secondNetworkName));
+            // Compare IP addresses
+            int ipComparison = Long.compare(ipToLong(firstNetworkName), ipToLong(secondNetworkName));
             if (ipComparison != 0) {
                 return ipComparison;
             }
+            // If IPs are the same, compare subnet mask lengths (smaller masks first)
             int mask1 = parseInteger(firstNetworkName.split(CIDR_SEPARATOR)[1]);
             int mask2 = parseInteger(secondNetworkName.split(CIDR_SEPARATOR)[1]);
-            return Integer.compare(mask1, mask2);
+            return Integer.compare(mask1, mask2);  // Ensure smaller mask comes first
         });
 
         return sortedList;
+    }
+
+    private static long ipToLong(String cidr) {
+        String ipAddress = cidr.split(CIDR_SEPARATOR)[0];
+        String[] octets = ipAddress.split(OCTET_SEPARATOR);
+        long ip = 0;
+        for (String octet : octets) {
+            ip = (ip << OCTET_SHIFT) | parseInteger(octet);
+        }
+        return ip;
     }
 }
