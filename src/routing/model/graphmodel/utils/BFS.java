@@ -42,7 +42,7 @@ public final class BFS {
 
             // Sort neighbors by their IPv4 address lexicographically before processing them
             List<NotWeightedEdge> sortedEdges = new ArrayList<>(currentRouter.getInterEdges());
-            sortedEdges.sort(Comparator.comparing(edge -> ((Router) edge.getTo()).getIpV4()));
+            sortedEdges.sort(Comparator.comparing(edge -> edge.getTo().getIpV4()));
 
             for (NotWeightedEdge edge : sortedEdges) {
                 Router neighbor = (Router) edge.getTo();

@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Router extends Node {
     private final List<NotWeightedEdge> interEdges = new ArrayList<>();
-    private Map<String, List<String>> shortestInterWays = new HashMap<>();
+    private final Map<String, List<String>> shortestInterWays = new HashMap<>();
 
     /**
      * Constructs a router with the specified IP address and name.
