@@ -5,13 +5,15 @@ package routing.model.txtmanager.parameters;
  * Validates IP addresses.
  * @author uktup
  */
-public class IpValidator {
+public final class IpValidator {
     private static final String OCTET_SEPARATOR = "\\.";
     private static final int OCTET_COUNT = 4;
     private static final int MIN_OCTET_VALUE = 0;
     private static final int MAX_OCTET_VALUE = 255;
     private static final int INVALID_FIRST_OCTET = 0;
     private static final int INVALID_LAST_OCTET = 255;
+
+    private IpValidator() { }
 
     /**
      * Validates an IPv4 address.
