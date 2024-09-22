@@ -1,11 +1,13 @@
 package routing.model.graphmodel.utils;
 
 /**
- * Utility class for converting an integer representation of an IP address
+ * Utility class for converting an integer representation of an IP address.
  *
  * @author uktup
  */
-public class IntegerToIp {
+public final class IntegerToIp {
+    private IntegerToIp() { }
+
     /**
      * Converts an integer to an IP address string.
      *
