@@ -40,6 +40,7 @@ public class LaunchGraph {
     private static final String ERROR_INVALID_WEIGHT = "the weight of the edge is not valid.";
     private static final String ERROR_PATTER_NOT_RECOGNIZE = "the pattern in the file is not valid.";
     private static final String ERROR_NOT_DISJOINT_NETWORKS = "this network is not disjoint.";
+    private static final int THIRD_DEVICE_GROUP_INDEX = 3;
     private static final Pattern SUBGRAPH_PATTERN = Pattern.compile("(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+/\\d+)");
     private static final Pattern ROUTER_PATTERN = Pattern.compile("(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
     private static final Pattern PC_PATTERN = Pattern.compile("(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]");
@@ -121,8 +122,8 @@ public class LaunchGraph {
                 pcHandler(subGraph, name, ip);
             } else if (edgeMatcher.find()) {
                 String nameFirstDevice = edgeMatcher.group(1);
-                String nameSecondDevice = edgeMatcher.group(3);
                 int weight = parseInteger(edgeMatcher.group(2));
+                String nameSecondDevice = edgeMatcher.group(THIRD_DEVICE_GROUP_INDEX);
                 edgeHandler(subGraph, nameFirstDevice, nameSecondDevice, weight);
             } else if (!subGraphMatcher.find() && !endMatcher.find()) {
                 errorHandler(ERROR_PATTER_NOT_RECOGNIZE);

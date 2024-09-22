@@ -8,6 +8,7 @@ import static routing.model.txtmanager.FileToList.fileToList;
 
 /**
  * Extracts router-to-router connections from a file.
+ *
  * @author uktup
  */
 public final class ExtractRouterConnection {
