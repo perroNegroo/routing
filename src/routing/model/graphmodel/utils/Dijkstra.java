@@ -45,7 +45,7 @@ public final class Dijkstra {
 
     private static PriorityQueue<NodeDistance> createPriorityQueue() {
         return new PriorityQueue<>(
-                Comparator.comparingInt(NodeDistance::getDistance)
+                Comparator.comparingInt((NodeDistance nd) -> nd.getDistance())
                         .thenComparing(nd -> nd.getNode().getIpV4())
         );
     }
