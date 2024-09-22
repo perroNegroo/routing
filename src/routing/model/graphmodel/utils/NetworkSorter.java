@@ -24,11 +24,8 @@ public final class NetworkSorter {
      * @return A list of subnet addresses sorted in ascending order.
      */
     public static List<String> sortSubnets(Set<String> subnets) {
-
         List<String> sortedList = new ArrayList<>(subnets);
-
-        sortedList.sort((o1, o2) -> Long.compare(ipToLong(o1), ipToLong(o2)));
-
+        sortedList.sort((firstNetworkName, secondNetworkName) -> Long.compare(ipToLong(firstNetworkName), ipToLong(secondNetworkName)));
         return sortedList;
     }
 
