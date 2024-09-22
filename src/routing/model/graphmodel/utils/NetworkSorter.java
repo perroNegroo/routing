@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 import static routing.programm.utils.ParseNumbers.parseInteger;
 
 
