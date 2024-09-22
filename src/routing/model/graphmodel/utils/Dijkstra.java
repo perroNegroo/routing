@@ -79,21 +79,6 @@ public final class Dijkstra {
         startNode.setShortestWays(shortestPaths);
     }
 
-    // Helper method to compare IPv4 addresses
-    /*
-    private static int compareIpV4(String ip1, String ip2) {
-        String[] octets1 = ip1.split("\\.");
-        String[] octets2 = ip2.split("\\.");
-        for (int i = 0; i < 4; i++) {
-            int diff = Integer.parseInt(octets1[i]) - Integer.parseInt(octets2[i]);
-            if (diff != 0) {
-                return diff;
-            }
-        }
-        return 0;
-    }
-     */
-
     // A helper class to represent a node and its distance for the priority queue
     private static class NodeDistance {
         Node node;
