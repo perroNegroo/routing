@@ -50,6 +50,7 @@ public final class CalculateRange {
                 + ((ip >> 8) & 0xFF) + "."
                 + (ip & 0xFF);
     }
+
     /*
     private static int parseInteger(String number) {
         try {
