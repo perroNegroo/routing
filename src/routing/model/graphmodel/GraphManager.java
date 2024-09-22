@@ -60,7 +60,7 @@ public final class GraphManager {
     /**
      * Executes Dijkstra's algorithm on each subgraph in the main graph.
      */
-    public static void dijkstraExecutor() {
+    public static void shortestPathsCalculator() {
         for (String subGraphKey: GRAPH_HOLDER.keySet()) {
             GRAPH_HOLDER.get(subGraphKey).dijkstraInSubgraph();
         }

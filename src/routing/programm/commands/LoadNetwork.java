@@ -4,7 +4,7 @@ import routing.model.txtmanager.dataextraction.LaunchGraph;
 
 import java.io.File;
 
-import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
+import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 
 /**
  * Command to load a network by a given file path.
@@ -14,7 +14,7 @@ public class LoadNetwork implements Command {
     @Override
     public void execute(String[] arguments) {
         new LaunchGraph().launchSubGraphs(arguments[0]);
-        dijkstraExecutor();
+        shortestPathsCalculator();
     }
     @Override
     public boolean validArguments(String[] arguments) {

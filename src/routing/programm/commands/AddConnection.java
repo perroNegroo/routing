@@ -6,7 +6,7 @@ import routing.model.graphmodel.edge.WeightedEdge;
 import routing.model.graphmodel.node.Node;
 import routing.model.graphmodel.node.Router;
 
-import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
+import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.model.txtmanager.parameters.IpValidator.ipValidator;
 import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
@@ -43,7 +43,7 @@ public class AddConnection implements Command {
         Router secondRouter = secondNetwork.getRouter();
         firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
         secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
-        dijkstraExecutor();
+        shortestPathsCalculator();
     }
 
 

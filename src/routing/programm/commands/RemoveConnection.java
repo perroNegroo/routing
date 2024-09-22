@@ -4,7 +4,7 @@ import routing.model.graphmodel.SubGraph;
 import routing.model.graphmodel.node.Node;
 import routing.model.graphmodel.node.Router;
 
-import static routing.model.graphmodel.GraphManager.dijkstraExecutor;
+import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
 import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
@@ -42,7 +42,7 @@ public class RemoveConnection implements Command {
         secondRouter.removeInterEdge(firstIp);
 
         //aca hay que actualiyar el BFS para calcular send package
-        dijkstraExecutor();
+        shortestPathsCalculator();
 
     }
 
