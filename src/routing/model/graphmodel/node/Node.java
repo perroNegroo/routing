@@ -54,14 +54,7 @@ public abstract class Node {
     public void setShortestWays(Map<String, List<String>> shortestWays) {
         this.shortestWays = shortestWays;
     }
-    /**
-     * Removes all connections to the specified node.
-     *
-     * @param ipV4To the IPv4 address of the node to disconnect
-     */
-    public void removeAllConnections(String ipV4To) {
-        intraEdges.removeIf(edge -> edge.getTo().getIpV4().equals(ipV4To));
-    }
+
     /**
      * Removes a specific intra-edge to the specified node.
      *
