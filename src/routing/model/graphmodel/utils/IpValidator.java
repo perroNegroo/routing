@@ -1,4 +1,4 @@
-package routing.model.txtmanager.parameters;
+package routing.model.graphmodel.utils;
 
 
 /**
@@ -34,12 +34,10 @@ public final class IpValidator {
         return areValidOctets(octets);
     }
 
-    // Helper method to validate the number of octets
     private static boolean hasValidOctetCount(String[] octets) {
         return octets.length == OCTET_COUNT;
     }
 
-    // Helper method to validate each octet
     private static boolean areValidOctets(String[] octets) {
         for (int i = 0; i < OCTET_COUNT; i++) {
             if (!isValidOctet(octets[i], i)) {
@@ -49,7 +47,6 @@ public final class IpValidator {
         return true;
     }
 
-    // Helper method to validate an individual octet
     private static boolean isValidOctet(String octet, int position) {
         try {
             int octetValue = Integer.parseInt(octet);

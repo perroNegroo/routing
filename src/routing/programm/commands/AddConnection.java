@@ -8,7 +8,7 @@ import routing.model.graphmodel.graph.node.Router;
 
 import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static routing.model.txtmanager.parameters.IpValidator.isValidIp;
+import static routing.model.graphmodel.utils.IpValidator.isValidIp;
 import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 
