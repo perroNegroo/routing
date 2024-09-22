@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
+
 
 /**
  * Utility class for sorting network subnets.
@@ -19,26 +21,10 @@ public final class NetworkSorter {
      */
     public static List<String> sortSubnets(Set<String> subnets) {
 
-        // Create a new list to avoid modifying the original one
         List<String> sortedList = new ArrayList<>(subnets);
 
-        // Sort the list using a custom comparator
-        sortedList.sort((o1, o2) -> Long.compare(ipToLong(o1), ipToLong(o2)));
+        sortedList.sort((o1, o2) -> Integer.compare(ipToInt(o1), ipToInt(o2)));
 
         return sortedList;
-    }
-
-    private static long ipToLong(String ip) {
-        // Extract the IP part before the '/'
-        String ipAddress = ip.split("/")[0];
-
-        // Split the IP address into its octets
-        String[] parts = ipAddress.split("\\.");
-
-        // Convert each octet to a long and combine them
-        return (Long.parseLong(parts[0]) << 24)
-                | (Long.parseLong(parts[1]) << 16)
-                | (Long.parseLong(parts[2]) << 8)
-                | Long.parseLong(parts[3]);
     }
 }
