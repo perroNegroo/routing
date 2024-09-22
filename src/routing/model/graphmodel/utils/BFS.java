@@ -24,7 +24,6 @@ public final class BFS {
 
     /**
      * Performs BFS from the specified start router to compute shortest paths to all other routers.
-     * Updates the start router's shortest path information based on the BFS traversal.
      *
      * @param startRouter the router from which to start the BFS
      */
