@@ -1,11 +1,15 @@
 package routing.model.graphmodel.utils;
 
+import static routing.programm.utils.ParseNumbers.parseInteger;
+
 /**
  * Utility class for converting an IP address of an integer representation.
  *
  * @author uktup
  */
 public final class IpToInteger {
+    private static final String OCTET_DELIMITER = "\\.";
+    private static final int OCTET_SHIFT = 8;
     private IpToInteger() { }
 
     /**
@@ -15,10 +19,10 @@ public final class IpToInteger {
      * @return the integer representation of the IP address
      */
     public static int ipToInt(String ipAddress) {
-        String[] octets = ipAddress.split("\\.");
+        String[] octets = ipAddress.split(OCTET_DELIMITER);
         int result = 0;
         for (String octet : octets) {
-            result = (result << 8) | Integer.parseInt(octet);
+            result = (result << OCTET_SHIFT) | parseInteger(octet);
         }
         return result;
     }

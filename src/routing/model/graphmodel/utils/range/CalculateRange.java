@@ -26,14 +26,4 @@ public final class CalculateRange {
         return new int[]{firstUsableIp, lastUsableIp};
     }
 
-    /*
-    private static int parseInteger(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            return Integer.MIN_VALUE;
-        }
-    }
-
-     */
 }
