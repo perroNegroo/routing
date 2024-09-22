@@ -31,15 +31,6 @@ public class NodeDistance {
     }
 
     /**
-     * Sets the distance to the node.
-     *
-     * @param distance the distance to set
-     */
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
-    /**
      * Returns the node associated with this distance.
      *
      * @return the node
