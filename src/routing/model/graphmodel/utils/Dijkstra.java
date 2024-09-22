@@ -2,6 +2,7 @@ package routing.model.graphmodel.utils;
 
 import routing.model.graphmodel.graph.edge.WeightedEdge;
 import routing.model.graphmodel.graph.node.Node;
+import routing.model.graphmodel.graph.node.NodeDistance;
 
 import java.util.PriorityQueue;
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public final class Dijkstra {
     public static void dijkstra(Node startNode) {
         // Priority queue with a comparator that compares by distance first, and by IPv4 address if distances are equal
         PriorityQueue<NodeDistance> pq = new PriorityQueue<>(
-                Comparator.comparingInt((NodeDistance nd) -> nd.distance)
-                        .thenComparing(nd -> nd.node.getIpV4()));
+                Comparator.comparingInt(NodeDistance::getDistance)
+                        .thenComparing(nd -> nd.getNode().getIpV4()));
 
         // Map to store the shortest distance to each node (keyed by the node's IPv4 address)
         Map<String, Integer> distances = new HashMap<>();
@@ -44,13 +45,13 @@ public final class Dijkstra {
 
         while (!pq.isEmpty()) {
             NodeDistance current = pq.poll();
-            Node currentNode = current.node;
+            Node currentNode = current.getNode();
 
             // Explore each edge (neighboring node)
             for (WeightedEdge edge : currentNode.getIntraEdges()) {
                 Node neighbor = edge.getTo();
                 String neighborIp = neighbor.getIpV4();
-                int newDist = current.distance + edge.getWeight();
+                int newDist = current.getDistance() + edge.getWeight();
 
                 // If a shorter path to the neighbor is found
                 if (newDist < distances.getOrDefault(neighborIp, Integer.MAX_VALUE)) {
@@ -78,8 +79,7 @@ public final class Dijkstra {
         // Store the shortest paths back to the node
         startNode.setShortestWays(shortestPaths);
     }
-
-    // A helper class to represent a node and its distance for the priority queue
+    /*
     private static class NodeDistance {
         Node node;
         int distance;
@@ -89,5 +89,7 @@ public final class Dijkstra {
             this.distance = distance;
         }
     }
+
+     */
 }
 
