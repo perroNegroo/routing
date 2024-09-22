@@ -41,11 +41,7 @@ public enum CommandNames {
     /**
      * Command name for remove computer.
      */
-    REMOVE_COMPUTER("remove computer"),
-    /**
-     * Command name for quit.
-     */
-    QUIT("quit");
+    REMOVE_COMPUTER("remove computer");
 
     private final String command;
 
