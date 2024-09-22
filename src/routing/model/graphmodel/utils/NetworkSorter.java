@@ -28,15 +28,13 @@ public final class NetworkSorter {
         List<String> sortedList = new ArrayList<>(subnets);
 
         sortedList.sort((firstNetworkName, secondNetworkName) -> {
-            // Compare IP addresses
             int ipComparison = Long.compare(ipToLong(firstNetworkName), ipToLong(secondNetworkName));
             if (ipComparison != 0) {
                 return ipComparison;
             }
-            // If IPs are the same, compare subnet mask lengths (smaller masks first)
             int mask1 = parseInteger(firstNetworkName.split(CIDR_SEPARATOR)[1]);
             int mask2 = parseInteger(secondNetworkName.split(CIDR_SEPARATOR)[1]);
-            return Integer.compare(mask1, mask2);  // Ensure smaller mask comes first
+            return Integer.compare(mask1, mask2);
         });
 
         return sortedList;
