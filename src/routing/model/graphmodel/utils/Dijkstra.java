@@ -50,7 +50,8 @@ public final class Dijkstra {
         );
     }
 
-    private static Map<String, List<String>> initializeDataStructures(Node startNode, Map<String, Integer> distances, PriorityQueue<NodeDistance> priorityQueue) {
+    private static Map<String, List<String>> initializeDataStructures(Node startNode, Map<String, Integer> distances,
+                                                                      PriorityQueue<NodeDistance> priorityQueue) {
         String startIp = startNode.getIpV4();
         List<String> startPath = new ArrayList<>(Collections.singletonList(startIp));
         distances.put(startIp, 0);
@@ -62,7 +63,8 @@ public final class Dijkstra {
         return shortestPaths;
     }
 
-    private static void processEdges(NodeDistance current, Node currentNode, Map<String, Integer> distances, Map<String, List<String>> shortestPaths, PriorityQueue<NodeDistance> priorityQueue) {
+    private static void processEdges(NodeDistance current, Node currentNode, Map<String, Integer> distances, Map<String,
+            List<String>> shortestPaths, PriorityQueue<NodeDistance> priorityQueue) {
         for (WeightedEdge edge : currentNode.getIntraEdges()) {
             Node neighbor = edge.getTo();
             String neighborIp = neighbor.getIpV4();
@@ -77,7 +79,8 @@ public final class Dijkstra {
         }
     }
 
-    private static void updateShortestPath(Map<String, Integer> distances, Map<String, List<String>> shortestPaths, String currentIp, String neighborIp, int newDist) {
+    private static void updateShortestPath(Map<String, Integer> distances, Map<String, List<String>> shortestPaths,
+                                           String currentIp, String neighborIp, int newDist) {
         distances.put(neighborIp, newDist);
         List<String> path = new ArrayList<>(shortestPaths.get(currentIp));
         path.add(neighborIp);
@@ -85,7 +88,8 @@ public final class Dijkstra {
     }
 
     private static void checkAndUpdatePathIfShorter(Map<String, Integer> distances, String neighborIp, Node neighbor, String currentIp,
-                                                    int newDist, Map<String, List<String>> shortestPaths, PriorityQueue<NodeDistance> priorityQueue) {
+                                                    int newDist, Map<String, List<String>> shortestPaths,
+                                                    PriorityQueue<NodeDistance> priorityQueue) {
         String currentShortestIp = shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1);
         if (compareIpV4(neighborIp, currentShortestIp) < 0) {
             updateShortestPath(distances, shortestPaths, currentIp, neighborIp, newDist);
