@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
  * @author uktup
  */
 public final class ExtractSubGraphs {
+    private static final String NEW_LINE_DELIMITER = "\n";
+    private static final String SUBGRAPH_BLOCK_PATTERN = "subgraph[\\s\\S]*?end";
     private ExtractSubGraphs() { }
     /**
      * Extracts and divides subgraph sections from the specified file.
@@ -22,14 +24,14 @@ public final class ExtractSubGraphs {
      * @return a list of subgraphs, each represented as a list of strings
      */
     public static List<List<String>> extractSubGraphs(String filePath) {
-        String content = fileToCotent(filePath);
+        String content = fileToContent(filePath);
         List<String> subGraphs = extractSubgraph(content);
         return subGraphDivider(subGraphs);
     }
 
     private static List<String> extractSubgraph(String content) {
         List<String> subgraphSections = new ArrayList<>();
-        Pattern subgraphPattern = Pattern.compile("subgraph[\\s\\S]*?end", Pattern.MULTILINE);
+        Pattern subgraphPattern = Pattern.compile(SUBGRAPH_BLOCK_PATTERN, Pattern.MULTILINE);
         Matcher matcher = subgraphPattern.matcher(content);
         while (matcher.find()) {
             subgraphSections.add(matcher.group());
@@ -37,14 +39,16 @@ public final class ExtractSubGraphs {
 
         return subgraphSections;
     }
+
     private static List<List<String>> subGraphDivider(List<String> subGraphs) {
         List<List<String>> dividedSubGraphs = new ArrayList<>();
         for (String subGraph: subGraphs) {
-            dividedSubGraphs.add(Arrays.asList(subGraph.split("\n")));
+            dividedSubGraphs.add(Arrays.asList(subGraph.split(NEW_LINE_DELIMITER)));
         }
         return dividedSubGraphs;
     }
-    private static String fileToCotent(String filePath) {
+
+    private static String fileToContent(String filePath) {
         String content;
         try {
             content = Files.readString(Paths.get(filePath));
