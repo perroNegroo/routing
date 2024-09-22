@@ -3,7 +3,6 @@ package routing.model.graphmodel.edge;
 
 import routing.model.graphmodel.node.Node;
 
-import java.util.PriorityQueue;
 
 /**
  * Represents an abstract edge between two nodes.
@@ -12,7 +11,7 @@ import java.util.PriorityQueue;
 public abstract class Edge {
     protected final Node from;
     protected final Node to;
-    PriorityQueue<Node> pq = new PriorityQueue<>();
+
     /**
      * Constructs an Edge between two nodes.
      *
