@@ -31,7 +31,7 @@ public final class Dijkstra {
     public static void dijkstra(Node startNode) {
         // Priority queue with a comparator that compares by distance first, and by IPv4 address if distances are equal
         PriorityQueue<NodeDistance> pq = new PriorityQueue<>(
-                Comparator.comparingInt(NodeDistance::getDistance)
+                Comparator.comparingInt((NodeDistance nd) -> nd.getDistance())
                         .thenComparing(nd -> nd.getNode().getIpV4()));
 
         // Map to store the shortest distance to each node (keyed by the node's IPv4 address)
