@@ -1,4 +1,4 @@
-package routing.model.txtmanager.dataextraction;
+package routing.model.graphmodel.utils;
 
 import routing.model.graphmodel.graph.SubGraph;
 import routing.model.graphmodel.graph.edge.NotWeightedEdge;

@@ -1,6 +1,6 @@
 package routing.programm.commands;
 
-import routing.model.txtmanager.dataextraction.LaunchGraph;
+import routing.model.graphmodel.utils.LaunchGraph;
 
 import java.io.File;
 
