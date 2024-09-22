@@ -116,15 +116,5 @@ public abstract class Node {
     public String getName() {
         return name;
     }
-    /**
-     * Prints all connections from this node to other nodes.
-     */
-    public void connectionsPriter() {
-        for (WeightedEdge weightedEdge: intraEdges) {
-            System.out.println("from: " + weightedEdge.getFrom().getName());
-            System.out.println("to: " + weightedEdge.getTo().getName());
-            System.out.println("wieght: " + weightedEdge.getWeight());
-        }
-    }
 
 }

@@ -90,11 +90,4 @@ public class Router extends Node {
         return false;
     }
 
-    @Override
-    public void connectionsPriter() {
-        for (NotWeightedEdge notWeightedEdge: interEdges) {
-            System.out.println("from: " + notWeightedEdge.getFrom().getName());
-            System.out.println("to: " + notWeightedEdge.getTo().getName());
-        }
-    }
 }
