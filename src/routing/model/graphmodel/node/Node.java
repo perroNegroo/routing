@@ -98,7 +98,6 @@ public abstract class Node {
 
     public List<WeightedEdge> getIntraEdges() {
         return new ArrayList<>(intraEdges);
-        //return intraEdges;
     }
     /**
      * Adds a new edge to this node.
