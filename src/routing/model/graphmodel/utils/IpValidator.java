@@ -3,6 +3,7 @@ package routing.model.graphmodel.utils;
 
 /**
  * Validates IP addresses.
+ *
  * @author uktup
  */
 public final class IpValidator {

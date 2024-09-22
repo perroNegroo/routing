@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import static routing.model.graphmodel.utils.IpV4Comparator.compareIpV4;
+
 
 /**
  * Utility class for performing Dijkstra's algorithm on a graph of nodes.
@@ -33,11 +35,9 @@ public final class Dijkstra {
 
         // Map to store the shortest distance to each node (keyed by the node's IPv4 address)
         Map<String, Integer> distances = new HashMap<>();
-        distances.put(startNode.getIpV4(), 0);
-
-        // Map to track the shortest paths from the start node (keyed by the node's IPv4 address)
         Map<String, List<String>> shortestPaths = new HashMap<>();
         shortestPaths.put(startNode.getIpV4(), new ArrayList<>(Collections.singletonList(startNode.getIpV4())));
+        distances.put(startNode.getIpV4(), 0);
 
         // Add the starting node to the priority queue
         pq.add(new NodeDistance(startNode, 0));
@@ -80,6 +80,7 @@ public final class Dijkstra {
     }
 
     // Helper method to compare IPv4 addresses
+    /*
     private static int compareIpV4(String ip1, String ip2) {
         String[] octets1 = ip1.split("\\.");
         String[] octets2 = ip2.split("\\.");
@@ -91,6 +92,7 @@ public final class Dijkstra {
         }
         return 0;
     }
+     */
 
     // A helper class to represent a node and its distance for the priority queue
     private static class NodeDistance {
