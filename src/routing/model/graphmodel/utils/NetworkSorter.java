@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static routing.programm.utils.ParseNumbers.parseInteger;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 
 /**

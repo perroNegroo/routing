@@ -1,6 +1,6 @@
 package routing.model.graphmodel.utils;
 
-import static routing.programm.utils.ParseNumbers.parseInteger;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Compares IP addresses.

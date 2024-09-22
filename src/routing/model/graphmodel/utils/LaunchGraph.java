@@ -21,7 +21,7 @@ import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.ex
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
 import static routing.model.graphmodel.utils.range.IpRange.areDisjoint;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
-import static routing.programm.utils.ParseNumbers.parseInteger;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Manages the loading and processing of subgraphs and router connections from a file.

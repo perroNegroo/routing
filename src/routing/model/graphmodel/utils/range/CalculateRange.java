@@ -1,7 +1,7 @@
 package routing.model.graphmodel.utils.range;
 
 import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
-import static routing.programm.utils.ParseNumbers.parseInteger;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Provides a utility method for calculating IP address ranges.

@@ -1,6 +1,6 @@
 package routing.model.graphmodel.utils;
 
-import static routing.programm.utils.ParseNumbers.parseInteger;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Utility class for converting an IP address of an integer representation.
