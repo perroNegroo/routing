@@ -1,18 +1,11 @@
 package routing.model.txtmanager.parameters;
 
-import routing.model.txtmanager.txt.TestTxt;
-
-import java.util.List;
 
 /**
  * Validates IP addresses.
  * @author uktup
  */
-public class IpValidator implements TestTxt {
-    @Override
-    public boolean valid(List<String> data) {
-        return false;
-    }
+public class IpValidator {
     /**
      * Validates an IPv4 address.
      *
