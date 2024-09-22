@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static routing.model.graphmodel.utils.IpV4Comparator.compareIpV4;
+
 /**
  * Utility class for performing Breadth-First Search (BFS) on a network of routers.
  *
@@ -75,6 +77,7 @@ public final class BFS {
     }
 
     // Helper method to compare IPv4 addresses
+    /*
     private static int compareIpV4(String ip1, String ip2) {
         String[] octets1 = ip1.split("\\.");
         String[] octets2 = ip2.split("\\.");
@@ -86,5 +89,7 @@ public final class BFS {
         }
         return 0;
     }
+
+     */
 }
 
