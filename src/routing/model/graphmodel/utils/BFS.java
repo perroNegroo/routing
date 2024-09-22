@@ -31,49 +31,72 @@ public final class BFS {
     public static void bfs(Router startRouter) {
         Queue<Router> queue = new LinkedList<>();
         Map<String, Integer> distances = new HashMap<>();
-        distances.put(startRouter.getIpV4(), 0);
-
         Map<String, List<String>> shortestPaths = new HashMap<>();
-        shortestPaths.put(startRouter.getIpV4(), new ArrayList<>(Collections.singletonList(startRouter.getIpV4())));
-        queue.add(startRouter);
+
+        // Initialize the starting router
+        initializeRouter(startRouter, distances, shortestPaths, queue);
 
         while (!queue.isEmpty()) {
             Router currentRouter = queue.poll();
-
-            // Sort neighbors by their IPv4 address lexicographically before processing them
-            List<NotWeightedEdge> sortedEdges = new ArrayList<>(currentRouter.getInterEdges());
-            sortedEdges.sort(Comparator.comparing(edge -> edge.getTo().getIpV4()));
-
-            for (NotWeightedEdge edge : sortedEdges) {
-                Router neighbor = (Router) edge.getTo();
-                String neighborIp = neighbor.getIpV4();
-                int newDist = distances.get(currentRouter.getIpV4()) + 1; // Unweighted graph (distance is always 1)
-
-                // If the neighbor hasn't been visited yet
-                if (!distances.containsKey(neighborIp)) {
-                    distances.put(neighborIp, newDist);
-                    List<String> path = new ArrayList<>(shortestPaths.get(currentRouter.getIpV4()));
-                    path.add(neighborIp);
-                    shortestPaths.put(neighborIp, path);
-                    queue.add(neighbor);
-                } else if (newDist == distances.get(neighborIp)) {
-                    // Tie-breaking mechanism: choose the path with the lexicographically smaller IP
-                    String currentShortestNeighbor = shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1);
-
-                    if (compareIpV4(neighborIp, currentShortestNeighbor) < 0) {
-                        // Update to the lexicographically smaller path
-                        List<String> path = new ArrayList<>(shortestPaths.get(currentRouter.getIpV4()));
-                        path.add(neighborIp);
-                        shortestPaths.put(neighborIp, path);
-
-                        // Only re-add this neighbor to the queue if the path improves
-                        queue.add(neighbor);
-                    }
-                }
-            }
+            processNeighbors(currentRouter, distances, shortestPaths, queue);
         }
+
         // Store the shortest paths back to the router
         startRouter.setShortestInterWays(shortestPaths);
     }
+
+    private static void initializeRouter(Router startRouter,
+                                         Map<String, Integer> distances,
+                                         Map<String, List<String>> shortestPaths,
+                                         Queue<Router> queue) {
+        String startIp = startRouter.getIpV4();
+        distances.put(startIp, 0);
+        shortestPaths.put(startIp, new ArrayList<>(Collections.singletonList(startIp)));
+        queue.add(startRouter);
+    }
+
+    private static void processNeighbors(Router currentRouter,
+                                         Map<String, Integer> distances,
+                                         Map<String, List<String>> shortestPaths,
+                                         Queue<Router> queue) {
+        List<NotWeightedEdge> sortedEdges = new ArrayList<>(currentRouter.getInterEdges());
+        sortedEdges.sort(Comparator.comparing(edge -> edge.getTo().getIpV4()));
+
+        for (NotWeightedEdge edge : sortedEdges) {
+            Router neighbor = (Router) edge.getTo();
+            String neighborIp = neighbor.getIpV4();
+            int newDist = distances.get(currentRouter.getIpV4()) + 1; // Unweighted graph (distance is always 1)
+
+            if (!distances.containsKey(neighborIp)) {
+                addNeighbor(neighborIp, newDist, currentRouter, shortestPaths, queue, distances, neighbor);
+            } else if (newDist == distances.get(neighborIp)) {
+                // Tie-breaking mechanism
+                updatePathIfBetter(neighborIp, currentRouter, shortestPaths, queue, neighbor);
+            }
+        }
+    }
+
+    private static void addNeighbor(String neighborIp, int newDist, Router currentRouter,
+                                    Map<String, List<String>> shortestPaths, Queue<Router> queue,
+                                    Map<String, Integer> distances, Router neighbor) {
+        distances.put(neighborIp, newDist);
+        List<String> path = new ArrayList<>(shortestPaths.get(currentRouter.getIpV4()));
+        path.add(neighborIp);
+        shortestPaths.put(neighborIp, path);
+        queue.add(neighbor);
+    }
+
+    private static void updatePathIfBetter(String neighborIp, Router currentRouter, Map<String, List<String>> shortestPaths,
+                                           Queue<Router> queue, Router neighbor) {
+        String currentShortestNeighbor = shortestPaths.get(neighborIp).get(shortestPaths.get(neighborIp).size() - 1);
+        if (compareIpV4(neighborIp, currentShortestNeighbor) < 0) {
+            // Update to the lexicographically smaller path
+            List<String> path = new ArrayList<>(shortestPaths.get(currentRouter.getIpV4()));
+            path.add(neighborIp);
+            shortestPaths.put(neighborIp, path);
+            queue.add(neighbor);
+        }
+    }
+
 }
 
