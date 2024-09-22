@@ -29,7 +29,7 @@ public class RemoveConnection implements Command {
             secondNode.removeIntraEdge(firstIp);
 
             //aca hay que actualiyar el Dijstra para calcular send package
-            firstNetwork.dijkstraInSubgraph();
+            firstNetwork.dijkstraAndBfsCalculator();
             return;
         }
         //diferent networks

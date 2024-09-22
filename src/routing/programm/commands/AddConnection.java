@@ -29,7 +29,7 @@ public class AddConnection implements Command {
             Node secondNode = network.getNode(secondIp);
             firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
             secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
-            network.dijkstraInSubgraph();
+            network.dijkstraAndBfsCalculator();
             return;
         }
 

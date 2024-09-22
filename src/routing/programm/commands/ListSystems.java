@@ -19,7 +19,7 @@ public class ListSystems implements Command {
     public void execute(String[] arguments) {
         String subnet = arguments[0];
         SubGraph subGraph = getNodeFromGraphHolder(subnet);
-        System.out.println(String.join(" ", ipSorter(subGraph.getKeys())));
+        System.out.println(String.join(" ", ipSorter(subGraph.getSystemIpNumbers())));
 
     }
 

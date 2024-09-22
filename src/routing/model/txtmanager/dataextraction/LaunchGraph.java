@@ -173,7 +173,7 @@ public class LaunchGraph {
         }
     }
     private void pcValidator(SubGraph subGraph, String ip) {
-        if (subGraph.getKeys().contains(ip)) {
+        if (subGraph.getSystemIpNumbers().contains(ip)) {
             errorHandler(ERROR_NOT_UNIQUE_IP);
         }
         if (!isIpInNetwork(ip, subGraph.getNetWorkName())) {

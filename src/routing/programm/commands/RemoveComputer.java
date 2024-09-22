@@ -21,12 +21,12 @@ public class RemoveComputer implements Command {
         // Node computer = network.getNode(ipToDelete);
         network.removeNode(ipToDelete);
         //aca borra las conectiones de cualquier nodo con ese nodo
-        for (String key: network.getKeys()) {
+        for (String key: network.getSystemIpNumbers()) {
             network.getNode(key).removeIntraEdge(ipToDelete);
         }
 
         //correr el Dijstra
-        network.dijkstraInSubgraph();
+        network.dijkstraAndBfsCalculator();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RemoveComputer implements Command {
             return false;
         }
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        if (!network.getKeys().contains(ipToRemove)) {
+        if (!network.getSystemIpNumbers().contains(ipToRemove)) {
             return false;
         }
         return !network.getNode(ipToRemove).isRouter();

@@ -20,13 +20,13 @@ import static routing.programm.utils.Dijkstra.dijkstra;
  * @author uktup
  */
 public class SubGraph {
+    private static final String NETWORK_NAME_DELIMITER = "/";
     private final String netWorkName;
     private final String ipV4;
-    private final String mask;
+    //private final String mask;
     private final String lowerBound;
     private final String higherBound;
     private Router router = null;
-    // ip de string y el nodo
     private final Map<String, Node> graphHolder = new TreeMap<>();
     /**
      * Constructs a SubGraph with the specified network name.
@@ -35,8 +35,8 @@ public class SubGraph {
      */
     public SubGraph(String netWorkName) {
         this.netWorkName = netWorkName;
-        this.ipV4 = netWorkName.split("/")[0];
-        this.mask = netWorkName.split("/")[1];
+        this.ipV4 = netWorkName.split(NETWORK_NAME_DELIMITER)[0];
+        //this.mask = netWorkName.split(NETWORK_NAME_DELIMITER)[1];
 
         this.lowerBound = intToIp(calculateRange(netWorkName)[0]);
         this.higherBound = intToIp(calculateRange(netWorkName)[1]);
@@ -99,7 +99,7 @@ public class SubGraph {
      *
      * @return a sorted set of keys
      */
-    public Set<String> getKeys() {
+    public Set<String> getSystemIpNumbers() {
         return new TreeSet<>(graphHolder.keySet());
     }
     /**
@@ -118,14 +118,7 @@ public class SubGraph {
     public String getIpV4() {
         return ipV4;
     }
-    /**
-     * Returns the subnet mask.
-     *
-     * @return the subnet mask
-     */
-    public String getMask() {
-        return mask;
-    }
+
     /**
      * Returns the lower bound IP address of the subnet.
      *
@@ -159,7 +152,7 @@ public class SubGraph {
     /**
      * Executes Dijkstra's algorithm for all nodes in the subgraph and performs BFS from the router.
      */
-    public void dijkstraInSubgraph() {
+    public void dijkstraAndBfsCalculator() {
         for (String nodeKey: graphHolder.keySet()) {
             dijkstra(graphHolder.get(nodeKey));
         }

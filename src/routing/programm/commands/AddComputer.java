@@ -32,7 +32,7 @@ public class AddComputer implements Command {
             return false;
         }
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        if (network.getKeys().contains(newComputerIp)) {
+        if (network.getSystemIpNumbers().contains(newComputerIp)) {
             return false;
         }
         return isIpInNetwork(newComputerIp, subnetAdresse);

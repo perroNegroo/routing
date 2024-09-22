@@ -62,7 +62,7 @@ public final class GraphManager {
      */
     public static void shortestPathsCalculator() {
         for (String subGraphKey: GRAPH_HOLDER.keySet()) {
-            GRAPH_HOLDER.get(subGraphKey).dijkstraInSubgraph();
+            GRAPH_HOLDER.get(subGraphKey).dijkstraAndBfsCalculator();
         }
     }
 
