@@ -20,23 +20,10 @@ public final class FileToList {
      *         or an empty list if an IOException occurs
      */
     public static List<String> fileToList(String filePath) {
-        //String filePath parameter when the command Handler is active
-       //final String filePath = "C:\\Users\\merch\\Downloads\\example_network.txt";
         try {
-            List<String> lines = Files.readAllLines(Paths.get(filePath));
-            // Print lines for demonstration
-            //lines.forEach(System.out::println);
-            return lines;
+            return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
-    /*
-    String subgraphPattern = "(subgraph)\\s(\\d+\\.\\d+\\.\\d+\\.\\d+)/(\\d+)";
-    String routerPattern = "(\\w+_Router)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]";
-    String pcPattern = "(\\w+_PC\\d+)\\[(\\d+\\.\\d+\\.\\d+\\.\\d+)]";
-    String edgePattern = "(\\w+) <-->|(\\d+)| (\\w+)";
-    String routerEdgePattern = "(\\w+_Router) <--> (\\w+_Router)";
-    String endPattern = "end";
-     */
 }
