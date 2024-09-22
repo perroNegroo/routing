@@ -1,7 +1,5 @@
 package routing.model.graphmodel.node;
 
-
-
 import routing.model.graphmodel.edge.NotWeightedEdge;
 
 import java.util.ArrayList;
@@ -26,6 +24,7 @@ public class Router extends Node {
     public Router(String ipV4, String name) {
         super(ipV4, name);
     }
+
     /**
      * Returns the shortest inter-router path to the specified destination.
      *
@@ -35,6 +34,7 @@ public class Router extends Node {
     public List<String> getShortestInterWays(String destinationRouterIp) {
         return new ArrayList<>(shortestInterWays.get(destinationRouterIp));
     }
+
     /**
      * Sets the shortest inter-router paths to other routers.
      *
@@ -56,7 +56,6 @@ public class Router extends Node {
      */
     public List<NotWeightedEdge> getInterEdges() {
         return new ArrayList<>(interEdges);
-        //return interEdges;
     }
 
     /**
@@ -67,6 +66,7 @@ public class Router extends Node {
     public void addNotWeightedEdge(NotWeightedEdge newEdge) {
         this.interEdges.add(newEdge);
     }
+
     /**
      * Removes an inter-router edge to the specified node.
      *
@@ -75,6 +75,7 @@ public class Router extends Node {
     public void removeInterEdge(String ipV4To) {
         interEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(this.ipV4) && edge.getTo().getIpV4().equals(ipV4To));
     }
+
     /**
      * Validates if exist a connection between the given routers.
      *
