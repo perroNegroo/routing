@@ -4,7 +4,7 @@ import java.util.Set;
 
 
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
-import static routing.model.graphmodel.utils.range.CalculateRange.ipToInt;
+import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 
 /**
  * Utility class for identifying networks and checking IP address membership.

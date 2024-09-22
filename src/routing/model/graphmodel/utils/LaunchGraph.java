@@ -15,11 +15,10 @@ import java.util.regex.Pattern;
 import static routing.model.graphmodel.GraphManager.assignGraphHolder;
 
 
-
+import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
-import static routing.model.graphmodel.utils.range.CalculateRange.ipToInt;
 import static routing.model.graphmodel.utils.range.IpRange.areDisjoint;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 import static routing.programm.utils.ParseNumbers.parseInteger;

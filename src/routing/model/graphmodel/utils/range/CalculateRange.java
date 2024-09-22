@@ -1,5 +1,6 @@
 package routing.model.graphmodel.utils.range;
 
+import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 import static routing.programm.utils.ParseNumbers.parseInteger;
 
 /**
@@ -23,32 +24,6 @@ public final class CalculateRange {
         int firstUsableIp = address & mask;
         int lastUsableIp = firstUsableIp | ~mask;
         return new int[]{firstUsableIp, lastUsableIp};
-    }
-    /**
-     * Converts an IP address string to an integer.
-     *
-     * @param ipAddress the IP address string (e.g., "192.168.1.1")
-     * @return the integer representation of the IP address
-     */
-    public static int ipToInt(String ipAddress) {
-        String[] octets = ipAddress.split("\\.");
-        int result = 0;
-        for (String octet : octets) {
-            result = (result << 8) | Integer.parseInt(octet);
-        }
-        return result;
-    }
-    /**
-     * Converts an integer to an IP address string.
-     *
-     * @param ip the integer representation of the IP address
-     * @return the IP address string (e.g., "192.168.1.1")
-     */
-    public static String intToIp(int ip) {
-        return ((ip >> 24) & 0xFF) + "."
-                + ((ip >> 16) & 0xFF) + "."
-                + ((ip >> 8) & 0xFF) + "."
-                + (ip & 0xFF);
     }
 
     /*
