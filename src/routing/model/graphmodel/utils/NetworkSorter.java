@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
+import static routing.programm.utils.ParseNumbers.parseInteger;
 
 
 /**
  * Utility class for sorting network subnets.
+ *
  * @author uktup
  */
 public final class NetworkSorter {
+    private static final String CIDR_SEPARATOR = "/";
     private NetworkSorter() { }
     /**
      * Sorts a set of subnet addresses in ascending order.
@@ -23,7 +26,15 @@ public final class NetworkSorter {
 
         List<String> sortedList = new ArrayList<>(subnets);
 
-        sortedList.sort((o1, o2) -> Integer.compare(ipToInt(o1), ipToInt(o2)));
+        sortedList.sort((firstNetworkName, secondNetworkName) -> {
+            int ipComparison = Integer.compare(ipToInt(firstNetworkName), ipToInt(secondNetworkName));
+            if (ipComparison != 0) {
+                return ipComparison;
+            }
+            int mask1 = parseInteger(firstNetworkName.split(CIDR_SEPARATOR)[1]);
+            int mask2 = parseInteger(secondNetworkName.split(CIDR_SEPARATOR)[1]);
+            return Integer.compare(mask1, mask2);
+        });
 
         return sortedList;
     }
