@@ -1,7 +1,7 @@
 package routing.model.txtmanager.dataextraction;
 
 import java.util.ArrayList;
-//import java.util.Collections;
+import java.util.Collections;
 import java.util.List;
 
 import static routing.model.txtmanager.FileToList.fileToList;
@@ -21,9 +21,9 @@ public final class ExtractRouterConnection {
      * @return a list of router-to-router connection strings
      */
     public static List<String> extractRouterEdges(String filePath) {
-        List<String> lines = fileToList(filePath).reversed();
+        List<String> lines = fileToList(filePath);
         List<String> routerEdges = new ArrayList<>();
-        //Collections.reverse(lines);
+        Collections.reverse(lines);
         for (String line: lines) {
             if (line.trim().equals(SUBGRAPH_END_LAST_MARKER)) {
                 break;
