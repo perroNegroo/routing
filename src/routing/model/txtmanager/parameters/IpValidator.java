@@ -6,40 +6,75 @@ package routing.model.txtmanager.parameters;
  * @author uktup
  */
 public class IpValidator {
+    private static final String OCTET_SEPARATOR = "\\.";
+    private static final int OCTET_COUNT = 4;
+    private static final int MIN_OCTET_VALUE = 0;
+    private static final int MAX_OCTET_VALUE = 255;
+    private static final int INVALID_FIRST_OCTET = 0;
+    private static final int INVALID_LAST_OCTET = 255;
+
     /**
      * Validates an IPv4 address.
      *
      * @param ip the IP address to validate (e.g., "192.168.1.1")
      * @return true if the IP address is valid, false otherwise
      */
-    public static boolean ipValidator(String ip) {
-        // Split the IP address by the dots
-        String[] octets = ip.split("\\.");
-        // Check if there are exactly four octets
-        if (octets.length != 4) {
+    public static boolean isValidIp(String ip) {
+        if (ip == null || ip.isEmpty()) {
             return false;
         }
+
+        String[] octets = ip.split(OCTET_SEPARATOR);
+        if (!hasValidOctetCount(octets)) {
+            return false;
+        }
+
+        return areValidOctets(octets);
+    }
+
+    // Helper method to validate the number of octets
+    private static boolean hasValidOctetCount(String[] octets) {
+        return octets.length == OCTET_COUNT;
+    }
+
+    // Helper method to validate each octet
+    private static boolean areValidOctets(String[] octets) {
+        for (int i = 0; i < OCTET_COUNT; i++) {
+            if (!isValidOctet(octets[i], i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Helper method to validate an individual octet
+    private static boolean isValidOctet(String octet, int position) {
         try {
-            // Convert each octet to an integer and check the conditions
-            for (int i = 0; i < 4; i++) {
-                int octet = Integer.parseInt(octets[i]);
-                // Check if octet is between 0 and 255
-                if (octet < 0 || octet > 255) {
-                    return false;
-                }
-                // Check if the first octet is not 0
-                if (i == 0 && octet == 0) {
-                    return false;
-                }
-                // Check if the last octet is not 255
-                if (i == 3 && octet == 255) {
-                    return false;
-                }
+            int octetValue = Integer.parseInt(octet);
+            if (!isInRange(octetValue)) {
+                return false;
+            }
+            if (isInvalidFirstOctet(octetValue, position)) {
+                return false;
+            }
+            if (isInvalidLastOctet(octetValue, position)) {
+                return false;
             }
         } catch (NumberFormatException e) {
             return false;
         }
         return true;
+    }
+
+    private static boolean isInRange(int value) {
+        return value >= MIN_OCTET_VALUE && value <= MAX_OCTET_VALUE;
+    }
+
+    private static boolean isInvalidFirstOctet(int value, int position) {
+        return position == 0 && value == INVALID_FIRST_OCTET;
+    }
+    private static boolean isInvalidLastOctet(int value, int position) {
+        return position == OCTET_COUNT - 1 && value == INVALID_LAST_OCTET;
     }
 
 }

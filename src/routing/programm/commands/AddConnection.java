@@ -8,7 +8,7 @@ import routing.model.graphmodel.graph.node.Router;
 
 import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static routing.model.txtmanager.parameters.IpValidator.ipValidator;
+import static routing.model.txtmanager.parameters.IpValidator.isValidIp;
 import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 
@@ -55,7 +55,7 @@ public class AddConnection implements Command {
         }
         String firstIp = arguments[0];
         String secondIp = arguments[1];
-        if (!ipValidator(firstIp) || !ipValidator(secondIp) || firstIp.equals(secondIp)) {
+        if (!isValidIp(firstIp) || !isValidIp(secondIp) || firstIp.equals(secondIp)) {
             return false;
         }
         String firstNetworkAdresse = findNetworkForIP(firstIp);
