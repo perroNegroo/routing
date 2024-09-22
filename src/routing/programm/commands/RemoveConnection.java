@@ -6,8 +6,8 @@ import routing.model.graphmodel.graph.node.Router;
 
 import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
-import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
+import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
+import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
  * Command to remove a connection between two systems.

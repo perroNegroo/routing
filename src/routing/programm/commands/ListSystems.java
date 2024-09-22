@@ -7,7 +7,7 @@ import static routing.model.graphmodel.GraphManager.getGraphHolder;
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 
 
-import static routing.programm.utils.IpSorter.ipSorter;
+import static routing.model.graphmodel.utils.IpSorter.ipSorter;
 
 
 /**

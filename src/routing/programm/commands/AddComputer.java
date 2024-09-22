@@ -5,7 +5,7 @@ import routing.model.graphmodel.graph.node.Computer;
 
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static routing.programm.utils.NetworkIdentifier.isIpInNetwork;
+import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 
 /**
  * Command to add a new computer to a specified subnet.

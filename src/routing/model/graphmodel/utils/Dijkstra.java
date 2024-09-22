@@ -1,4 +1,4 @@
-package routing.programm.utils;
+package routing.model.graphmodel.utils;
 
 import routing.model.graphmodel.graph.edge.WeightedEdge;
 import routing.model.graphmodel.graph.node.Node;

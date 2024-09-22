@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-import static routing.programm.utils.NetworkIdentifier.findNetworkForIP;
+import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
 
 /**
  * Command to print the shortest path between two systems.

@@ -2,7 +2,7 @@ package routing.programm.commands;
 
 import static routing.model.graphmodel.GraphManager.getGraphHolder;
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
-import static routing.programm.utils.NetworkSorter.sortSubnets;
+import static routing.model.graphmodel.utils.NetworkSorter.sortSubnets;
 
 /**
  * Command to list all subnets in ascending order.

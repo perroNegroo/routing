@@ -12,8 +12,8 @@ import java.util.TreeMap;
 
 import static routing.model.graphmodel.utils.range.CalculateRange.calculateRange;
 import static routing.model.graphmodel.utils.range.CalculateRange.intToIp;
-import static routing.programm.utils.BFS.bfs;
-import static routing.programm.utils.Dijkstra.dijkstra;
+import static routing.model.graphmodel.utils.BFS.bfs;
+import static routing.model.graphmodel.utils.Dijkstra.dijkstra;
 
 /**
  * Represents a subnet of a network, containing nodes and a potential router.
