@@ -36,6 +36,7 @@ public abstract class Node {
      * @return true if the node is a router, false otherwise
      */
     public abstract boolean isRouter();
+
     /**
      * Returns the shortest path to the specified destination.
      *
@@ -46,6 +47,7 @@ public abstract class Node {
         //System.out.println(shortestWays.get(destinationIp));
         return new ArrayList<>(shortestWays.get(destinationIp));
     }
+
     /**
      * Sets the shortest paths to other nodes.
      *
@@ -63,6 +65,7 @@ public abstract class Node {
     public void removeIntraEdge(String ipV4To) {
         intraEdges.removeIf(edge -> edge.getFrom().getIpV4().equals(ipV4) && edge.getTo().getIpV4().equals(ipV4To));
     }
+
     /**
      * Validates if exist a connection between the given nodes.
      *
@@ -77,6 +80,7 @@ public abstract class Node {
         }
         return false;
     }
+
     /**
      * Returns the IPv4 address of this node.
      *
@@ -85,13 +89,16 @@ public abstract class Node {
     public String getIpV4() {
         return ipV4;
     }
+
     /**
      * Returns the list of intra-node edges.
      *
      * @return the list of intra-node edges
      */
+
     public List<WeightedEdge> getIntraEdges() {
-        return intraEdges;
+        return new ArrayList<>(intraEdges);
+        //return intraEdges;
     }
     /**
      * Adds a new edge to this node.
