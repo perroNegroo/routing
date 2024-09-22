@@ -1,10 +1,10 @@
 package routing.model.graphmodel.utils;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 
 
 /**
@@ -23,7 +23,7 @@ public final class NetworkSorter {
 
         List<String> sortedList = new ArrayList<>(subnets);
 
-        sortedList.sort(Comparator.comparingInt(IpToInteger::ipToInt));
+        sortedList.sort((o1, o2) -> Integer.compare(ipToInt(o1), ipToInt(o2)));
 
         return sortedList;
     }
