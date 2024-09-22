@@ -23,7 +23,6 @@ public class SubGraph {
     private static final String NETWORK_NAME_DELIMITER = "/";
     private final String netWorkName;
     private final String ipV4;
-    //private final String mask;
     private final String lowerBound;
     private final String higherBound;
     private Router router = null;
@@ -36,8 +35,6 @@ public class SubGraph {
     public SubGraph(String netWorkName) {
         this.netWorkName = netWorkName;
         this.ipV4 = netWorkName.split(NETWORK_NAME_DELIMITER)[0];
-        //this.mask = netWorkName.split(NETWORK_NAME_DELIMITER)[1];
-
         this.lowerBound = intToIp(calculateRange(netWorkName)[0]);
         this.higherBound = intToIp(calculateRange(netWorkName)[1]);
     }
