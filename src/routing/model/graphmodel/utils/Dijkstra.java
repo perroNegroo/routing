@@ -79,17 +79,5 @@ public final class Dijkstra {
         // Store the shortest paths back to the node
         startNode.setShortestWays(shortestPaths);
     }
-    /*
-    private static class NodeDistance {
-        Node node;
-        int distance;
-
-        NodeDistance(Node node, int distance) {
-            this.node = node;
-            this.distance = distance;
-        }
-    }
-
-     */
 }
 
