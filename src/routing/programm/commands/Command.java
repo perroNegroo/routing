@@ -18,4 +18,5 @@ public interface Command {
      * @return {@code true} if arguments are valid, {@code false} otherwise
      */
     boolean validArguments(String[] arguments);
+
 }
