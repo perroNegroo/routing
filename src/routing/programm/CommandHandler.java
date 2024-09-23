@@ -45,8 +45,6 @@ public class CommandHandler {
      */
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        //String commandInput;
-
         while (isProgrammRunning) {
             String commandInput = scanner.nextLine().trim();
             executeCommand(commandInput);
