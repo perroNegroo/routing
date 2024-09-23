@@ -3,7 +3,6 @@ package routing.programm.commands;
 import routing.model.graphmodel.graph.SubGraph;
 
 import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
-//import static routing.model.graphmodel.GraphManager.getGraphHolder;
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 
 /**
@@ -29,6 +28,5 @@ public class ListRange implements Command {
     @Override
     public boolean availability() {
         return true;
-        //return !getGraphHolder().isEmpty();
     }
 }
