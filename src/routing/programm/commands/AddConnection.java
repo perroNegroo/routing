@@ -76,46 +76,73 @@ public class AddConnection implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        if (arguments.length < MIN_ARGUMENTS_COUNT || arguments.length > MAX_ARGUMENTS_COUNT) {
+        if (!isValidArgumentLength(arguments)) {
             return false;
         }
+
         String firstIp = arguments[0];
         String secondIp = arguments[1];
-        if (!isValidIp(firstIp) || !isValidIp(secondIp) || firstIp.equals(secondIp)) {
-            return false;
-        }
-        String firstNetworkAdresse = findNetworkForIP(firstIp);
-        String secondNetworkAdresse = findNetworkForIP(secondIp);
 
-        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
-        SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
-        if (firstNetworkAdresse == null  || secondNetworkAdresse == null
-                || firstNetwork == null || secondNetwork == null) {
+        if (!areValidIps(firstIp, secondIp) || firstIp.equals(secondIp)) {
             return false;
         }
+
+        SubGraph firstNetwork = getSubGraphForIp(firstIp);
+        SubGraph secondNetwork = getSubGraphForIp(secondIp);
+
+        if (firstNetwork == null || secondNetwork == null) {
+            return false;
+        }
+
         Node firstNode = firstNetwork.getNode(firstIp);
         Node secondNode = secondNetwork.getNode(secondIp);
+
         if (firstNode == null || secondNode == null) {
             return false;
         }
 
-        if (isIpInNetwork(firstIp, firstNetworkAdresse)
-                && isIpInNetwork(secondIp, firstNetworkAdresse)
-                && !firstNode.existsConnection(secondIp)
-                && arguments.length == MAX_ARGUMENTS_COUNT) {
-
-            return parseInteger(arguments[2]) > 0;
-
-        }
-
-        if (firstNode.isRouter() && secondNode.isRouter()
-                && !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp)
-                && arguments.length == 2) {
+        if (isSameNetworkConnection(firstIp, secondIp, firstNetwork, firstNode, arguments)) {
             return true;
-
         }
+
+        if (isRouterConnection(firstNode, secondNode, firstNetwork, secondIp, arguments)) {
+            return true;
+        }
+
         return false;
     }
+
+    private boolean isValidArgumentLength(String[] arguments) {
+        return arguments.length >= MIN_ARGUMENTS_COUNT && arguments.length <= MAX_ARGUMENTS_COUNT;
+    }
+
+    private boolean areValidIps(String firstIp, String secondIp) {
+        return isValidIp(firstIp) && isValidIp(secondIp);
+    }
+    /*
+    private SubGraph getSubGraphForIp(String ip) {
+        String networkAddress = findNetworkForIP(ip);
+        return Objects.isNull(networkAddress) ? null : getNodeFromGraphHolder(networkAddress);
+    }
+
+     */
+
+    private boolean isSameNetworkConnection(String firstIp, String secondIp, SubGraph network, Node firstNode, String[] arguments) {
+        return isIpInNetwork(firstIp, network.getNetWorkName())
+                && isIpInNetwork(secondIp, network.getNetWorkName())
+                && !firstNode.existsConnection(secondIp)
+                && arguments.length == MAX_ARGUMENTS_COUNT
+                && parseInteger(arguments[2]) > 0;
+
+    }
+
+    private boolean isRouterConnection(Node firstNode, Node secondNode, SubGraph firstNetwork, String secondIp, String[] arguments) {
+        return firstNode.isRouter() && secondNode.isRouter() &&
+                !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp) &&
+                arguments.length == 2;
+    }
+
+
 
     @Override
     public boolean availability() {
