@@ -11,21 +11,19 @@ import static routing.model.graphmodel.GraphManager.getNetworksNames;
  * @author uktup
  */
 public class ListRange implements Command {
+    private static final String RANGE_DELIMITER = " ";
     @Override
     public void execute(String[] arguments) {
         String subnet = arguments[0];
         SubGraph subGraph = getNodeFromGraphHolder(subnet);
-        System.out.println(subGraph.getLowerBound() + " " + subGraph.getHigherBound());
+        System.out.println(subGraph.getLowerBound() + RANGE_DELIMITER + subGraph.getHigherBound());
     }
     @Override
     public boolean validArguments(String[] arguments) {
         if (arguments.length != 1) {
             return false;
         }
-        if (!getNetworksNames().contains(arguments[0])) {
-            return false;
-        }
-        return true;
+        return getNetworksNames().contains(arguments[0]);
     }
 
     @Override
