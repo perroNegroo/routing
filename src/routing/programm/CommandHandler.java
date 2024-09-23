@@ -34,7 +34,6 @@ public class CommandHandler {
     private static final String REMOVE_COMPUTER_COMMAND = "remove computer";
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
     private static final String COMMAND_DELIMITER = " ";
-    private static final String COMMAND_NAME_DELIMITER = "_";
 
 
 
@@ -54,7 +53,6 @@ public class CommandHandler {
             }
             executeCommand(commandInput);
         }
-
         scanner.close();
     }
 
@@ -86,24 +84,6 @@ public class CommandHandler {
             default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
         }
     }
-    /*
-    private void executeBasedOnCommand(String command, String[] arguments) {
-        switch (CommandNames.valueOf(command.toUpperCase().replace(COMMAND_DELIMITER, COMMAND_NAME_DELIMITER))) {
-            case LOAD_NETWORK -> executeCommandWithArguments(new LoadNetwork(), arguments);
-            case LIST_SUBNETS -> executeCommandWithArguments(new ListSubnets(), arguments);
-            case LIST_RANGE -> executeCommandWithArguments(new ListRange(), arguments);
-            case LIST_SYSTEMS -> executeCommandWithArguments(new ListSystems(), arguments);
-            case SEND_PACKET -> executeCommandWithArguments(new SendPackage(), arguments);
-            case ADD_COMPUTER -> executeCommandWithArguments(new AddComputer(), arguments);
-            case ADD_CONNECTION -> executeCommandWithArguments(new AddConnection(), arguments);
-            case REMOVE_CONNECTION -> executeCommandWithArguments(new RemoveConnection(), arguments);
-            case REMOVE_COMPUTER -> executeCommandWithArguments(new RemoveComputer(), arguments);
-            //arreglar el unkown en el enum
-            default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
-        }
-    }
-     */
-
 
     private void executeCommandWithArguments(Command commandExecutor, String[] arguments) {
         if (!errorHandler(commandExecutor, arguments)) {
