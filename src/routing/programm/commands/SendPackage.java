@@ -28,9 +28,19 @@ public class SendPackage implements Command {
             System.out.println(String.join(PATH_DELIMITER, path));
             return;
         }
-        path.addAll(firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4()));
-        path.addAll(firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4()));
-        path.addAll(secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp));
+
+        List<String> firstToRouter = firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4());
+        List<String> routerToRouter = firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4());
+        List<String> routerToDestination = secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp);
+        if (firstToRouter == null || routerToRouter == null || routerToDestination == null) {
+            return;
+        }
+        path.addAll(firstToRouter);
+        path.addAll(routerToRouter);
+        path.addAll(routerToDestination);
+        //path.addAll(firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4()));
+        //path.addAll(firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4()));
+        //path.addAll(secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp));
         System.out.println(String.join(PATH_DELIMITER, new LinkedHashSet<>(path)));
 
 

@@ -32,7 +32,11 @@ public class Router extends Node {
      * @return a list of nodes representing the shortest path
      */
     public List<String> getShortestInterWays(String destinationRouterIp) {
-        return new ArrayList<>(shortestInterWays.get(destinationRouterIp));
+        if (shortestInterWays.get(destinationRouterIp) == null) {
+            return null;
+        } else {
+            return new ArrayList<>(shortestInterWays.get(destinationRouterIp));
+        }
     }
 
     /**
@@ -41,6 +45,7 @@ public class Router extends Node {
      * @param shortestWays the map of shortest paths
      */
     public void setShortestInterWays(Map<String, List<String>> shortestWays) {
+        this.shortestInterWays.clear();
         this.shortestInterWays.putAll(shortestWays);
         //this.shortestInterWays = shortestWays;
     }
