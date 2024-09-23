@@ -28,11 +28,10 @@ public class AddComputer implements Command {
         }
 
         String subnetAdresse = arguments[0];
-        String newComputerIp = arguments[1];
         if (!getNetworksNames().contains(subnetAdresse)) {
             return false;
         }
-
+        String newComputerIp = arguments[1];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
         if (network.getSystemIpNumbers().contains(newComputerIp)) {
             return false;

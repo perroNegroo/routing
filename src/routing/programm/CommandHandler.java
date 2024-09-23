@@ -85,7 +85,7 @@ public class CommandHandler {
             case ADD_CONNECTION_COMMAND -> executeCommandWithArguments(new AddConnection(), arguments);
             case REMOVE_CONNECTION_COMMAND -> executeCommandWithArguments(new RemoveConnection(), arguments);
             case REMOVE_COMPUTER_COMMAND -> executeCommandWithArguments(new RemoveComputer(), arguments);
-            case QUIT_COMMAND -> isProgrammRunning = false;
+            case QUIT_COMMAND -> quitHandler();
             default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
         }
     }
@@ -95,6 +95,9 @@ public class CommandHandler {
             return;
         }
         commandExecutor.execute(arguments);
+    }
+    private void quitHandler() {
+        isProgrammRunning = false;
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
 
