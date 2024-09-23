@@ -59,7 +59,6 @@ public abstract class Node {
     public void setShortestWays(Map<String, List<String>> shortestWays) {
         this.shortestWays.clear();
         this.shortestWays.putAll(shortestWays);
-        //this.shortestWays = shortestWays;
     }
 
     /**

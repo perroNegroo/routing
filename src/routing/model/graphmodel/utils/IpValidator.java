@@ -1,6 +1,8 @@
 package routing.model.graphmodel.utils;
 
 
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
+
 /**
  * Validates IP addresses.
  *
@@ -50,7 +52,7 @@ public final class IpValidator {
 
     private static boolean isValidOctet(String octet, int position) {
         try {
-            int octetValue = Integer.parseInt(octet);
+            int octetValue = parseInteger(octet);
             if (!isInRange(octetValue)) {
                 return false;
             }
