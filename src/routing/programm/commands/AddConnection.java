@@ -119,13 +119,6 @@ public class AddConnection implements Command {
     private boolean areValidIps(String firstIp, String secondIp) {
         return isValidIp(firstIp) && isValidIp(secondIp);
     }
-    /*
-    private SubGraph getSubGraphForIp(String ip) {
-        String networkAddress = findNetworkForIP(ip);
-        return Objects.isNull(networkAddress) ? null : getNodeFromGraphHolder(networkAddress);
-    }
-
-     */
 
     private boolean isSameNetworkConnection(String firstIp, String secondIp, SubGraph network, Node firstNode, String[] arguments) {
         return isIpInNetwork(firstIp, network.getNetWorkName())
@@ -141,8 +134,6 @@ public class AddConnection implements Command {
                 && !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp)
                 && arguments.length == 2;
     }
-
-
 
     @Override
     public boolean availability() {
