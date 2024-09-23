@@ -24,14 +24,14 @@ public class SendPackage implements Command {
         SubGraph sourceNetwork = getNodeFromGraphHolder(findNetworkForIP(sourceIp));
         SubGraph destinationNetwork = getNodeFromGraphHolder(findNetworkForIP(destinationIp));
 
-        if (Objects.equals(sourceNetwork.getIpV4(), destinationNetwork.getIpV4())) {
+        if (areNetworkEqual(sourceNetwork, destinationNetwork)) {
             sameNetworkHandler(sourceNetwork, sourceIp, destinationIp);
         } else {
             differentNetworkHandler(sourceNetwork, destinationNetwork, sourceIp, destinationIp);
         }
     }
-    private boolean areIpsInTheSameNetwork(SubGraph firstNetwork, SubGraph secondNetwork) {
-        return Objects.equals(firstNetwork.getIpV4(), secondNetwork.getIpV4());
+    private boolean areNetworkEqual(SubGraph sourceNetwork, SubGraph destinationNetwork) {
+        return Objects.equals(sourceNetwork.getIpV4(), destinationNetwork.getIpV4());
     }
     private void sameNetworkHandler(SubGraph sourceNetwork, String sourceIp, String destinationIp) {
         List<String> path = sourceNetwork.getNode(sourceIp).getShortestWays(destinationIp);
