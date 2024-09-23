@@ -11,12 +11,14 @@ import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 import static routing.model.graphmodel.utils.IpValidator.isValidIp;
 import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Command to add a new connection between two nodes.
  * @author uktup
  */
 public class AddConnection implements Command {
+
     @Override
     public void execute(String[] arguments) {
         String firstIp = arguments[0];
@@ -94,6 +96,7 @@ public class AddConnection implements Command {
     public boolean availability() {
         return true;
     }
+    /*
 
     private int parseInteger(String number) {
         try {
@@ -102,4 +105,6 @@ public class AddConnection implements Command {
             return Integer.MIN_VALUE;
         }
     }
+
+     */
 }
