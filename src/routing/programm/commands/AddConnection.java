@@ -18,12 +18,14 @@ import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
  * @author uktup
  */
 public class AddConnection implements Command {
+    private static final int MAX_ARGUMENTS_COUNT = 3;
+    private static final int MIN_ARGUMENTS_COUNT = 2;
 
     @Override
     public void execute(String[] arguments) {
         String firstIp = arguments[0];
         String secondIp = arguments[1];
-        if (arguments.length == 3) {
+        if (arguments.length == MAX_ARGUMENTS_COUNT) {
             int weight = parseInteger(arguments[2]);
             String subGraphAdresse = findNetworkForIP(firstIp);
             SubGraph network = getNodeFromGraphHolder(subGraphAdresse);
@@ -52,7 +54,7 @@ public class AddConnection implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        if (arguments.length < 2 || arguments.length > 3) {
+        if (arguments.length < MIN_ARGUMENTS_COUNT || arguments.length > MAX_ARGUMENTS_COUNT) {
             return false;
         }
         String firstIp = arguments[0];
@@ -77,7 +79,7 @@ public class AddConnection implements Command {
         if (isIpInNetwork(firstIp, firstNetworkAdresse)
                 && isIpInNetwork(secondIp, firstNetworkAdresse)
                 && !firstNode.existsConnection(secondIp)
-                && arguments.length == 3) {
+                && arguments.length == MAX_ARGUMENTS_COUNT) {
 
             return parseInteger(arguments[2]) > 0;
 
@@ -96,15 +98,4 @@ public class AddConnection implements Command {
     public boolean availability() {
         return true;
     }
-    /*
-
-    private int parseInteger(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            return Integer.MIN_VALUE;
-        }
-    }
-
-     */
 }
