@@ -25,6 +25,10 @@ public class SendPackage implements Command {
         List<String> path = new ArrayList<>();
         if (Objects.equals(firstNetwork.getIpV4(), secondNetwork.getIpV4())) {
             path = firstNetwork.getNode(firstIp).getShortestWays(destinationIp);
+            if (path == null) {
+                System.out.printf("Error, there is no path between %s and %s.%n", firstIp, destinationIp);
+                return;
+            }
             System.out.println(String.join(PATH_DELIMITER, path));
             return;
         }

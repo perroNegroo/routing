@@ -44,8 +44,11 @@ public abstract class Node {
      * @return a list of nodes representing the shortest path
      */
     public List<String> getShortestWays(String destinationIp) {
-        //System.out.println(shortestWays.get(destinationIp));
-        return new ArrayList<>(shortestWays.get(destinationIp));
+        if (shortestWays.get(destinationIp) == null) {
+            return null;
+        } else {
+            return new ArrayList<>(shortestWays.get(destinationIp));
+        }
     }
 
     /**
@@ -54,6 +57,7 @@ public abstract class Node {
      * @param shortestWays the map of shortest paths
      */
     public void setShortestWays(Map<String, List<String>> shortestWays) {
+        this.shortestWays.clear();
         this.shortestWays = shortestWays;
     }
 
