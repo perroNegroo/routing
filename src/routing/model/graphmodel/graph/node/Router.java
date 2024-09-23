@@ -47,7 +47,6 @@ public class Router extends Node {
     public void setShortestInterWays(Map<String, List<String>> shortestWays) {
         this.shortestInterWays.clear();
         this.shortestInterWays.putAll(shortestWays);
-        //this.shortestInterWays = shortestWays;
     }
 
     @Override
