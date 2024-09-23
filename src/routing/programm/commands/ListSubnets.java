@@ -1,6 +1,6 @@
 package routing.programm.commands;
 
-import static routing.model.graphmodel.GraphManager.getGraphHolder;
+//import static routing.model.graphmodel.GraphManager.getGraphHolder;
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.utils.NetworkSorter.sortSubnets;
 
