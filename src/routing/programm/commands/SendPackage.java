@@ -23,19 +23,13 @@ public class SendPackage implements Command {
         String destinationIp = arguments[1];
         SubGraph firstNetwork = getNodeFromGraphHolder(findNetworkForIP(firstIp));
         SubGraph secondNetwork = getNodeFromGraphHolder(findNetworkForIP(destinationIp));
-        List<String> path = new ArrayList<>();
+
         if (Objects.equals(firstNetwork.getIpV4(), secondNetwork.getIpV4())) {
             sameNetworkHandler(firstNetwork, firstIp, destinationIp);
-            /*
-            path = firstNetwork.getNode(firstIp).getShortestWays(destinationIp);
-            if (path == null) {
-                System.out.printf(ERROR_MESSAGE_NO_PATH, firstIp, destinationIp);
-            } else {
-                System.out.println(String.join(PATH_DELIMITER, path));
-            }
-
-             */
         } else {
+            differentNetworkHandler(firstNetwork, secondNetwork, firstIp, destinationIp);
+            /*
+            List<String> path = new ArrayList<>();
             List<String> firstToRouter = firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4());
             List<String> routerToRouter = firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4());
             List<String> routerToDestination = secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp);
@@ -47,6 +41,8 @@ public class SendPackage implements Command {
             path.addAll(routerToRouter);
             path.addAll(routerToDestination);
             System.out.println(String.join(PATH_DELIMITER, new LinkedHashSet<>(path)));
+
+             */
         }
     }
     private void sameNetworkHandler(SubGraph firstNetwork, String firstIp, String destinationIp) {
@@ -56,6 +52,20 @@ public class SendPackage implements Command {
         } else {
             System.out.println(String.join(PATH_DELIMITER, path));
         }
+    }
+    private void differentNetworkHandler(SubGraph firstNetwork, SubGraph secondNetwork, String firstIp, String destinationIp) {
+        List<String> path = new ArrayList<>();
+        List<String> firstToRouter = firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4());
+        List<String> routerToRouter = firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4());
+        List<String> routerToDestination = secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp);
+        if (firstToRouter == null || routerToRouter == null || routerToDestination == null) {
+            System.out.printf(ERROR_MESSAGE_NO_PATH, firstIp, destinationIp);
+            return;
+        }
+        path.addAll(firstToRouter);
+        path.addAll(routerToRouter);
+        path.addAll(routerToDestination);
+        System.out.println(String.join(PATH_DELIMITER, new LinkedHashSet<>(path)));
     }
 
     @Override
