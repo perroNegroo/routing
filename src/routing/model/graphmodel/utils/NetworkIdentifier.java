@@ -5,6 +5,7 @@ import java.util.Set;
 
 import static routing.model.graphmodel.GraphManager.getNetworksNames;
 import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
+import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Utility class for identifying networks and checking IP address membership.
@@ -41,7 +42,7 @@ public final class NetworkIdentifier {
     public static boolean isIpInNetwork(String ipAddress, String network) {
         String[] parts = network.split(CIDR_SEPARATOR);
         String networkAddress = parts[0];
-        int subnetMaskLength = Integer.parseInt(parts[1]);
+        int subnetMaskLength = parseInteger(parts[1]);
 
         int ip = ipToInt(ipAddress);
         int networkIp = ipToInt(networkAddress);

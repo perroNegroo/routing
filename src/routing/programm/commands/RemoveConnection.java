@@ -46,7 +46,6 @@ public class RemoveConnection implements Command {
 
     @Override
     public boolean validArguments(String[] arguments) {
-        // Validate argument length
         if (!isValidArgumentCount(arguments)) {
             return false;
         }

@@ -29,5 +29,4 @@ public class LoadNetwork implements Command {
         return file.exists() && file.isFile();
     }
 
-
 }
