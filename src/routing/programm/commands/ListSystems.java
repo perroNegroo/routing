@@ -31,8 +31,4 @@ public class ListSystems implements Command {
         return getNetworksNames().contains(arguments[0]);
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

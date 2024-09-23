@@ -40,8 +40,4 @@ public class AddComputer implements Command {
         return isIpInNetwork(newComputerIp, subnetAdresse);
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

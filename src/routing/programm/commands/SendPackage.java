@@ -56,8 +56,4 @@ public class SendPackage implements Command {
         return true;
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

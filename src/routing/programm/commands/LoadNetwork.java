@@ -24,10 +24,6 @@ public class LoadNetwork implements Command {
         return validFilePath(arguments[0]);
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
     private boolean validFilePath(String filePath) {
         File file = new File(filePath);
         return file.exists() && file.isFile();

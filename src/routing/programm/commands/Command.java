@@ -18,10 +18,4 @@ public interface Command {
      * @return {@code true} if arguments are valid, {@code false} otherwise
      */
     boolean validArguments(String[] arguments);
-    /**
-     * Checks whether the command is currently available for execution.
-     *
-     * @return {@code true} if the command is available, {@code false} otherwise
-     */
-    boolean availability();
 }

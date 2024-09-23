@@ -73,8 +73,4 @@ public class RemoveConnection implements Command {
         return false;
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

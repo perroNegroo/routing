@@ -133,8 +133,4 @@ public class AddConnection implements Command {
                 && arguments.length == 2;
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

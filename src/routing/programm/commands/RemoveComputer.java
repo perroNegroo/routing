@@ -44,8 +44,4 @@ public class RemoveComputer implements Command {
         return !network.getNode(ipToRemove).isRouter();
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }

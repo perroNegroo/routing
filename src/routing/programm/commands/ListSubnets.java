@@ -25,8 +25,4 @@ public class ListSubnets implements Command {
         return arguments.length == 0;
     }
 
-    @Override
-    public boolean availability() {
-        return true;
-    }
 }
