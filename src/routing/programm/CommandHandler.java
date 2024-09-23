@@ -23,6 +23,15 @@ public class CommandHandler {
     private static final String QUIT_COMMAND = "quit";
     private static final String COMMAND_AVAILABILITY_ERROR = "Error, command is not available %s.%n";
     private static final String COMMAND_ARGUMENTS_ERROR = "Error, command arguments are invalid %s.%n";
+    private static final String LOAD_NETWORK_COMMAND = "load network";
+    private static final String LIST_SUBNETS_COMMAND = "list subnets";
+    private static final String LIST_RANGE_COMMAND = "list range";
+    private static final String LIST_SYSTEMS_COMMAND = "list systems";
+    private static final String SEND_PACKET_COMMAND = "send packet";
+    private static final String ADD_COMPUTER_COMMAND = "add computer";
+    private static final String ADD_CONNECTION_COMMAND = "add connection";
+    private static final String REMOVE_CONNECTION_COMMAND = "remove connection";
+    private static final String REMOVE_COMPUTER_COMMAND = "remove computer";
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
     private static final String COMMAND_DELIMITER = " ";
     private static final String COMMAND_NAME_DELIMITER = "_";
@@ -63,7 +72,21 @@ public class CommandHandler {
 
         executeBasedOnCommand(command, arguments);
     }
-
+    private void executeBasedOnCommand(String command, String[] arguments) {
+        switch (command) {
+            case LOAD_NETWORK_COMMAND -> executeCommandWithArguments(new LoadNetwork(), arguments);
+            case LIST_SUBNETS_COMMAND -> executeCommandWithArguments(new ListSubnets(), arguments);
+            case LIST_RANGE_COMMAND -> executeCommandWithArguments(new ListRange(), arguments);
+            case LIST_SYSTEMS_COMMAND -> executeCommandWithArguments(new ListSystems(), arguments);
+            case SEND_PACKET_COMMAND -> executeCommandWithArguments(new SendPackage(), arguments);
+            case ADD_COMPUTER_COMMAND -> executeCommandWithArguments(new AddComputer(), arguments);
+            case ADD_CONNECTION_COMMAND -> executeCommandWithArguments(new AddConnection(), arguments);
+            case REMOVE_CONNECTION_COMMAND -> executeCommandWithArguments(new RemoveConnection(), arguments);
+            case REMOVE_COMPUTER_COMMAND -> executeCommandWithArguments(new RemoveComputer(), arguments);
+            default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
+        }
+    }
+    /*
     private void executeBasedOnCommand(String command, String[] arguments) {
         switch (CommandNames.valueOf(command.toUpperCase().replace(COMMAND_DELIMITER, COMMAND_NAME_DELIMITER))) {
             case LOAD_NETWORK -> executeCommandWithArguments(new LoadNetwork(), arguments);
@@ -75,9 +98,11 @@ public class CommandHandler {
             case ADD_CONNECTION -> executeCommandWithArguments(new AddConnection(), arguments);
             case REMOVE_CONNECTION -> executeCommandWithArguments(new RemoveConnection(), arguments);
             case REMOVE_COMPUTER -> executeCommandWithArguments(new RemoveComputer(), arguments);
+            //arreglar el unkown en el enum
             default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
         }
     }
+     */
 
 
     private void executeCommandWithArguments(Command commandExecutor, String[] arguments) {
