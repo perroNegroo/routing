@@ -45,16 +45,10 @@ public class CommandHandler {
      */
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        String commandInput;
+        //String commandInput;
 
         while (isProgrammRunning) {
-            commandInput = scanner.nextLine().trim();
-            /*
-            if (QUIT_COMMAND.equals(commandInput)) {
-                break;
-            }
-
-             */
+            String commandInput = scanner.nextLine().trim();
             executeCommand(commandInput);
         }
         scanner.close();
