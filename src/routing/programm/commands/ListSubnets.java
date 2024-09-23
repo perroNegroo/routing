@@ -24,6 +24,7 @@ public class ListSubnets implements Command {
 
     @Override
     public boolean availability() {
-        return !getGraphHolder().isEmpty();
+        return true;
+        //return !getGraphHolder().isEmpty();
     }
 }
