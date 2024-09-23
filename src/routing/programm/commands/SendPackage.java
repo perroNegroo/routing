@@ -33,6 +33,7 @@ public class SendPackage implements Command {
         List<String> routerToRouter = firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4());
         List<String> routerToDestination = secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp);
         if (firstToRouter == null || routerToRouter == null || routerToDestination == null) {
+            System.out.printf("Error, there is no connection between %s and %s%n.", firstIp, destinationIp);
             return;
         }
         path.addAll(firstToRouter);
