@@ -26,31 +26,53 @@ public class AddConnection implements Command {
         String firstIp = arguments[0];
         String secondIp = arguments[1];
         if (arguments.length == MAX_ARGUMENTS_COUNT) {
-            int weight = parseInteger(arguments[2]);
-            String subGraphAdresse = findNetworkForIP(firstIp);
-            SubGraph network = getNodeFromGraphHolder(subGraphAdresse);
-            Node firstNode = network.getNode(firstIp);
-            Node secondNode = network.getNode(secondIp);
-            firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
-            secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
-            network.dijkstraAndBfsCalculator();
-            return;
+            handleWeightedConnection(arguments, firstIp, secondIp);
+        } else {
+            handleUnweightedConnection(firstIp, secondIp);
         }
+    }
 
-        String firstSubGraphAdresse = findNetworkForIP(firstIp);
-        SubGraph firstNetwork = getNodeFromGraphHolder(firstSubGraphAdresse);
+    // Handle when the connection is weighted
+    private void handleWeightedConnection(String[] arguments, String firstIp, String secondIp) {
+        int weight = parseInteger(arguments[2]);
 
-        String secondSubGraphAdresse = findNetworkForIP(secondIp);
-        SubGraph secondNetwork = getNodeFromGraphHolder(secondSubGraphAdresse);
+        SubGraph network = getSubGraphForIp(firstIp);
+        Node firstNode = network.getNode(firstIp);
+        Node secondNode = network.getNode(secondIp);
+
+        addWeightedEdge(firstNode, secondNode, weight);
+
+        network.dijkstraAndBfsCalculator();
+    }
+
+    // Handle when the connection is unweighted
+    private void handleUnweightedConnection(String firstIp, String secondIp) {
+
+        SubGraph firstNetwork = getSubGraphForIp(firstIp);
+        SubGraph secondNetwork = getSubGraphForIp(secondIp);
 
         Router firstRouter = firstNetwork.getRouter();
         Router secondRouter = secondNetwork.getRouter();
-        firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
-        secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
+
+        addNotWeightedEdge(firstRouter, secondRouter);
+
         shortestPathsCalculator();
     }
 
+    private SubGraph getSubGraphForIp(String ip) {
+        String networkAddress = findNetworkForIP(ip);
+        return getNodeFromGraphHolder(networkAddress);
+    }
 
+    private void addWeightedEdge(Node firstNode, Node secondNode, int weight) {
+        firstNode.addEdge(new WeightedEdge(firstNode, secondNode, weight));
+        secondNode.addEdge(new WeightedEdge(secondNode, firstNode, weight));
+    }
+
+    private void addNotWeightedEdge(Router firstRouter, Router secondRouter) {
+        firstRouter.addNotWeightedEdge(new NotWeightedEdge(firstRouter, secondRouter));
+        secondRouter.addNotWeightedEdge(new NotWeightedEdge(secondRouter, firstRouter));
+    }
 
     @Override
     public boolean validArguments(String[] arguments) {
@@ -76,6 +98,7 @@ public class AddConnection implements Command {
         if (firstNode == null || secondNode == null) {
             return false;
         }
+
         if (isIpInNetwork(firstIp, firstNetworkAdresse)
                 && isIpInNetwork(secondIp, firstNetworkAdresse)
                 && !firstNode.existsConnection(secondIp)
