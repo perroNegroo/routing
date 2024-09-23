@@ -92,10 +92,12 @@ public class CommandHandler {
         commandExecutor.execute(arguments);
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
+        /*
         if (!commandExecutor.availability()) {
             System.out.printf(COMMAND_AVAILABILITY_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
         }
+         */
         if (!commandExecutor.validArguments(arguments)) {
             System.out.printf(COMMAND_ARGUMENTS_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
