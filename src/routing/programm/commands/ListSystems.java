@@ -15,11 +15,12 @@ import static routing.model.graphmodel.utils.IpSorter.ipSorter;
  * @author uktup
  */
 public class ListSystems implements Command {
+    private static final String SYSTEMS_DELIMITER = " ";
     @Override
     public void execute(String[] arguments) {
         String subnet = arguments[0];
         SubGraph subGraph = getNodeFromGraphHolder(subnet);
-        System.out.println(String.join(" ", ipSorter(subGraph.getSystemIpNumbers())));
+        System.out.println(String.join(SYSTEMS_DELIMITER, ipSorter(subGraph.getSystemIpNumbers())));
 
     }
 
@@ -28,10 +29,7 @@ public class ListSystems implements Command {
         if (arguments.length != 1) {
             return false;
         }
-        if (!getNetworksNames().contains(arguments[0])) {
-            return false;
-        }
-        return true;
+        return getNetworksNames().contains(arguments[0]);
     }
 
     @Override

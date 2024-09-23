@@ -17,15 +17,13 @@ public class RemoveComputer implements Command {
         String subnetAdresse = arguments[0];
         String ipToDelete = arguments[1];
         SubGraph network = getNodeFromGraphHolder(subnetAdresse);
-        // borrar todos las conecctiones
-        // Node computer = network.getNode(ipToDelete);
+
         network.removeNode(ipToDelete);
-        //aca borra las conectiones de cualquier nodo con ese nodo
+
         for (String key: network.getSystemIpNumbers()) {
             network.getNode(key).removeIntraEdge(ipToDelete);
         }
 
-        //correr el Dijstra
         network.dijkstraAndBfsCalculator();
     }
 

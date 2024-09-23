@@ -28,11 +28,10 @@ public class RemoveConnection implements Command {
             firstNode.removeIntraEdge(secondIp);
             secondNode.removeIntraEdge(firstIp);
 
-            //aca hay que actualiyar el Dijstra para calcular send package
             firstNetwork.dijkstraAndBfsCalculator();
             return;
         }
-        //diferent networks
+
         String secondNetworkAdresse = findNetworkForIP(secondIp);
         SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
         Router firstRouter = firstNetwork.getRouter();
@@ -41,7 +40,6 @@ public class RemoveConnection implements Command {
         firstRouter.removeInterEdge(secondIp);
         secondRouter.removeInterEdge(firstIp);
 
-        //aca hay que actualiyar el BFS para calcular send package
         shortestPathsCalculator();
 
     }
@@ -57,7 +55,7 @@ public class RemoveConnection implements Command {
         SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
         String secondNetworkAdresse = findNetworkForIP(secondIp);
         SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
-        // si alguna de las dos ip no existen
+
         if (firstNetworkAdresse == null  || secondNetworkAdresse == null) {
             return false;
         }

@@ -9,13 +9,11 @@ import static routing.model.graphmodel.utils.NetworkSorter.sortSubnets;
  * @author uktup
  */
 public class ListSubnets implements Command {
+    private static final String SUBNETS_DELIMITER = " ";
     @Override
     public void execute(String[] arguments) {
 
-        //organiazrlos ascendente
-        //System.out.println(String.join(" ", getKeySet()));
-
-        System.out.println(String.join(" ", sortSubnets(getNetworksNames())));
+        System.out.println(String.join(SUBNETS_DELIMITER, sortSubnets(getNetworksNames())));
 
     }
 

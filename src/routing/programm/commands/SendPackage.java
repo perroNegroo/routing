@@ -15,6 +15,7 @@ import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
  * @author uktup
  */
 public class SendPackage implements Command {
+    private static final String PATH_DELIMITER = " ";
     @Override
     public void execute(String[] arguments) {
         String firstIp = arguments[0];
@@ -24,14 +25,14 @@ public class SendPackage implements Command {
         List<String> path = new ArrayList<>();
         if (Objects.equals(firstNetwork.getIpV4(), secondNetwork.getIpV4())) {
             path = firstNetwork.getNode(firstIp).getShortestWays(destinationIp);
-            System.out.println(String.join(" ", path));
+            System.out.println(String.join(PATH_DELIMITER, path));
             return;
         }
         path.addAll(firstNetwork.getNode(firstIp).getShortestWays(firstNetwork.getRouter().getIpV4()));
         path.addAll(firstNetwork.getRouter().getShortestInterWays(secondNetwork.getRouter().getIpV4()));
         path.addAll(secondNetwork.getNode(secondNetwork.getRouter().getIpV4()).getShortestWays(destinationIp));
-        System.out.println(String.join(" ", new LinkedHashSet<>(path)));
-        //System.out.println(new LinkedHashSet<>(path));
+        System.out.println(String.join(PATH_DELIMITER, new LinkedHashSet<>(path)));
+
 
     }
 

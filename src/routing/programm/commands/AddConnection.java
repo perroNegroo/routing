@@ -32,7 +32,6 @@ public class AddConnection implements Command {
         }
     }
 
-    // Handle when the connection is weighted
     private void handleWeightedConnection(String[] arguments, String firstIp, String secondIp) {
         int weight = parseInteger(arguments[2]);
 
@@ -45,7 +44,6 @@ public class AddConnection implements Command {
         network.dijkstraAndBfsCalculator();
     }
 
-    // Handle when the connection is unweighted
     private void handleUnweightedConnection(String firstIp, String secondIp) {
 
         SubGraph firstNetwork = getSubGraphForIp(firstIp);
