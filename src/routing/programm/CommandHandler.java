@@ -34,6 +34,7 @@ public class CommandHandler {
     private static final String REMOVE_COMPUTER_COMMAND = "remove computer";
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
     private static final String COMMAND_DELIMITER = " ";
+    private boolean isProgrammRunning = true;
 
 
 
@@ -46,11 +47,14 @@ public class CommandHandler {
         Scanner scanner = new Scanner(System.in);
         String commandInput;
 
-        while (true) {
+        while (isProgrammRunning) {
             commandInput = scanner.nextLine().trim();
+            /*
             if (QUIT_COMMAND.equals(commandInput)) {
                 break;
             }
+
+             */
             executeCommand(commandInput);
         }
         scanner.close();
@@ -81,6 +85,7 @@ public class CommandHandler {
             case ADD_CONNECTION_COMMAND -> executeCommandWithArguments(new AddConnection(), arguments);
             case REMOVE_CONNECTION_COMMAND -> executeCommandWithArguments(new RemoveConnection(), arguments);
             case REMOVE_COMPUTER_COMMAND -> executeCommandWithArguments(new RemoveComputer(), arguments);
+            case QUIT_COMMAND -> isProgrammRunning = false;
             default -> System.out.println(UNKNOWN_COMMAND_ERROR + command);
         }
     }
@@ -92,12 +97,7 @@ public class CommandHandler {
         commandExecutor.execute(arguments);
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
-        /*
-        if (!commandExecutor.availability()) {
-            System.out.printf(COMMAND_AVAILABILITY_ERROR, commandExecutor.getClass().getSimpleName());
-            return false;
-        }
-         */
+
         if (!commandExecutor.validArguments(arguments)) {
             System.out.printf(COMMAND_ARGUMENTS_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
