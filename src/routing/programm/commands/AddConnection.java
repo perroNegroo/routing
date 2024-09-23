@@ -137,9 +137,9 @@ public class AddConnection implements Command {
     }
 
     private boolean isRouterConnection(Node firstNode, Node secondNode, SubGraph firstNetwork, String secondIp, String[] arguments) {
-        return firstNode.isRouter() && secondNode.isRouter() &&
-                !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp) &&
-                arguments.length == 2;
+        return firstNode.isRouter() && secondNode.isRouter()
+                && !firstNetwork.getRouter().existsConnectionBetweenRouters(secondIp)
+                && arguments.length == 2;
     }
 
 
