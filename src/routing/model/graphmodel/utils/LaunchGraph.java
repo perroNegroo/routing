@@ -69,7 +69,7 @@ public class LaunchGraph {
         }
     }
     private void errorHandler(String errorMessage) {
-        if (isErrorMessageUnique) {
+        if (isGraphCorrect) {
             isErrorMessageUnique = false;
             isGraphCorrect = false;
             for (String line: txtInformation) {

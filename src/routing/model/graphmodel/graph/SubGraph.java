@@ -27,6 +27,7 @@ public class SubGraph {
     private final String higherBound;
     private Router router = null;
     private final Map<String, Node> graphHolder = new TreeMap<>();
+
     /**
      * Constructs a SubGraph with the specified network name.
      *
@@ -38,6 +39,7 @@ public class SubGraph {
         this.lowerBound = intToIp(calculateRange(netWorkName)[0]);
         this.higherBound = intToIp(calculateRange(netWorkName)[1]);
     }
+
     /**
      * Adds a node to the subgraph.
      *
@@ -47,6 +49,7 @@ public class SubGraph {
     public void addNode(String key, Node node) {
         graphHolder.put(key, node);
     }
+
     /**
      * Removes a node from the subgraph.
      *
@@ -58,6 +61,7 @@ public class SubGraph {
         }
         graphHolder.remove(key);
     }
+
     /**
      * Retrieves a node by its key.
      *
@@ -67,6 +71,7 @@ public class SubGraph {
     public Node getNode(String key) {
         return graphHolder.get(key);
     }
+
     /**
      * Checks if a router is assigned to this subgraph.
      *
@@ -75,6 +80,7 @@ public class SubGraph {
     public boolean isRouterAssign() {
         return router != null;
     }
+
     /**
      * Retrieves the router assigned to this subgraph.
      *
@@ -83,6 +89,7 @@ public class SubGraph {
     public Router getRouter() {
         return router;
     }
+
     /**
      * Sets the router for this subgraph.
      *
@@ -91,6 +98,7 @@ public class SubGraph {
     public void setRouter(Router router) {
         this.router = router;
     }
+
     /**
      * Returns the set of keys (node IP addresses) in the subgraph.
      *
@@ -99,6 +107,7 @@ public class SubGraph {
     public Set<String> getSystemIpNumbers() {
         return new TreeSet<>(graphHolder.keySet());
     }
+
     /**
      * Returns the network name of the subgraph.
      *
@@ -107,6 +116,7 @@ public class SubGraph {
     public String getNetWorkName() {
         return netWorkName;
     }
+
     /**
      * Returns the base IPv4 address of the subnet.
      *
@@ -124,6 +134,7 @@ public class SubGraph {
     public String getLowerBound() {
         return lowerBound;
     }
+
     /**
      * Returns the upper bound IP address of the subnet.
      *
@@ -132,6 +143,7 @@ public class SubGraph {
     public String getHigherBound() {
         return higherBound;
     }
+
     /**
      * Retrieves a node by its name.
      *
@@ -146,6 +158,7 @@ public class SubGraph {
         }
         return new Computer("", "");
     }
+
     /**
      * Executes Dijkstra's algorithm for all nodes in the subgraph and performs BFS from the router.
      */
