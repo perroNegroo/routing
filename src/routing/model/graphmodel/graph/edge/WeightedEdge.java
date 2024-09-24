@@ -5,6 +5,7 @@ import routing.model.graphmodel.graph.node.Node;
 
 /**
  * Represents a weighted edge between two nodes.
+ *
  * @author uktup
  */
 public class WeightedEdge extends Edge {

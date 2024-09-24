@@ -6,6 +6,7 @@ import routing.model.graphmodel.graph.node.Node;
 
 /**
  * Represents an abstract edge between two nodes.
+ *
  * @author uktup
  */
 public abstract class Edge {
