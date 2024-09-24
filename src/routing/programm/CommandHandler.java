@@ -21,7 +21,6 @@ import java.util.Scanner;
  */
 public class CommandHandler {
     private static final String QUIT_COMMAND = "quit";
-    //private static final String COMMAND_AVAILABILITY_ERROR = "Error, command is not available %s.%n";
     private static final String COMMAND_ARGUMENTS_ERROR = "Error, command arguments are invalid %s.%n";
     private static final String LOAD_NETWORK_COMMAND = "load network";
     private static final String LIST_SUBNETS_COMMAND = "list subnets";
@@ -35,8 +34,6 @@ public class CommandHandler {
     private static final String UNKNOWN_COMMAND_ERROR = "Error, command is not recognize : ";
     private static final String COMMAND_DELIMITER = " ";
     private boolean isProgrammRunning = true;
-
-
 
 
 
