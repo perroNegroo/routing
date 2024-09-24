@@ -24,12 +24,12 @@ public class AddConnection implements Command {
 
     @Override
     public void execute(String[] arguments) {
-        String firstIp = arguments[0];
-        String secondIp = arguments[1];
+        String sourceIp = arguments[0];
+        String destinationIp = arguments[1];
         if (arguments.length == MAX_ARGUMENTS_COUNT) {
-            handleWeightedConnection(arguments, firstIp, secondIp);
+            handleWeightedConnection(arguments, sourceIp, destinationIp);
         } else {
-            handleUnweightedConnection(firstIp, secondIp);
+            handleUnweightedConnection(sourceIp, destinationIp);
         }
     }
 
