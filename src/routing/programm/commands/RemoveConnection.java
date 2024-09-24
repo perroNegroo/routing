@@ -27,29 +27,6 @@ public class RemoveConnection implements Command {
         } else {
             differentNetworkHandler(sourceNetwork, sourceIp, destinationIp);
         }
-        /*
-        if (sourceNetworkAdresse != null && isIpInNetwork(sourceIp, sourceNetworkAdresse)
-                && isIpInNetwork(destinationIp, sourceNetworkAdresse)) {
-            Node firstNode = sourceNetwork.getNode(sourceIp);
-            Node secondNode = sourceNetwork.getNode(destinationIp);
-            firstNode.removeIntraEdge(destinationIp);
-            secondNode.removeIntraEdge(sourceIp);
-
-            sourceNetwork.dijkstraAndBfsCalculator();
-            return;
-        }
-
-        String secondNetworkAdresse = findNetworkForIP(destinationIp);
-        SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
-        Router firstRouter = sourceNetwork.getRouter();
-        Router secondRouter = secondNetwork.getRouter();
-
-        firstRouter.removeInterEdge(destinationIp);
-        secondRouter.removeInterEdge(sourceIp);
-
-        shortestPathsCalculator();
-
-         */
 
     }
     private boolean areSystemsInTheSameNetwork(String firstNetworkAdresse, String sourceIp, String destinationIp) {
