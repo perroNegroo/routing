@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * Extracts subgraph sections from a file.
+ *
  * @author uktup
  */
 public final class ExtractSubGraphs {

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Utility class for handling file operations and storing patterns.
+ *
  * @author uktup
  */
 public final class FileToList {
