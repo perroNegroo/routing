@@ -1,4 +1,4 @@
-package routing.model.graphmodel.utils.range;
+package routing.model.graphmodel.utils;
 
 import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;

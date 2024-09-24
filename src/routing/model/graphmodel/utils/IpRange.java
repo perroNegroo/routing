@@ -1,6 +1,6 @@
-package routing.model.graphmodel.utils.range;
+package routing.model.graphmodel.utils;
 
-import static routing.model.graphmodel.utils.range.CalculateRange.calculateRange;
+import static routing.model.graphmodel.utils.CalculateRange.calculateRange;
 
 /**
  * Utility class for IP range operations.

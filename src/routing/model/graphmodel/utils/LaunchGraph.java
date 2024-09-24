@@ -19,7 +19,7 @@ import static routing.model.graphmodel.utils.IpToInteger.ipToInt;
 import static routing.model.txtmanager.FileToList.fileToList;
 import static routing.model.txtmanager.dataextraction.ExtractRouterConnection.extractRouterEdges;
 import static routing.model.txtmanager.dataextraction.ExtractSubGraphs.extractSubGraphs;
-import static routing.model.graphmodel.utils.range.IpRange.areDisjoint;
+import static routing.model.graphmodel.utils.IpRange.areDisjoint;
 import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
