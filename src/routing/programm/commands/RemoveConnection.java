@@ -17,31 +17,63 @@ import static routing.model.graphmodel.utils.NetworkIdentifier.isIpInNetwork;
 public class RemoveConnection implements Command {
     @Override
     public void execute(String[] arguments) {
-        String firstIp = arguments[0];
-        String secondIp = arguments[1];
-        String firstNetworkAdresse = findNetworkForIP(firstIp);
-        SubGraph firstNetwork = getNodeFromGraphHolder(firstNetworkAdresse);
+        String sourceIp = arguments[0];
+        String destinationIp = arguments[1];
+        String sourceNetworkAdresse = findNetworkForIP(sourceIp);
+        SubGraph sourceNetwork = getNodeFromGraphHolder(sourceNetworkAdresse);
 
-        if (firstNetworkAdresse != null && isIpInNetwork(firstIp, firstNetworkAdresse) && isIpInNetwork(secondIp, firstNetworkAdresse)) {
-            Node firstNode = firstNetwork.getNode(firstIp);
-            Node secondNode = firstNetwork.getNode(secondIp);
-            firstNode.removeIntraEdge(secondIp);
-            secondNode.removeIntraEdge(firstIp);
+        if (areSystemsInTheSameNetwork(sourceNetworkAdresse, sourceIp, destinationIp)) {
+            sameNetworkHandler(sourceNetwork, sourceIp, destinationIp);
+        } else {
+            differentNetworkHandler(sourceNetwork, sourceIp, destinationIp);
+        }
+        /*
+        if (sourceNetworkAdresse != null && isIpInNetwork(sourceIp, sourceNetworkAdresse) && isIpInNetwork(destinationIp, sourceNetworkAdresse)) {
+            Node firstNode = sourceNetwork.getNode(sourceIp);
+            Node secondNode = sourceNetwork.getNode(destinationIp);
+            firstNode.removeIntraEdge(destinationIp);
+            secondNode.removeIntraEdge(sourceIp);
 
-            firstNetwork.dijkstraAndBfsCalculator();
+            sourceNetwork.dijkstraAndBfsCalculator();
             return;
         }
 
-        String secondNetworkAdresse = findNetworkForIP(secondIp);
+        String secondNetworkAdresse = findNetworkForIP(destinationIp);
         SubGraph secondNetwork = getNodeFromGraphHolder(secondNetworkAdresse);
-        Router firstRouter = firstNetwork.getRouter();
+        Router firstRouter = sourceNetwork.getRouter();
         Router secondRouter = secondNetwork.getRouter();
 
-        firstRouter.removeInterEdge(secondIp);
-        secondRouter.removeInterEdge(firstIp);
+        firstRouter.removeInterEdge(destinationIp);
+        secondRouter.removeInterEdge(sourceIp);
 
         shortestPathsCalculator();
 
+         */
+
+    }
+    private boolean areSystemsInTheSameNetwork(String firstNetworkAdresse, String sourceIp, String destinationIp) {
+        return firstNetworkAdresse != null && isIpInNetwork(sourceIp, firstNetworkAdresse)
+                && isIpInNetwork(destinationIp, firstNetworkAdresse);
+    }
+
+    private void sameNetworkHandler(SubGraph sourceNetwork, String sourceIp, String destinationIp) {
+        Node firstNode = sourceNetwork.getNode(sourceIp);
+        Node secondNode = sourceNetwork.getNode(destinationIp);
+        firstNode.removeIntraEdge(destinationIp);
+        secondNode.removeIntraEdge(sourceIp);
+
+        sourceNetwork.dijkstraAndBfsCalculator();
+    }
+    private void differentNetworkHandler(SubGraph sourceNetwork, String sourceIp, String destinationIp) {
+        String sourceNetworkAdresse = findNetworkForIP(destinationIp);
+        SubGraph destinationNetwork = getNodeFromGraphHolder(sourceNetworkAdresse);
+        Router sourceRouter = sourceNetwork.getRouter();
+        Router destinationRouter = destinationNetwork.getRouter();
+
+        sourceRouter.removeInterEdge(destinationIp);
+        destinationRouter.removeInterEdge(sourceIp);
+
+        shortestPathsCalculator();
     }
 
     @Override
