@@ -7,7 +7,7 @@ import routing.model.graphmodel.graph.node.Router;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 import java.util.TreeMap;
 
 import static routing.model.graphmodel.utils.IntegerToIp.intToIp;
@@ -17,6 +17,7 @@ import static routing.model.graphmodel.utils.Dijkstra.dijkstra;
 
 /**
  * Represents a subnet of a network, containing nodes and a potential router.
+ *
  * @author uktup
  */
 public class SubGraph {
@@ -105,7 +106,7 @@ public class SubGraph {
      * @return a sorted set of keys
      */
     public Set<String> getSystemIpNumbers() {
-        return new TreeSet<>(graphHolder.keySet());
+        return new HashSet<>(graphHolder.keySet());
     }
 
     /**

@@ -1,7 +1,5 @@
 package routing.model.graphmodel.graph.node;
 
-
-
 import routing.model.graphmodel.graph.edge.WeightedEdge;
 
 import java.util.List;
@@ -12,6 +10,7 @@ import java.util.HashMap;
 
 /**
  * Represents an abstract node in the network.
+ *
  * @author uktup
  */
 public abstract class Node {

@@ -2,6 +2,7 @@ package routing.model.graphmodel.graph.node;
 
 /**
  * Represents a computer node in the network.
+ *
  * @author uktup
  */
 public class Computer extends Node {
