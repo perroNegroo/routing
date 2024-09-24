@@ -15,6 +15,7 @@ import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Command to add a new connection between two nodes.
+ *
  * @author uktup
  */
 public class AddConnection implements Command {
@@ -103,11 +104,7 @@ public class AddConnection implements Command {
             return true;
         }
 
-        if (isRouterConnection(firstNode, secondNode, firstNetwork, secondIp, arguments)) {
-            return true;
-        }
-
-        return false;
+        return isRouterConnection(firstNode, secondNode, firstNetwork, secondIp, arguments);
     }
 
     private boolean isValidArgumentLength(String[] arguments) {

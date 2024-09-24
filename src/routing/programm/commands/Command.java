@@ -2,6 +2,7 @@ package routing.programm.commands;
 
 /**
  * Interface for commands that can be executed with arguments.
+ *
  * @author uktup
  */
 public interface Command {

@@ -12,9 +12,7 @@ public class ListSubnets implements Command {
     private static final String SUBNETS_DELIMITER = " ";
     @Override
     public void execute(String[] arguments) {
-
         System.out.println(String.join(SUBNETS_DELIMITER, sortSubnets(getNetworksNames())));
-
     }
 
     @Override
