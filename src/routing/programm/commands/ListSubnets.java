@@ -6,6 +6,7 @@ import static routing.model.graphmodel.utils.NetworkSorter.sortSubnets;
 
 /**
  * Command to list all subnets in ascending order.
+ *
  * @author uktup
  */
 public class ListSubnets implements Command {

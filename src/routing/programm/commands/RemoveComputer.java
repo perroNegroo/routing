@@ -9,6 +9,7 @@ import static routing.model.graphmodel.GraphManager.getNodeFromGraphHolder;
 
 /**
  * Command to remove a compùter from a given network.
+ *
  * @author uktup
  */
 public class RemoveComputer implements Command {

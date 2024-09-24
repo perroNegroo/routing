@@ -8,6 +8,7 @@ import static routing.model.graphmodel.GraphManager.shortestPathsCalculator;
 
 /**
  * Command to load a network by a given file path.
+ *
  * @author uktup
  */
 public class LoadNetwork implements Command {

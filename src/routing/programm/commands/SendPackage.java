@@ -12,6 +12,7 @@ import static routing.model.graphmodel.utils.NetworkIdentifier.findNetworkForIP;
 
 /**
  * Command to print the shortest path between two systems.
+ *
  * @author uktup
  */
 public class SendPackage implements Command {

@@ -9,6 +9,7 @@ import static routing.model.graphmodel.utils.ParseNumbers.parseInteger;
 
 /**
  * Utility class for identifying networks and checking IP address membership.
+ *
  * @author uktup
  */
 public final class NetworkIdentifier {
@@ -17,6 +18,7 @@ public final class NetworkIdentifier {
     private static final int FULL_MASK = 0xFFFFFFFF;
 
     private NetworkIdentifier() { }
+
     /**
      * Finds the network to which the specified IP address belongs.
      *
@@ -32,6 +34,7 @@ public final class NetworkIdentifier {
         }
         return null;
     }
+
     /**
      * Checks if the specified IP address is within the given network.
      *

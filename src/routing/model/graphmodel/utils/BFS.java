@@ -23,7 +23,7 @@ public final class BFS {
     private BFS() { }
 
     /**
-     * Performs BFS from the specified start router to compute shortest paths to all other routers.
+     * Performs BFS from the specified start router to compute the shortest paths to all other routers.
      *
      * @param startRouter the router from which to start the BFS
      */

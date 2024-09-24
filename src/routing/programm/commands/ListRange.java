@@ -7,6 +7,7 @@ import static routing.model.graphmodel.GraphManager.getNetworksNames;
 
 /**
  * Command to list the IP address range of a specified subnet.
+ *
  * @author uktup
  */
 public class ListRange implements Command {
