@@ -24,7 +24,7 @@ public class ListSystems implements Command {
     }
 
     @Override
-    public boolean validArguments(String[] arguments) {
+    public boolean areArgumentsValid(String[] arguments) {
         if (arguments.length != 1) {
             return false;
         }

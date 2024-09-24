@@ -45,7 +45,7 @@ public class RemoveConnection implements Command {
     }
 
     @Override
-    public boolean validArguments(String[] arguments) {
+    public boolean areArgumentsValid(String[] arguments) {
         if (!isValidArgumentCount(arguments)) {
             return false;
         }

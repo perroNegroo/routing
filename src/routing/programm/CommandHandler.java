@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 /**
  * Handles user commands for interacting with the network management system.
+ *
  * @author uktup
  */
 public class CommandHandler {
@@ -90,7 +91,7 @@ public class CommandHandler {
     }
     private boolean errorHandler(Command commandExecutor, String[] arguments) {
 
-        if (!commandExecutor.validArguments(arguments)) {
+        if (!commandExecutor.areArgumentsValid(arguments)) {
             System.out.printf(COMMAND_ARGUMENTS_ERROR, commandExecutor.getClass().getSimpleName());
             return false;
         }

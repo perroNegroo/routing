@@ -18,7 +18,7 @@ public class ListSubnets implements Command {
     }
 
     @Override
-    public boolean validArguments(String[] arguments) {
+    public boolean areArgumentsValid(String[] arguments) {
         if (getGraphHolder().isEmpty()) {
             return false;
         }

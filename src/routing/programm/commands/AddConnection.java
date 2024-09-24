@@ -73,7 +73,7 @@ public class AddConnection implements Command {
     }
 
     @Override
-    public boolean validArguments(String[] arguments) {
+    public boolean areArgumentsValid(String[] arguments) {
         if (!isValidArgumentLength(arguments)) {
             return false;
         }

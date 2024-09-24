@@ -18,7 +18,7 @@ public class ListRange implements Command {
         System.out.println(subGraph.getLowerBound() + RANGE_DELIMITER + subGraph.getHigherBound());
     }
     @Override
-    public boolean validArguments(String[] arguments) {
+    public boolean areArgumentsValid(String[] arguments) {
         if (arguments.length != 1) {
             return false;
         }

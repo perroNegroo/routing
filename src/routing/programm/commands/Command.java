@@ -17,6 +17,6 @@ public interface Command {
      * @param arguments an array of arguments to validate
      * @return {@code true} if arguments are valid, {@code false} otherwise
      */
-    boolean validArguments(String[] arguments);
+    boolean areArgumentsValid(String[] arguments);
 
 }

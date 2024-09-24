@@ -4,6 +4,7 @@ import routing.programm.CommandHandler;
 
 /**
  * Entry point for the application that starts the command handler.
+ *
  * @author uktup
  */
 public final class Main {
