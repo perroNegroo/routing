@@ -28,7 +28,8 @@ public class RemoveConnection implements Command {
             differentNetworkHandler(sourceNetwork, sourceIp, destinationIp);
         }
         /*
-        if (sourceNetworkAdresse != null && isIpInNetwork(sourceIp, sourceNetworkAdresse) && isIpInNetwork(destinationIp, sourceNetworkAdresse)) {
+        if (sourceNetworkAdresse != null && isIpInNetwork(sourceIp, sourceNetworkAdresse)
+                && isIpInNetwork(destinationIp, sourceNetworkAdresse)) {
             Node firstNode = sourceNetwork.getNode(sourceIp);
             Node secondNode = sourceNetwork.getNode(destinationIp);
             firstNode.removeIntraEdge(destinationIp);
