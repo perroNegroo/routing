@@ -49,7 +49,6 @@ public class LaunchGraph {
     private final List<SubGraph> subGraphs = new ArrayList<>();
     private List<String> txtInformation = new ArrayList<>();
     private boolean isGraphCorrect = true;
-    private boolean isErrorMessageUnique = true;
 
     /**
      * Launches subgraphs and router connections by reading from the specified file.
@@ -70,13 +69,12 @@ public class LaunchGraph {
     }
     private void errorHandler(String errorMessage) {
         if (isGraphCorrect) {
-            isErrorMessageUnique = false;
-            isGraphCorrect = false;
             for (String line: txtInformation) {
                 System.out.println(line);
             }
             System.out.printf(ERROR_PATTERN, errorMessage);
         }
+        isGraphCorrect = false;
     }
 
     private void subGraphInitializer(List<List<String>> subGraphs) {
